@@ -104,6 +104,26 @@ export const es = {
         about: "Conóceme",
         contact: "Contacto",
     },
+    synergy: {
+        title: "Arquitectura Neural",
+        description: "Un profesional no es un conjunto de habilidades aisladas. Arrastra las estrellas y únelas todas en una sola red para descubrir la sinergia.",
+        networkStability: "Estabilidad de Red",
+        unifiedSystem: "SISTEMA UNIFICADO",
+        unifiedDescription: "Las habilidades aisladas son solo el inicio. Al crear una arquitectura neural perfecta, el desarrollo Frontend, Backend y el Diseño convergen para crear productos inigualables.",
+        rewardUnlocked: "RECOMPENSA DESBLOQUEADA",
+        downloadCV: "Descargar CV Ampliado",
+        secretExperience: "Acceso a métricas clave y experiencia secreta."
+    },
+    synergyNodes: {
+        react: "React & Next.js",
+        ts: "TypeScript",
+        ui: "UI / UX",
+        arch: "Arquitectura",
+        perf: "Performance",
+        backend: "APIs",
+        db: "Bases de Datos",
+        design: "Figma"
+    },
     theme: {
         dark: "Oscuro",
         light: "Claro",

@@ -118,10 +118,10 @@ export function SynergySection() {
                 
                 <FadeIn className="mb-16 text-center flex flex-col items-center">
                     <h2 className="text-3xl md:text-5xl font-bold font-primary mb-4 text-foreground">
-                        <span className="text-brand-cyan">/</span> Arquitectura Neural
+                        <span className="text-brand-cyan">/</span> {t.synergy.title}
                     </h2>
                     <p className="text-muted text-lg max-w-2xl">
-                        Un profesional no es un conjunto de habilidades aisladas. Arrastra las estrellas y únelas todas en una sola red para descubrir la sinergia.
+                        {t.synergy.description}
                     </p>
                 </FadeIn>
 
@@ -144,17 +144,13 @@ export function SynergySection() {
                             }} 
                         />
                         
-                        {/* Glow Central Pulzante y Luz Flotante */}
-                        <motion.div 
-                            animate={{ opacity: [0.1, 0.3, 0.1], scale: [0.8, 1.2, 0.8] }}
-                            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brand-cyan/10 rounded-full blur-[120px] pointer-events-none" 
+                        {/* Glow Central Pulzante y Luz Flotante (Optimizados para reducir lag) */}
+                        <div 
+                            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-cyan/5 rounded-full blur-[80px] pointer-events-none" 
                         />
                         
-                        <motion.div
-                            animate={{ x: [0, 400, -200, 0], y: [0, -200, 200, 0] }}
-                            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-                            className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-brand-cyan/5 rounded-full blur-[80px] pointer-events-none"
+                        <div
+                            className="absolute top-1/4 left-1/4 w-[300px] h-[300px] bg-brand-cyan/5 rounded-full blur-[60px] pointer-events-none"
                         />
 
                         {/* Custom SVG Animation para flujo de datos */}
@@ -192,7 +188,7 @@ export function SynergySection() {
                                             stroke="url(#lineGrad)"
                                             strokeWidth={isVictory ? 3 : 1.5}
                                             strokeDasharray={isVictory ? "none" : "8 8"}
-                                            className={`transition-all duration-300 ease-in-out drop-shadow-[0_0_5px_var(--brand-cyan)] ${isVictory ? '' : 'animate-flow'}`}
+                                            className={`transition-all duration-300 ease-in-out ${isVictory ? '' : 'animate-flow'}`}
                                         />
                                     );
                                 })
@@ -203,7 +199,7 @@ export function SynergySection() {
                         {!isVictory && (
                             <div className="absolute top-6 right-6 md:top-8 md:right-8 z-20 bg-background/80 backdrop-blur-md border border-brand-cyan/20 rounded-xl px-4 py-3 shadow-[0_0_15px_rgba(0,0,0,0.5)] flex items-center gap-4 transition-all duration-500">
                                 <div className="flex flex-col text-right">
-                                    <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold">Estabilidad de Red</span>
+                                    <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold">{t.synergy.networkStability}</span>
                                     <span className="text-lg font-mono font-bold text-brand-cyan">
                                         {Math.round((connectedCount / nodes.length) * 100)}%
                                     </span>
@@ -251,7 +247,7 @@ export function SynergySection() {
                                         <span className={`text-xs font-mono tracking-widest font-bold transition-colors duration-300
                                             ${isVictory ? 'text-white' : 'text-brand-cyan/90'}
                                         `}>
-                                            {node.label}
+                                            {t.synergyNodes[node.id as keyof typeof t.synergyNodes] || node.label}
                                         </span>
                                     </div>
                                 </motion.div>
@@ -277,10 +273,10 @@ export function SynergySection() {
                                     >
                                         <Network size={50} className="text-brand-cyan mb-6 animate-pulse" />
                                         <h3 className="text-4xl md:text-6xl font-primary font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan via-foreground to-brand-cyan mb-4 tracking-wider drop-shadow-sm text-center">
-                                            SISTEMA UNIFICADO
+                                            {t.synergy.unifiedSystem}
                                         </h3>
                                         <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto text-center px-6 leading-relaxed mb-8">
-                                            Las habilidades aisladas son solo el inicio. Al crear una arquitectura neural perfecta, el desarrollo Frontend, Backend y el Diseño convergen para crear productos inigualables.
+                                            {t.synergy.unifiedDescription}
                                         </p>
                                         
                                         <motion.div 
@@ -291,17 +287,17 @@ export function SynergySection() {
                                         >
                                             <div className="px-4 py-2 bg-brand-cyan/20 border border-brand-cyan/50 rounded-full flex items-center gap-2 mb-2 shadow-lg">
                                                 <Sparkles size={16} className="text-brand-cyan animate-pulse" />
-                                                <span className="text-sm text-brand-cyan font-bold tracking-wider">RECOMPENSA DESBLOQUEADA</span>
+                                                <span className="text-sm text-brand-cyan font-bold tracking-wider">{t.synergy.rewardUnlocked}</span>
                                             </div>
                                             
                                             <Button variant="primary" size="lg" className="gap-3 transition-shadow font-bold group" onClick={() => window.open('/cv.pdf', '_blank')}>
                                                 <FileText size={22} className="group-hover:scale-110 transition-transform" />
-                                                Descargar CV Ampliado
+                                                {t.synergy.downloadCV}
                                                 <Download size={18} className="opacity-80 group-hover:translate-y-1 transition-transform" />
                                             </Button>
 
                                             <p className="text-xs text-brand-cyan/80 mt-1 max-w-xs text-center font-mono">
-                                                Acceso a métricas clave y experiencia secreta.
+                                                {t.synergy.secretExperience}
                                             </p>
                                         </motion.div>
                                     </motion.div>

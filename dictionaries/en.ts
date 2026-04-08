@@ -104,6 +104,26 @@ export const en = {
         about: "About",
         contact: "Contact",
     },
+    synergy: {
+        title: "Neural Architecture",
+        description: "A professional is not a set of isolated skills. Drag the stars and connect them all in a single network to discover the synergy.",
+        networkStability: "Network Stability",
+        unifiedSystem: "UNIFIED SYSTEM",
+        unifiedDescription: "Isolated skills are just the beginning. By creating a perfect neural architecture, Frontend, Backend development, and Design converge to create unparalleled products.",
+        rewardUnlocked: "REWARD UNLOCKED",
+        downloadCV: "Download Extended CV",
+        secretExperience: "Access key metrics and secret experience."
+    },
+    synergyNodes: {
+        react: "React & Next.js",
+        ts: "TypeScript",
+        ui: "UI / UX",
+        arch: "Architecture",
+        perf: "Performance",
+        backend: "APIs",
+        db: "Databases",
+        design: "Figma"
+    },
     theme: {
         dark: "Dark",
         light: "Light",
