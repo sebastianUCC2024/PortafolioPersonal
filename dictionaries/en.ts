@@ -49,6 +49,18 @@ export const en = {
             "Design Patterns"
         ]
     },
+    about: {
+        title: "About Me",
+        description1: "Passionate about creating digital experiences that combine exceptional design with robust and scalable code. I always work under the premise that details make the difference.",
+        description2: "Throughout my studies at UCC, I have specialized in front-end architecture and standardized methodologies, ensuring that every product is intuitive and fast.",
+        skillsTitle: "Technologies I've recently studied and applied in real projects:",
+        skills: [
+            "React.js / Next.js",
+            "Tailwind CSS v4 & UI/UX",
+            "JavaScript / TypeScript",
+            "Frontend Development"
+        ]
+    },
     nav: {
         projects: "Projects",
         experience: "Experience",

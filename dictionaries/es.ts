@@ -49,6 +49,18 @@ export const es = {
             "Patrones de Diseño"
         ]
     },
+    about: {
+        title: "Conóceme",
+        description1: "Apasionado por crear experiencias digitales que combinen un diseño excepcional con un código robusto y escalable. Trabajo siempre bajo la premisa de que los detalles hacen la diferencia.",
+        description2: "A lo largo de mis estudios en la UCC, me he especializado en arquitectura front-end y metodologías estandarizadas, asegurando que cada producto sea intuitivo y rápido.",
+        skillsTitle: "Tecnologías que más he estudiado y aplicado en proyectos reales últimamente:",
+        skills: [
+            "React.js / Next.js",
+            "Tailwind CSS v4 & UI/UX",
+            "JavaScript / TypeScript",
+            "Desarrollo Frontend"
+        ]
+    },
     nav: {
         projects: "Proyectos",
         experience: "Experiencia",
