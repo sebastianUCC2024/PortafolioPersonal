@@ -92,7 +92,9 @@ export const es = {
         emailPlaceholder: "¿A dónde te respondo?",
         messageLabel: "Mensaje",
         messagePlaceholder: "Cuéntame sobre tu proyecto...",
-        submitBtn: "Enviar mensaje"
+        submitBtn: "Enviar mensaje",
+        locationLabel: "Ubicación",
+        location: "Bogotá, Colombia"
     },
     footer: {
         copyright: "Diseñado y desarrollado por",
@@ -106,13 +108,26 @@ export const es = {
     },
     synergy: {
         title: "Arquitectura Neural",
-        description: "Un profesional no es un conjunto de habilidades aisladas. Arrastra las estrellas y únelas todas en una sola red para descubrir la sinergia.",
+        description: "Un profesional no es un conjunto de habilidades aisladas. Conecta las estrellas construyendo líneas para descubrir las constelaciones.",
         networkStability: "Estabilidad de Red",
         unifiedSystem: "SISTEMA UNIFICADO",
         unifiedDescription: "Las habilidades aisladas son solo el inicio. Al crear una arquitectura neural perfecta, el desarrollo Frontend, Backend y el Diseño convergen para crear productos inigualables.",
         rewardUnlocked: "RECOMPENSA DESBLOQUEADA",
         downloadCV: "Descargar CV Ampliado",
-        secretExperience: "Acceso a métricas clave y experiencia secreta."
+        secretExperience: "Acceso a métricas clave y experiencia secreta.",
+        tools: {
+            reset: "Reiniciar Red"
+        },
+        onboarding: "Selecciona una estrella y luego otra para conectarlas.",
+        missionsTitle: "Misiones Neurales:",
+        constellations: [
+            { id: "orion", name: "Orión (Frontend)", description: "El cazador. Se revela al dominar Figma, Diseño, UI/UX y React." },
+            { id: "lyra", name: "Lyra (Datos)", description: "La lira celestial. Compuesta por la armonía de Bases de Datos, APIs y Arquitectura." },
+            { id: "cassiopeia", name: "Casiopea (Rendimiento)", description: "La reina. Fluye conectando TypeScript, Rendimiento y React." },
+            { id: "cygnus", name: "Cygnus (Fullstack)", description: "El cisne intergaláctico. Unifica Frontend (UI, React) con Backend (API, DB)." },
+            { id: "pegasus", name: "Pegaso (Núcleo)", description: "El caballo alado. El motor central entre Rendimiento, TypeScript, Arquitectura y APIs." }
+        ],
+        finalMissionObj: "Andrómeda (Red Global)",
     },
     synergyNodes: {
         react: "React & Next.js",

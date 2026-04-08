@@ -51,8 +51,8 @@ export function Contact() {
                                     <MapPin size={20} />
                                 </div>
                                 <div className="flex flex-col">
-                                    <span className="text-muted text-sm uppercase tracking-wider">Ubicación</span>
-                                    <span className="text-foreground font-medium">Colombia</span>
+                                    <span className="text-muted text-sm uppercase tracking-wider">{t.contact.locationLabel}</span>
+                                    <span className="text-foreground font-medium">{t.contact.location}</span>
                                 </div>
                             </div>
                         </div>

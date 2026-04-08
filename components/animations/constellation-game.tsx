@@ -20,42 +20,59 @@ const INITIAL_NODES: Node[] = [
     { id: "contact", label: "Contacto", x: 400, y: 250 },
 ];
 
+// Target positions for the star-shaped constellation (same ids, different coordinates)
+const TARGET_NODES: Node[] = [
+    { id: "projects", label: "Proyectos", x: 250, y: 80 },   // top point
+    { id: "experience", label: "Experiencia", x: 320, y: 200 }, // right upper
+    { id: "about", label: "Conóceme", x: 200, y: 250 }, // left lower
+    { id: "contact", label: "Contacto", x: 280, y: 340 }, // bottom right
+];
+
 export function ConstellationGame() {
     const { t } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
     const [nodes, setNodes] = useState<Node[]>(INITIAL_NODES);
     const [isVictory, setIsVictory] = useState(false);
+    const [showGuide, setShowGuide] = useState(true); // show shape guide initially
+    const [completedConstellation, setCompletedConstellation] = useState<string | null>(null);
     
     const containerRef = useRef<HTMLDivElement>(null);
 
     // Revisar si todas las líneas están conectadas (distancia < 250px)
     useEffect(() => {
-        if (!isOpen || isVictory) return;
+        if (!isOpen) return;
 
+        // Check generic connections for victory (same as before)
         const checkConnections = () => {
             let connectedPairs = 0;
-            const requiredPairs = (nodes.length * (nodes.length - 1)) / 2; // todas combinadas = 6
-
             for (let i = 0; i < nodes.length; i++) {
                 for (let j = i + 1; j < nodes.length; j++) {
                     const dx = nodes[i].x - nodes[j].x;
                     const dy = nodes[i].y - nodes[j].y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
-                    if (distance < 250) {
-                        connectedPairs++;
-                    }
+                    if (distance < 250) connectedPairs++;
                 }
             }
+            if (connectedPairs >= 4) setIsVictory(true);
+        };
 
-            // Si están cerquita todas de todas (o al menos unidas en red), damos victoria.
-            // Para simplificar, requerimos que estén todas en un clúster pequeño o al menos 4 conexiones
-            if (connectedPairs >= 4) {
-                setIsVictory(true);
+        // Check if nodes match the target star shape
+        const checkStarShape = () => {
+            const tolerance = 30; // pixels
+            const matches = TARGET_NODES.every(target => {
+                const node = nodes.find(n => n.id === target.id);
+                if (!node) return false;
+                return Math.abs(node.x - target.x) < tolerance && Math.abs(node.y - target.y) < tolerance;
+            });
+            if (matches) {
+                setCompletedConstellation("Estrella");
+                setShowGuide(false);
             }
         };
 
         checkConnections();
-    }, [nodes, isOpen, isVictory]);
+        checkStarShape();
+    }, [nodes, isOpen]);
 
     const handleDrag = (id: string, info: any) => {
         setNodes(prev => prev.map(n => 
@@ -97,6 +114,7 @@ export function ConstellationGame() {
                         Cerrar
                     </Button>
                 </div>
+<div className="absolute top-12 left-0 w-full flex justify-center"><p className="text-sm text-muted">Arrastra los nodos para formar una figura de estrella y desbloquear la sinergia.</p></div>
 
                 {/* SVG para dibujar las líneas de energía */}
                 <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
@@ -162,6 +180,17 @@ export function ConstellationGame() {
                         <Button variant="primary" size="md" onClick={handleReset}>
                             Reiniciar Red
                         </Button>
+                    </motion.div>
+                )}
+                {/* Constellation info panel when shape completed */}
+                {completedConstellation && (
+                    <motion.div 
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-card-bg/90 border border-brand-cyan/30 rounded-xl p-4 shadow-lg"
+                    >
+                        <h4 className="text-lg font-bold text-brand-cyan mb-2">Constelación: {completedConstellation}</h4>
+                        <p className="text-sm text-foreground">Esta constelación representa la unión de mis principales habilidades: desarrollo, experiencia, conocimiento y contacto.</p>
                     </motion.div>
                 )}
 

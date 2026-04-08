@@ -47,14 +47,23 @@ export function Navbar() {
                 </nav>
 
                 {/* Accesorios y Botones de Escritorio */}
-                <div className="hidden md:flex items-center gap-4">
+                <div className="hidden md:flex items-center gap-6">
                     {/* Botón cambiar Idioma */}
-                    <button
-                        onClick={() => setLanguage(language === "es" ? "en" : "es")}
-                        className="text-sm font-bold text-muted hover:text-brand-cyan uppercase"
-                    >
-                        {language === "es" ? "EN" : "ES"}
-                    </button>
+                    <div className="flex items-center gap-2 text-sm font-bold uppercase border border-brand-cyan/20 rounded-full px-3 py-1">
+                        <button
+                            onClick={() => setLanguage("es")}
+                            className={`transition-colors ${language === "es" ? "text-brand-cyan" : "text-muted hover:text-foreground"}`}
+                        >
+                            ES
+                        </button>
+                        <span className="text-muted/30">|</span>
+                        <button
+                            onClick={() => setLanguage("en")}
+                            className={`transition-colors ${language === "en" ? "text-brand-cyan" : "text-muted hover:text-foreground"}`}
+                        >
+                            EN
+                        </button>
+                    </div>
 
                     {/* Botón cambiar Tema */}
                     {mounted && (
@@ -73,12 +82,7 @@ export function Navbar() {
                     className="md:hidden text-brand-cyan"
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 >
-                    <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        {isMobileMenuOpen
-                            ? <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                            : <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                        }
-                    </svg>
+                    {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
                 </button>
             </div>
 
@@ -90,11 +94,39 @@ export function Navbar() {
                             {link.name}
                         </a>
                     ))}
-                    <div className="flex justify-between items-center pt-4 border-t border-brand-cyan/10">
-                        <span className="text-muted">{language === "es" ? "Idioma" : "Language"}</span>
-                        <button onClick={() => setLanguage(language === "es" ? "en" : "es")} className="font-bold text-brand-cyan">
-                            {language === "es" ? "English" : "Español"}
-                        </button>
+                    
+                    <div className="flex flex-col gap-4 mt-2">
+                        {/* Tema Mobile */}
+                        {mounted && (
+                            <div className="flex justify-between items-center py-4 border-t border-brand-cyan/10">
+                                <span className="text-muted">{language === "es" ? "Apariencia" : "Appearance"}</span>
+                                <button 
+                                    className="flex items-center gap-2 font-medium text-foreground" 
+                                    onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
+                                >
+                                    {currentTheme === "dark" ? <><Sun size={18} /> {t.theme.light}</> : <><Moon size={18} /> {t.theme.dark}</>}
+                                </button>
+                            </div>
+                        )}
+                        
+                        {/* Idioma Mobile */}
+                        <div className="flex justify-between items-center py-4 border-t border-brand-cyan/10">
+                            <span className="text-muted">{language === "es" ? "Idioma" : "Language"}</span>
+                            <div className="flex gap-4">
+                                <button 
+                                    onClick={() => { setLanguage("es"); setIsMobileMenuOpen(false); }} 
+                                    className={`font-bold ${language === "es" ? "text-brand-cyan" : "text-muted"}`}
+                                >
+                                    <span className={language === "es" ? "border-b border-brand-cyan" : ""}>Español</span>
+                                </button>
+                                <button 
+                                    onClick={() => { setLanguage("en"); setIsMobileMenuOpen(false); }} 
+                                    className={`font-bold ${language === "en" ? "text-brand-cyan" : "text-muted"}`}
+                                >
+                                    <span className={language === "en" ? "border-b border-brand-cyan" : ""}>English</span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             )}

@@ -92,7 +92,9 @@ export const en = {
         emailPlaceholder: "Where do I reply?",
         messageLabel: "Message",
         messagePlaceholder: "Tell me about your project...",
-        submitBtn: "Send message"
+        submitBtn: "Send message",
+        locationLabel: "Location",
+        location: "Bogota, Colombia"
     },
     footer: {
         copyright: "Designed and built by",
@@ -106,13 +108,26 @@ export const en = {
     },
     synergy: {
         title: "Neural Architecture",
-        description: "A professional is not a set of isolated skills. Drag the stars and connect them all in a single network to discover the synergy.",
+        description: "A professional is not a set of isolated skills. Connect the stars by drawing lines to discover the constellations.",
         networkStability: "Network Stability",
         unifiedSystem: "UNIFIED SYSTEM",
         unifiedDescription: "Isolated skills are just the beginning. By creating a perfect neural architecture, Frontend, Backend development, and Design converge to create unparalleled products.",
         rewardUnlocked: "REWARD UNLOCKED",
         downloadCV: "Download Extended CV",
-        secretExperience: "Access key metrics and secret experience."
+        secretExperience: "Access key metrics and secret experience.",
+        tools: {
+            reset: "Reset Network"
+        },
+        onboarding: "Tap a star and then another to connect them.",
+        missionsTitle: "Neural Missions:",
+        constellations: [
+            { id: "orion", name: "Orion (Frontend)", description: "The hunter. Revealed by mastering Figma, Design, UI/UX, and React." },
+            { id: "lyra", name: "Lyra (Data)", description: "The celestial lyre. Composed of the harmony of Databases, APIs, and Architecture." },
+            { id: "cassiopeia", name: "Cassiopeia (Performance)", description: "The queen. Flows across TypeScript, Performance, and React." },
+            { id: "cygnus", name: "Cygnus (Fullstack)", description: "The intergalactic swan. Unifies Frontend (UI, React) with Backend (API, DB)." },
+            { id: "pegasus", name: "Pegasus (Core)", description: "The winged horse. The central engine connecting Performance, TypeScript, Architecture, and APIs." }
+        ],
+        finalMissionObj: "Andromeda (Global Network)",
     },
     synergyNodes: {
         react: "React & Next.js",
