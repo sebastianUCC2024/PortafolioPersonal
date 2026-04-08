@@ -9,6 +9,7 @@ import { CustomCursor } from "@/components/ui/custom-cursor";
 import { NoiseFilter } from "@/components/ui/noise-filter";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { AmbientBackground } from "@/components/animations/ambient-background";
+import { Starfield } from "@/components/animations/starfield";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -45,6 +46,7 @@ export default function RootLayout({
         `}
       >
         <AmbientBackground />
+        <Starfield />
         <NoiseFilter />
         <CustomCursor />
         <ScrollProgress />

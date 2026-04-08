@@ -1,26 +1,45 @@
 @import "tailwindcss";
 
 :root {
+  /* Fondo Light Mode: Blanco puro/nieve con textos grises corporativos */
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #18181b; /* zinc-900 */
+  
+  /* Accent Color: Slate elegante en vez de neón */
+  --brand-cyan: #334155; /* slate-700 */
+  --brand-cyan-hover: #0f172a; /* slate-900 */
+  
+  /* Cards y Componentes modo claro */
+  --card-bg: #f4f4f5; /* zinc-100 */
+  --muted: #71717a; /* zinc-500 */
+}
+
+.dark {
+  /* Fondo Oscuro: Grafito ultra profundo profesional */
+  --background: #09090b; /* zinc-950 */
+  --foreground: #fafafa; /* zinc-50 */
+  
+  /* Accent Color: Blanco roto para máxima sobriedad en modo oscuro */
+  --brand-cyan: #e4e4e7; /* zinc-200 */
+  --brand-cyan-hover: #ffffff;
+  
+  /* Cards y Bordes en modo oscuro */
+  --card-bg: #18181b; /* zinc-900 */
+  --muted: #a1a1aa; /* zinc-400 */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-inter);
+  --color-brand-cyan: var(--brand-cyan);
+  --color-brand-cyan-hover: var(--brand-cyan-hover);
+  --color-card-bg: var(--card-bg);
+  --color-muted: var(--muted);
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }

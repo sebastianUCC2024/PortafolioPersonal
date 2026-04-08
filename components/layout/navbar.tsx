@@ -5,9 +5,7 @@ import { useLanguage } from "@/hooks/use-language";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 
-// Íconos SVG ultra ligeros (sin librerías extra)
-const SunIcon = () => (<svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>);
-const MoonIcon = () => (<svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>);
+import { Sun, Moon, Menu, X } from "lucide-react";
 
 export function Navbar() {
     const { t, language, setLanguage } = useLanguage();
@@ -35,7 +33,7 @@ export function Navbar() {
                 {/* Logo minimalista textual */}
                 <a href="#" className="flex items-center gap-2 group">
                     <div className="w-10 h-10 rounded-full border-2 border-brand-cyan flex items-center justify-center bg-brand-cyan/10 group-hover:bg-brand-cyan transition-colors">
-                        <span className="font-primary font-bold text-lg text-brand-cyan group-hover:text-[#0a0c10]">JP</span>
+                        <span className="font-primary font-bold text-lg text-brand-cyan group-hover:text-background">JP</span>
                     </div>
                 </a>
 
@@ -60,9 +58,13 @@ export function Navbar() {
 
                     {/* Botón cambiar Tema */}
                     {mounted && (
-                        <Button variant="ghost" size="sm" className="w-10 h-10 p-0 rounded-full" onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}>
-                            {currentTheme === "dark" ? <SunIcon /> : <MoonIcon />}
-                        </Button>
+                        <button 
+                            className="w-10 h-10 rounded-full flex items-center justify-center text-foreground hover:bg-card-bg hover:text-brand-cyan transition-colors border border-transparent hover:border-brand-cyan/20" 
+                            onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
+                            aria-label="Toggle Theme"
+                        >
+                            {currentTheme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+                        </button>
                     )}
                 </div>
 

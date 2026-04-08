@@ -3,6 +3,7 @@
 import { useLanguage } from "@/hooks/use-language";
 import { Badge } from "@/components/ui/badge";
 import { FadeIn } from "@/components/animations/fade-in";
+import { GraduationCap, CheckCircle2 } from "lucide-react";
 
 export function Experience() {
     const { t } = useLanguage();
@@ -32,29 +33,30 @@ export function Experience() {
                             <h3 className="text-3xl md:text-4xl font-bold font-primary text-foreground mb-2">
                                 {t.experience.degree}
                             </h3>
-                            <h4 className="text-xl font-medium text-brand-cyan">
+                            <h4 className="text-xl font-medium text-brand-cyan flex items-center gap-2">
+                                <GraduationCap size={24} />
                                 {t.experience.university}
                             </h4>
                         </div>
-                        {/* Decoración de marca de agua estilo "🎓" o abstracta */}
-                        <div className="hidden md:flex w-20 h-20 rounded-full bg-brand-cyan/10 border border-brand-cyan/20 items-center justify-center shrink-0">
-                            <span className="text-brand-cyan text-3xl opacity-80 font-primary font-bold">UCC</span>
+                        {/* Decoración de marca de agua */}
+                        <div className="hidden md:flex flex-col w-20 h-20 rounded-2xl bg-brand-cyan/5 border border-brand-cyan/20 items-center justify-center shrink-0 shadow-inner rotate-3 group-hover:rotate-0 transition-transform duration-500">
+                            <span className="text-brand-cyan text-2xl font-primary font-bold bg-clip-text text-transparent bg-gradient-to-r from-brand-cyan to-brand-cyan-hover">UCC</span>
                         </div>
                     </div>
 
-                    <p className="text-muted text-lg leading-relaxed mb-10">
+                    <p className="text-muted text-lg leading-relaxed mb-10 border-l-2 border-brand-cyan/20 pl-6">
                         {t.experience.description}
                     </p>
 
                     <div>
-                        <h5 className="text-foreground font-semibold text-lg mb-4">
+                        <h5 className="text-foreground font-semibold text-lg mb-4 opacity-90">
                             {t.experience.skillsTitle}
                         </h5>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             {t.experience.skills.map(skill => (
-                                <div key={skill} className="flex items-center gap-3">
-                                    <div className="w-2 h-2 rounded-full bg-brand-cyan" />
-                                    <span className="text-muted group-hover:text-foreground/90 transition-colors">
+                                <div key={skill} className="flex items-center gap-3 p-3 rounded-lg border border-transparent hover:border-brand-cyan/10 hover:bg-brand-cyan/5 transition-all">
+                                    <CheckCircle2 size={16} className="text-brand-cyan shrink-0" />
+                                    <span className="text-muted group-hover:text-foreground transition-colors font-medium text-sm">
                                         {skill}
                                     </span>
                                 </div>

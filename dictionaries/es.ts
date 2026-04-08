@@ -10,6 +10,7 @@ export const es = {
     },
     projects: {
         title: "Mis Proyectos",
+        placeholder: "Previsualización",
         items: [
             {
                 status: "En Curso",
@@ -18,7 +19,7 @@ export const es = {
                 stack: ["Next.js", "Tailwind CSS", "Recharts", "Zustand"],
                 previewUrl: "#",
                 githubUrl: "#",
-                previewText: "Live preview",
+                previewText: "Vista previa",
                 githubText: "Ver código"
             },
             {
@@ -28,7 +29,7 @@ export const es = {
                 stack: ["React", "Stripe API", "Framer Motion", "React Hook Form"],
                 previewUrl: "#",
                 githubUrl: "#",
-                previewText: "Live preview",
+                previewText: "Vista previa",
                 githubText: "Ver código"
             }
         ]

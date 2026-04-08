@@ -10,6 +10,7 @@ export const en = {
     },
     projects: {
         title: "My Projects",
+        placeholder: "Image Preview",
         items: [
             {
                 status: "In Progress",

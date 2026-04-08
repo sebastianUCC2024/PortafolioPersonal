@@ -4,6 +4,7 @@ import { useLanguage } from "@/hooks/use-language";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { FadeIn } from "@/components/animations/fade-in";
+import { Starfield } from "@/components/animations/starfield";
 
 export function Hero() {
     const { t } = useLanguage();

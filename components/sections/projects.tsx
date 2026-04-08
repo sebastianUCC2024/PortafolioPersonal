@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { StaggerGrid } from "@/components/animations/stagger-grid";
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
+import { Code2, ExternalLink } from "lucide-react";
 
 export function Projects() {
     const { t } = useLanguage();
@@ -36,6 +37,7 @@ export function Projects() {
 
 // Componente individual separado para mantener su propio estado del ratón
 function SpotlightCard({ project }: { project: any }) {
+    const { t } = useLanguage();
     const divRef = useRef<HTMLDivElement>(null);
     const [isFocused, setIsFocused] = useState(false);
     const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -88,14 +90,14 @@ function SpotlightCard({ project }: { project: any }) {
             />
             
             {/* Columna Izquierda: Imagen / Placeholder gigante */}
-            <div className="relative z-10 w-full aspect-video md:aspect-[4/3] rounded-2xl bg-gradient-to-br from-[#12141a] to-[#0a0c10] border border-brand-cyan/10 flex items-center justify-center overflow-hidden">
+            <div className="relative z-10 w-full aspect-video md:aspect-[4/3] rounded-2xl bg-card-bg border border-brand-cyan/20 flex flex-col items-center justify-center overflow-hidden shadow-inner">
                  <div className="absolute inset-0 bg-brand-cyan/5 group-hover:bg-transparent transition-colors duration-500" />
-                 {/* Logo/Icon placeholder centrado */}
-                 <div className="w-20 h-20 rounded-2xl bg-brand-cyan/10 backdrop-blur border border-brand-cyan/20 flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
-                     <svg className="w-10 h-10 text-brand-cyan opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-                     </svg>
+                 {/* Icon placeholder centrado lucide */}
+                 <div className="w-20 h-20 rounded-2xl bg-background backdrop-blur border border-brand-cyan/20 flex items-center justify-center transition-transform duration-500 group-hover:scale-110 shadow-lg">
+                     <Code2 className="w-10 h-10 text-brand-cyan opacity-80" />
                  </div>
+                 {/* Texto decorativo para el placeholder */}
+                 <span className="mt-6 text-sm font-medium text-muted tracking-widest uppercase">{t.projects.placeholder}</span>
             </div>
 
             {/* Columna Derecha: Información */}
@@ -123,7 +125,7 @@ function SpotlightCard({ project }: { project: any }) {
                 {/* Acciones */}
                 <div className="flex flex-wrap gap-4 mt-auto pt-4 border-t border-brand-cyan/10">
                     <Button variant="primary" size="md">
-                        {project.previewText} ↗
+                        {project.previewText} <ExternalLink className="ml-1 w-4 h-4 inline-block" />
                     </Button>
                     <Button variant="outline" size="md">
                         {project.githubText}
