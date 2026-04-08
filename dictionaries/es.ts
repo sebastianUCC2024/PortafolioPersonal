@@ -61,6 +61,26 @@ export const es = {
             "Desarrollo Frontend"
         ]
     },
+    testimonials: {
+        title: "Testimonios",
+        items: [
+            {
+                quote: "Juan es un dev sumamente organizado. Su habilidad para transformar diseños complejos en código limpio es excepcional.",
+                name: "Carlos",
+                role: "Lead Frontend Engineer"
+            },
+            {
+                quote: "El nivel de atención al detalle que pone en cada componente es algo que rara vez he visto. Un excelente compañero de equipo.",
+                name: "Camila",
+                role: "Product Designer"
+            },
+            {
+                quote: "No solo escribe código rápido, se asegura que sea mantenible y entienda la visión del producto a nivel arquitectónico.",
+                name: "Andrés",
+                role: "Tech Lead"
+            }
+        ]
+    },
     nav: {
         projects: "Proyectos",
         experience: "Experiencia",

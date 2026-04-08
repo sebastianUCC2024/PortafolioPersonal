@@ -61,6 +61,26 @@ export const en = {
             "Frontend Development"
         ]
     },
+    testimonials: {
+        title: "Testimonials",
+        items: [
+            {
+                quote: "Juan is an extremely organized developer. His ability to transform complex designs into clean code is exceptional.",
+                name: "Carlos",
+                role: "Lead Frontend Engineer"
+            },
+            {
+                quote: "The level of attention to detail he puts into every component is something I've rarely seen. Excellent teammate.",
+                name: "Camila",
+                role: "Product Designer"
+            },
+            {
+                quote: "Not only does he write code fast, he ensures it's maintainable and understands the product vision at an architectural level.",
+                name: "Andrés",
+                role: "Tech Lead"
+            }
+        ]
+    },
     nav: {
         projects: "Projects",
         experience: "Experience",
