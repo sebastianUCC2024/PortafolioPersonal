@@ -33,6 +33,22 @@ export const en = {
             }
         ]
     },
+    experience: {
+        title: "Academic Background",
+        badge: "2020 - Present",
+        degree: "Software Engineering",
+        university: "Universidad Cooperativa de Colombia",
+        description: "Comprehensive training focused on scalable application development, software architecture, and agile methodologies. Stand out for creating practical projects aimed at solving real-world problems.",
+        skillsTitle: "Acquired Skills:",
+        skills: [
+            "Frontend & Backend Development",
+            "Relational Databases",
+            "Software Architecture",
+            "RESTful API Construction",
+            "UI/UX Design (Figma)",
+            "Design Patterns"
+        ]
+    },
     nav: {
         projects: "Projects",
         experience: "Experience",
