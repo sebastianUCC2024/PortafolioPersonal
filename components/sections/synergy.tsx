@@ -3,8 +3,9 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/hooks/use-language";
-import { Network, Sparkles } from "lucide-react";
+import { Network, Sparkles, FileText, Download } from "lucide-react";
 import { FadeIn } from "@/components/animations/fade-in";
+import { Button } from "@/components/ui/button";
 
 interface StarNode {
     id: string;
@@ -30,6 +31,7 @@ export function SynergySection() {
     
     const [nodes, setNodes] = useState<StarNode[]>(INITIAL_STARS);
     const [isVictory, setIsVictory] = useState(false);
+    const [connectedCount, setConnectedCount] = useState(1);
     const containerRef = useRef<HTMLDivElement>(null);
     const [dimensions, setDimensions] = useState({ width: 800, height: 600 });
     
@@ -70,21 +72,35 @@ export function SynergySection() {
             }
         }
 
-        const visited = new Set<number>();
-        const queue = [0];
-        visited.add(0);
+        let maxClusterSize = 1;
+        const globalVisited = new Set<number>();
 
-        while (queue.length > 0) {
-            const current = queue.shift()!;
-            for (const neighbor of adjacencyList[current]) {
-                if (!visited.has(neighbor)) {
-                    visited.add(neighbor);
-                    queue.push(neighbor);
+        for (let i = 0; i < nodes.length; i++) {
+            if (!globalVisited.has(i)) {
+                const visited = new Set<number>();
+                const queue = [i];
+                visited.add(i);
+
+                while (queue.length > 0) {
+                    const current = queue.shift()!;
+                    for (const neighbor of adjacencyList[current]) {
+                        if (!visited.has(neighbor)) {
+                            visited.add(neighbor);
+                            queue.push(neighbor);
+                        }
+                    }
+                }
+
+                for (const node of visited) globalVisited.add(node);
+                if (visited.size > maxClusterSize) {
+                    maxClusterSize = visited.size;
                 }
             }
         }
 
-        if (visited.size === nodes.length) {
+        setConnectedCount(maxClusterSize);
+
+        if (maxClusterSize === nodes.length) {
             setIsVictory(true);
         }
     }, [nodes, isVictory]);
@@ -141,6 +157,14 @@ export function SynergySection() {
                             className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-brand-cyan/5 rounded-full blur-[80px] pointer-events-none"
                         />
 
+                        {/* Custom SVG Animation para flujo de datos */}
+                        <style>{`
+                            @keyframes dashFlow {
+                                to { stroke-dashoffset: -16; }
+                            }
+                            .animate-flow { animation: dashFlow 1s linear infinite; }
+                        `}</style>
+
                         {/* Lienzo SVG para las conexiones matemáticas */}
                         <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
                             <defs>
@@ -167,12 +191,31 @@ export function SynergySection() {
                                             y2={nodeB.y}
                                             stroke="url(#lineGrad)"
                                             strokeWidth={isVictory ? 3 : 1.5}
-                                            className="transition-all duration-300 ease-in-out drop-shadow-[0_0_5px_var(--brand-cyan)]"
+                                            strokeDasharray={isVictory ? "none" : "8 8"}
+                                            className={`transition-all duration-300 ease-in-out drop-shadow-[0_0_5px_var(--brand-cyan)] ${isVictory ? '' : 'animate-flow'}`}
                                         />
                                     );
                                 })
                             ))}
                         </svg>
+
+                        {/* HUD de Progreso */}
+                        {!isVictory && (
+                            <div className="absolute top-6 right-6 md:top-8 md:right-8 z-20 bg-background/80 backdrop-blur-md border border-brand-cyan/20 rounded-xl px-4 py-3 shadow-[0_0_15px_rgba(0,0,0,0.5)] flex items-center gap-4 transition-all duration-500">
+                                <div className="flex flex-col text-right">
+                                    <span className="text-[10px] text-muted-foreground uppercase tracking-widest font-bold">Estabilidad de Red</span>
+                                    <span className="text-lg font-mono font-bold text-brand-cyan">
+                                        {Math.round((connectedCount / nodes.length) * 100)}%
+                                    </span>
+                                </div>
+                                <div className="relative w-10 h-10 flex items-center justify-center">
+                                    <svg className="w-full h-full -rotate-90 drop-shadow-[0_0_5px_var(--brand-cyan)]">
+                                        <circle cx="20" cy="20" r="16" stroke="currentColor" strokeWidth="3" fill="none" className="text-muted/30" />
+                                        <circle cx="20" cy="20" r="16" stroke="var(--brand-cyan)" strokeWidth="3" fill="none" strokeDasharray="100" strokeDashoffset={100 - (connectedCount / nodes.length) * 100} className="transition-all duration-500 ease-out" strokeLinecap="round" />
+                                    </svg>
+                                </div>
+                            </div>
+                        )}
 
                         {/* Nodos (Estrellas miniatura elegantes) */}
                         <div className="absolute inset-0 z-10 overflow-hidden">
@@ -236,12 +279,34 @@ export function SynergySection() {
                                         className="relative z-10 flex flex-col items-center"
                                     >
                                         <Network size={50} className="text-white mb-6 animate-pulse" />
-                                        <h3 className="text-4xl md:text-6xl font-primary font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan via-white to-brand-cyan mb-4 tracking-wider drop-shadow-[0_0_20px_var(--brand-cyan)]">
+                                        <h3 className="text-4xl md:text-6xl font-primary font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan via-white to-brand-cyan mb-4 tracking-wider drop-shadow-[0_0_20px_var(--brand-cyan)] text-center">
                                             SISTEMA UNIFICADO
                                         </h3>
-                                        <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto text-center px-6 leading-relaxed">
+                                        <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto text-center px-6 leading-relaxed mb-8">
                                             Las habilidades aisladas son solo el inicio. Al crear una arquitectura neural perfecta, el desarrollo Frontend, Backend y el Diseño convergen para crear productos inigualables.
                                         </p>
+                                        
+                                        <motion.div 
+                                            initial={{ opacity: 0, y: 20 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ delay: 2.5 }}
+                                            className="flex flex-col items-center gap-4"
+                                        >
+                                            <div className="px-4 py-2 bg-brand-cyan/20 border border-brand-cyan/50 rounded-full flex items-center gap-2 mb-2 shadow-[0_0_15px_var(--brand-cyan)]">
+                                                <Sparkles size={16} className="text-white animate-pulse" />
+                                                <span className="text-sm text-white font-bold tracking-wider">RECOMPENSA DESBLOQUEADA</span>
+                                            </div>
+                                            
+                                            <Button variant="primary" size="lg" className="gap-3 shadow-[0_0_20px_var(--brand-cyan)] hover:shadow-[0_0_40px_var(--brand-cyan)] transition-shadow font-bold group border border-brand-cyan/20" onClick={() => window.open('/cv.pdf', '_blank')}>
+                                                <FileText size={22} className="group-hover:scale-110 transition-transform" />
+                                                Descargar CV Ampliado
+                                                <Download size={18} className="opacity-80 group-hover:translate-y-1 transition-transform" />
+                                            </Button>
+
+                                            <p className="text-xs text-brand-cyan/80 mt-1 max-w-xs text-center font-mono">
+                                                Acceso a métricas clave y experiencia secreta.
+                                            </p>
+                                        </motion.div>
                                     </motion.div>
                                 </motion.div>
                             )}
