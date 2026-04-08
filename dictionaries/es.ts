@@ -1,7 +1,12 @@
 export const es = {
     hero: {
+        badge: "FRONT-END DEVELOPER",
         greeting: "Hola, soy",
-        role: "Desarrollador Frontend",
+        name: "Juan",
+        lastName: "Patiño",
+        description: "Construyendo interfaces memorables y experiencias digitales futuristas con un enfoque minimalista y gran atención al detalle visual.",
+        primaryBtn: "Ver mis proyectos",
+        secondaryBtn: "Conóceme"
     },
     nav: {
         projects: "Proyectos",
