@@ -2,6 +2,7 @@
 
 import { useLanguage } from "@/hooks/use-language";
 import { Badge } from "@/components/ui/badge";
+import { FadeIn } from "@/components/animations/fade-in";
 
 export function Experience() {
     const { t } = useLanguage();
@@ -11,17 +12,18 @@ export function Experience() {
             <div className="max-w-4xl mx-auto px-6">
                 
                 {/* Título de Sección centrado */}
-                <div className="mb-16 text-center flex flex-col items-center">
+                <FadeIn className="mb-16 text-center flex flex-col items-center">
                     <h2 className="text-3xl md:text-5xl font-bold font-primary mb-4 text-foreground">
                         <span className="text-brand-cyan">/</span> {t.experience.title}
                     </h2>
                     <div className="w-24 h-1 bg-brand-cyan/30 rounded-full" />
-                </div>
+                </FadeIn>
 
                 {/* Tarjeta de Experiencia Principal */}
-                <div className="relative rounded-3xl bg-card-bg/80 border-t-2 border-l border-r border-b border-t-brand-cyan/50 border-brand-cyan/10 p-8 md:p-12 shadow-2xl backdrop-blur-sm overflow-hidden group">
-                    
-                    {/* Elemento decorativo visual */}
+                <FadeIn delay={0.2}>
+                    <div className="relative rounded-3xl bg-card-bg/80 border-t-2 border-l border-r border-b border-t-brand-cyan/50 border-brand-cyan/10 p-8 md:p-12 shadow-2xl backdrop-blur-sm overflow-hidden group">
+                        
+                        {/* Elemento decorativo visual */}
                     <div className="absolute top-0 right-0 w-64 h-64 bg-brand-cyan/5 rounded-full blur-[80px] -z-10 group-hover:bg-brand-cyan/10 transition-colors duration-500" />
 
                     <div className="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-8">
@@ -61,6 +63,7 @@ export function Experience() {
                     </div>
 
                 </div>
+                </FadeIn>
 
             </div>
         </section>

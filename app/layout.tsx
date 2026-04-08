@@ -2,9 +2,12 @@ import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { LanguageProvider } from "@/hooks/use-language";
+import { SmoothScrollProvider } from "@/components/providers/smooth-scroll";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
-import { PianoWidget } from "@/components/ui/piano-widget"; // <-- Nuevo import
+import { CustomCursor } from "@/components/ui/custom-cursor";
+import { NoiseFilter } from "@/components/ui/noise-filter";
+import { ScrollProgress } from "@/components/ui/scroll-progress";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -37,14 +40,19 @@ export default function RootLayout({
           min-h-screen
           flex flex-col
           relative
+          md:cursor-none
         `}
       >
+        <NoiseFilter />
+        <CustomCursor />
+        <ScrollProgress />
         <LanguageProvider>
           <ThemeProvider>
-            <Navbar />
-            {children}
-            <Footer />
-            <PianoWidget /> {/* <-- Innovación interactiva inyectada */}
+            <SmoothScrollProvider>
+              <Navbar />
+              {children}
+              <Footer />
+            </SmoothScrollProvider>
           </ThemeProvider>
         </LanguageProvider>
       </body>

@@ -97,15 +97,6 @@ export const es = {
         copyright: "Diseñado y desarrollado por",
         rights: "Todos los derechos reservados."
     },
-    piano: {
-        keys: [
-            { id: 1, label: "Estado", content: "👨‍💻 Trabajando en algo nuevo y genial." },
-            { id: 2, label: "Música", content: "🎵 Escuchando Synthwave / Retrowave" },
-            { id: 3, label: "Tech", content: "⚡ Obsesionado con Next.js y Tailwind" },
-            { id: 4, label: "Café", content: "☕ Nivel de cafeína: Óptimo (3 tazas)" },
-            { id: 5, label: "Quote", content: "💭 'Hazlo funcionar, hazlo bien, hazlo rápido.'" }
-        ]
-    },
     nav: {
         projects: "Proyectos",
         experience: "Experiencia",

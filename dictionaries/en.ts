@@ -97,15 +97,6 @@ export const en = {
         copyright: "Designed and built by",
         rights: "All rights reserved."
     },
-    piano: {
-        keys: [
-            { id: 1, label: "Status", content: "👨‍💻 Building something new & cool." },
-            { id: 2, label: "Music", content: "🎵 Listening to Synthwave / Retrowave" },
-            { id: 3, label: "Tech", content: "⚡ Obsessed with Next.js & Tailwind" },
-            { id: 4, label: "Coffee", content: "☕ Caffeine level: Optimal (3 cups)" },
-            { id: 5, label: "Quote", content: "💭 'Make it work, make it right, make it fast.'" }
-        ]
-    },
     nav: {
         projects: "Projects",
         experience: "Experience",

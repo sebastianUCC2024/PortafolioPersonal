@@ -1,6 +1,8 @@
 "use client";
 
 import { useLanguage } from "@/hooks/use-language";
+import { FadeIn } from "@/components/animations/fade-in";
+import { StaggerGrid } from "@/components/animations/stagger-grid";
 
 export function Testimonials() {
     const { t } = useLanguage();
@@ -10,15 +12,15 @@ export function Testimonials() {
             <div className="max-w-7xl mx-auto px-6">
                 
                 {/* Título de Sección */}
-                <div className="mb-16 md:mb-24 flex flex-col items-center text-center">
+                <FadeIn className="mb-16 md:mb-24 flex flex-col items-center text-center">
                     <h2 className="text-3xl md:text-5xl font-bold font-primary mb-4 text-foreground">
                         <span className="text-brand-cyan">/</span> {t.testimonials.title}
                     </h2>
                     <div className="w-24 h-1 bg-brand-cyan/30 rounded-full" />
-                </div>
+                </FadeIn>
 
                 {/* Grid de Testimonios */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <StaggerGrid className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {t.testimonials.items.map((testimonial, index) => (
                         <div 
                             key={index} 
@@ -53,7 +55,7 @@ export function Testimonials() {
                             </div>
                         </div>
                     ))}
-                </div>
+                </StaggerGrid>
 
             </div>
         </section>
