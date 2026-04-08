@@ -118,6 +118,13 @@ export function ConstellationGame() {
                 {/* Shape guide overlay (faint star) */}
                 {showGuide && (
                     <svg className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-30">
+                        {/* Definir marcador de flecha */}
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="var(--brand-cyan)" />
+                            </marker>
+                        </defs>
+                        {/* Líneas punteadas de la constelación completa */}
                         {TARGET_NODES.map((nodeA, i) => (
                             TARGET_NODES.slice(i + 1).map((nodeB) => (
                                 <line
@@ -131,6 +138,26 @@ export function ConstellationGame() {
                                     strokeDasharray="4 4"
                                 />
                             ))
+                        ))}
+                        {/* Ruta ordenada con flechas */}
+                        <polyline
+                            points={TARGET_NODES.map(n => `${n.x + 50},${n.y + 20}`).join(' ')}
+                            fill="none"
+                            stroke="var(--brand-cyan)"
+                            strokeWidth={2}
+                            markerEnd="url(#arrowhead)"
+                        />
+                        {/* Números de orden para cada nodo */}
+                        {TARGET_NODES.map((node, idx) => (
+                            <text
+                                key={node.id + "-label"}
+                                x={node.x + 55}
+                                y={node.y + 15}
+                                fill="var(--brand-cyan)"
+                                fontSize={12}
+                                fontWeight="bold"
+                                textAnchor="middle"
+                            >{idx + 1}</text>
                         ))}
                     </svg>
                 )}

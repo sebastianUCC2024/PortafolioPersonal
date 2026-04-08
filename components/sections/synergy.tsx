@@ -26,11 +26,11 @@ const INITIAL_STARS: StarNode[] = [
 ];
 
 const TARGET_CONSTELLATIONS = [
-    { id: "orion", nodes: ["design", "react", "ui", "ts"] },
-    { id: "lyra", nodes: ["db", "backend", "arch"] },
-    { id: "cassiopeia", nodes: ["ts", "perf", "react"] },
-    { id: "cygnus", nodes: ["db", "backend", "react", "ui"] },
-    { id: "pegasus", nodes: ["perf", "ts", "arch", "backend"] }
+    { id: "orion", nodes: ["design", "react", "ui", "ts"], edges: [["design", "react"], ["react", "ui"], ["ui", "ts"]] },
+    { id: "lyra", nodes: ["db", "backend", "arch"], edges: [["db", "backend"], ["backend", "arch"]] },
+    { id: "cassiopeia", nodes: ["ts", "perf", "react"], edges: [["ts", "perf"], ["perf", "react"]] },
+    { id: "cygnus", nodes: ["db", "backend", "react", "ui"], edges: [["db", "backend"], ["backend", "react"], ["react", "ui"]] },
+    { id: "pegasus", nodes: ["perf", "ts", "arch", "backend"], edges: [["perf", "ts"], ["ts", "arch"], ["arch", "backend"]] }
 ];
 
 export function SynergySection() {
@@ -47,6 +47,7 @@ export function SynergySection() {
 
     // Derived states
     const [isUltimateVictory, setIsUltimateVictory] = useState(false);
+    const [progress, setProgress] = useState(0);
     
     // Dimension setup
     const containerRef = useRef<HTMLDivElement>(null);
@@ -122,7 +123,10 @@ export function SynergySection() {
 
     // Main logic: Evaluate connections against active mission
     useEffect(() => {
-        if (!activeMissionId || isUltimateVictory) return;
+        if (!activeMissionId || isUltimateVictory) {
+            setProgress(0);
+            return;
+        }
         
         const adjacencyList: Map<string, string[]> = new Map();
         nodes.forEach(n => adjacencyList.set(n.id, []));
@@ -150,6 +154,8 @@ export function SynergySection() {
                 }
             }
 
+            setProgress(Math.round((visitedCount / nodes.length) * 100));
+
             if (visitedCount === nodes.length) {
                 setIsUltimateVictory(true);
             }
@@ -157,6 +163,17 @@ export function SynergySection() {
             // Sub-victory condition for normal missions
             const mission = TARGET_CONSTELLATIONS.find(c => c.id === activeMissionId);
             if (!mission) return;
+
+            // Calculate progress based on target edges matched
+            let matchedEdges = 0;
+            mission.edges?.forEach(([from, to]) => {
+                const exists = userEdges.some(e => 
+                    (e.from === from && e.to === to) || (e.from === to && e.to === from)
+                );
+                if (exists) matchedEdges++;
+            });
+            const totalTargetEdges = mission.edges?.length || 1;
+            setProgress(Math.round((matchedEdges / totalTargetEdges) * 100));
 
             if (!discoveredConstellations.includes(mission.id)) {
                 let isGraphConnected = false;
@@ -193,7 +210,7 @@ export function SynergySection() {
         ));
     };
 
-    const handleNodePointerDown = (e: React.PointerEvent, id: string) => {
+    const handleNodePointerUp = (e: React.PointerEvent, id: string) => {
         e.stopPropagation();
         if (isUltimateVictory) return;
 
@@ -203,7 +220,7 @@ export function SynergySection() {
             return;
         }
 
-        // Mechanics: Click-to-Connect
+        // Mechanics: Click-to-Connect / Drag-to-Connect hybrid
         if (!selectedNodeId) {
             setSelectedNodeId(id);
         } else {
@@ -225,10 +242,18 @@ export function SynergySection() {
         }
     };
 
-    const handleContainerPointerDown = () => {
+    const handleContainerPointerDown = (e: React.PointerEvent) => {
         if (selectedNodeId) {
             setSelectedNodeId(null);
             setMousePos(null);
+        }
+        // También actualizar posición del ratón al pulsar en móvil
+        if (containerRef.current) {
+            const rect = containerRef.current.getBoundingClientRect();
+            setMousePos({
+                x: e.clientX - rect.left,
+                y: e.clientY - rect.top
+            });
         }
     };
 
@@ -367,8 +392,62 @@ export function SynergySection() {
                                 </div>
                             )}
 
+                            {/* UI de Ayuda con barra de progreso */}
+                            {activeMissionId && !isUltimateVictory && (
+                                <FadeIn className="absolute top-6 left-1/2 -translate-x-1/2 z-20 w-auto min-w-[300px] pointer-events-none">
+                                    <div className="bg-background/80 border border-brand-cyan/20 px-6 py-4 rounded-2xl backdrop-blur-md shadow-lg flex flex-col gap-3">
+                                        <div className="flex justify-between items-center gap-8">
+                                            <span className="text-xs font-bold uppercase tracking-widest text-brand-cyan">
+                                                Progreso de Constelación
+                                            </span>
+                                            <span className="text-sm font-mono font-bold text-foreground">{progress}%</span>
+                                        </div>
+                                        <div className="w-full h-1.5 bg-muted rounded-full overflow-hidden">
+                                            <motion.div 
+                                                initial={{ width: 0 }}
+                                                animate={{ width: `${progress}%` }}
+                                                className="h-full bg-brand-cyan shadow-[0_0_10px_var(--brand-cyan)]"
+                                            />
+                                        </div>
+                                        <p className="text-[10px] text-muted uppercase tracking-tighter text-center">
+                                            Conecta los nodos brillantes para formar la figura
+                                        </p>
+                                    </div>
+                                </FadeIn>
+                            )}
+
                             {/* Canvas SVG para Ejes (Líneas) */}
                             <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
+                                {/* Guía Visual (Líneas trazadoras) */}
+                                {activeMissionId && !isUltimateVictory && (
+                                    <g className="opacity-30 scale-[1.01]">
+                                        {(() => {
+                                            const mission = TARGET_CONSTELLATIONS.find(c => c.id === activeMissionId);
+                                            if (!mission || !mission.edges) return null;
+                                            
+                                            // Pre-calculate positions to avoid redundant calls in render
+                                            return mission.edges.map(([fromId, toId], i) => {
+                                                const n1 = nodes.find(n => n.id === fromId);
+                                                const n2 = nodes.find(n => n.id === toId);
+                                                if (!n1 || !n2) return null;
+                                                
+                                                const p1 = getDynamicNodePosition(n1, nodes.indexOf(n1));
+                                                const p2 = getDynamicNodePosition(n2, nodes.indexOf(n2));
+                                                
+                                                return (
+                                                    <line 
+                                                        key={`guide-${i}`}
+                                                        x1={p1.x} y1={p1.y}
+                                                        x2={p2.x} y2={p2.y}
+                                                        stroke="var(--brand-cyan)"
+                                                        strokeWidth={1}
+                                                        strokeDasharray="4 4"
+                                                    />
+                                                );
+                                            });
+                                        })()}
+                                    </g>
+                                )}
                                 {/* Conexiones reales creadas por el usuario */}
                                 {userEdges.map((edge, i) => {
                                     const n1 = nodes.find(n => n.id === edge.from);
@@ -428,14 +507,15 @@ export function SynergySection() {
                                     return (
                                         <motion.div
                                             key={node.id}
-                                            onPointerDown={(e) => handleNodePointerDown(e, node.id)}
+                                            onPointerUp={(e) => handleNodePointerUp(e, node.id)}
+                                            onPointerDown={(e) => e.stopPropagation()}
                                             animate={{ 
                                                 x: targetPos.x,
                                                 y: targetPos.y,
                                                 opacity: isFaded ? 0.3 : 1
                                             }}
                                             transition={{ duration: 1.5, type: "spring", bounce: 0.3 }}
-                                            className={`absolute flex items-center justify-center w-0 h-0
+                                            className={`absolute flex items-center justify-center w-0 h-0 touch-none
                                                 ${activeMissionId ? 'pointer-events-auto cursor-pointer' : 'pointer-events-none'}
                                                 ${isSelected ? 'z-50' : 'z-20'}
                                             `}
