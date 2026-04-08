@@ -8,6 +8,31 @@ export const es = {
         primaryBtn: "Ver mis proyectos",
         secondaryBtn: "Conóceme"
     },
+    projects: {
+        title: "Mis Proyectos",
+        items: [
+            {
+                status: "En Curso",
+                title: "Dashboard Interactivo",
+                description: "Aplicación SaaS para visualización de datos en tiempo real. Integra paneles personalizables y reportes detallados.",
+                stack: ["Next.js", "Tailwind CSS", "Recharts", "Zustand"],
+                previewUrl: "#",
+                githubUrl: "#",
+                previewText: "Live preview",
+                githubText: "Ver código"
+            },
+            {
+                status: "Completado",
+                title: "Sistema de Checkout",
+                description: "Flujo de pagos de alta conversión con validaciones asíncronas y diseño enfocado en la experiencia de usuario (UX).",
+                stack: ["React", "Stripe API", "Framer Motion", "React Hook Form"],
+                previewUrl: "#",
+                githubUrl: "#",
+                previewText: "Live preview",
+                githubText: "Ver código"
+            }
+        ]
+    },
     nav: {
         projects: "Proyectos",
         experience: "Experiencia",
