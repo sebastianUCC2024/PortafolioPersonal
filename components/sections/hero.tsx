@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useLanguage } from "@/hooks/use-language";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -57,12 +58,16 @@ export function Hero() {
                     <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full bg-card-bg border-2 border-brand-cyan/50 shadow-[0_0_30px_rgba(0,229,153,0.15)] flex items-center justify-center overflow-hidden group">
                         
                         {/* Filtro interactivo en hover */}
-                        <div className="absolute inset-0 bg-brand-cyan/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        <div className="absolute inset-0 bg-brand-cyan/20 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none" />
                         
-                        {/* Tipografía provisional brillante hasta tener imagen */}
-                        <span className="font-primary font-bold text-6xl md:text-8xl text-brand-cyan tracking-tighter drop-shadow-[0_0_20px_rgba(0,229,153,0.5)] transition-transform duration-500 group-hover:scale-110">
-                            JP
-                        </span>
+                        {/* Imagen de perfil */}
+                        <Image 
+                            src="/portafolio.jpg"
+                            alt="Foto de perfil"
+                            fill
+                            className="object-cover transition-transform duration-500 group-hover:scale-110"
+                            priority
+                        />
                     </div>
                 </div>
 

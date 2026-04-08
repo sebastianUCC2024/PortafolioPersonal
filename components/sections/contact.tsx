@@ -40,8 +40,8 @@ export function Contact() {
                                 </div>
                                 <div className="flex flex-col">
                                     <span className="text-muted text-sm uppercase tracking-wider">{t.contact.emailLabel}</span>
-                                    <a href="mailto:hola@juanpatino.com" className="text-foreground font-medium hover:text-brand-cyan transition-colors">
-                                        hola@juanpatino.com
+                                    <a href="mailto:juan17patino@gmail.com" className="text-foreground font-medium hover:text-brand-cyan transition-colors">
+                                        juan17patino@gmail.com
                                     </a>
                                 </div>
                             </div>
