@@ -8,6 +8,7 @@ import { Footer } from "@/components/layout/footer";
 import { CustomCursor } from "@/components/ui/custom-cursor";
 import { NoiseFilter } from "@/components/ui/noise-filter";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
+import { AmbientBackground } from "@/components/animations/ambient-background";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -43,6 +44,7 @@ export default function RootLayout({
           md:cursor-none
         `}
       >
+        <AmbientBackground />
         <NoiseFilter />
         <CustomCursor />
         <ScrollProgress />
