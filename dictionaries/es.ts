@@ -81,6 +81,22 @@ export const es = {
             }
         ]
     },
+    contact: {
+        title: "Contáctame",
+        subtitle: "¿Listo para construir algo increíble juntos?",
+        description: "Actualmente estoy abierto a nuevas oportunidades. Ya sea que tengas una pregunta o simplemente quieras saludar, ¡haré lo posible por responderte!",
+        nameLabel: "Nombre",
+        namePlaceholder: "Tu nombre",
+        emailLabel: "Correo Electrónico",
+        emailPlaceholder: "¿A dónde te respondo?",
+        messageLabel: "Mensaje",
+        messagePlaceholder: "Cuéntame sobre tu proyecto...",
+        submitBtn: "Enviar mensaje"
+    },
+    footer: {
+        copyright: "Diseñado y desarrollado por",
+        rights: "Todos los derechos reservados."
+    },
     nav: {
         projects: "Proyectos",
         experience: "Experiencia",

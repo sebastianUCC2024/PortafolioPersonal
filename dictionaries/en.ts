@@ -81,6 +81,22 @@ export const en = {
             }
         ]
     },
+    contact: {
+        title: "Contact Me",
+        subtitle: "Ready to build something amazing together?",
+        description: "I'm currently open to new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!",
+        nameLabel: "Name",
+        namePlaceholder: "Your name",
+        emailLabel: "Email Address",
+        emailPlaceholder: "Where do I reply?",
+        messageLabel: "Message",
+        messagePlaceholder: "Tell me about your project...",
+        submitBtn: "Send message"
+    },
+    footer: {
+        copyright: "Designed and built by",
+        rights: "All rights reserved."
+    },
     nav: {
         projects: "Projects",
         experience: "Experience",

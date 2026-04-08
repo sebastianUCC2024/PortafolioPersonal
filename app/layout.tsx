@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { LanguageProvider } from "@/hooks/use-language";
-import { Navbar } from "@/components/layout/navbar"; // <-- Nuevo import
+import { Navbar } from "@/components/layout/navbar";
+import { Footer } from "@/components/layout/footer"; // <-- Nuevo import
 import "./globals.css";
 
 const outfit = Outfit({
@@ -38,8 +39,9 @@ export default function RootLayout({
       >
         <LanguageProvider>
           <ThemeProvider>
-            <Navbar /> {/* <-- Inyectamos la cabecera permanentemente */}
+            <Navbar />
             {children}
+            <Footer /> {/* <-- Footer inyectado */}
           </ThemeProvider>
         </LanguageProvider>
       </body>
