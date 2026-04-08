@@ -3,7 +3,8 @@ import { Inter, Outfit } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { LanguageProvider } from "@/hooks/use-language";
 import { Navbar } from "@/components/layout/navbar";
-import { Footer } from "@/components/layout/footer"; // <-- Nuevo import
+import { Footer } from "@/components/layout/footer";
+import { PianoWidget } from "@/components/ui/piano-widget"; // <-- Nuevo import
 import "./globals.css";
 
 const outfit = Outfit({
@@ -35,13 +36,15 @@ export default function RootLayout({
           antialiased 
           min-h-screen
           flex flex-col
+          relative
         `}
       >
         <LanguageProvider>
           <ThemeProvider>
             <Navbar />
             {children}
-            <Footer /> {/* <-- Footer inyectado */}
+            <Footer />
+            <PianoWidget /> {/* <-- Innovación interactiva inyectada */}
           </ThemeProvider>
         </LanguageProvider>
       </body>
