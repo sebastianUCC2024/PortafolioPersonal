@@ -35,6 +35,7 @@ export function ConstellationGame() {
     const [isVictory, setIsVictory] = useState(false);
     const [showGuide, setShowGuide] = useState(true); // show shape guide initially
     const [completedConstellation, setCompletedConstellation] = useState<string | null>(null);
+    const [progress, setProgress] = useState(0);
     
     const containerRef = useRef<HTMLDivElement>(null);
 
@@ -114,7 +115,33 @@ export function ConstellationGame() {
                         Cerrar
                     </Button>
                 </div>
+                {/* Shape guide overlay (faint star) */}
+                {showGuide && (
+                    <svg className="absolute inset-0 w-full h-full pointer-events-none z-0 opacity-30">
+                        {TARGET_NODES.map((nodeA, i) => (
+                            TARGET_NODES.slice(i + 1).map((nodeB) => (
+                                <line
+                                    key={`${nodeA.id}-${nodeB.id}`}
+                                    x1={nodeA.x + 50}
+                                    y1={nodeA.y + 20}
+                                    x2={nodeB.x + 50}
+                                    y2={nodeB.y + 20}
+                                    stroke="var(--brand-cyan)"
+                                    strokeWidth={1}
+                                    strokeDasharray="4 4"
+                                />
+                            ))
+                        ))}
+                    </svg>
+                )}
 <div className="absolute top-12 left-0 w-full flex justify-center"><p className="text-sm text-muted">Arrastra los nodos para formar una figura de estrella y desbloquear la sinergia.</p></div>
+                {/* Barra de progreso de la constelación */}
+                <div className="absolute top-24 left-0 w-full flex justify-center items-center px-4">
+                    <div className="w-3/4 bg-muted rounded-full h-2 overflow-hidden">
+                        <div className="bg-brand-cyan h-full" style={{ width: `${progress}%` }}></div>
+                    </div>
+                    <span className="ml-2 text-sm text-foreground">{progress}%</span>
+                </div>
 
                 {/* SVG para dibujar las líneas de energía */}
                 <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
