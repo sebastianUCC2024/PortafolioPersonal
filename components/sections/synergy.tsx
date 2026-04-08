@@ -105,10 +105,10 @@ export function SynergySection() {
         }
     }, [nodes, isVictory]);
 
-    const handleDrag = (id: string, info: any) => {
+    const handleDragEnd = (id: string, info: any) => {
         if (isVictory) return;
         setNodes(prev => prev.map(n => 
-            n.id === id ? { ...n, x: n.x + info.delta.x, y: n.y + info.delta.y } : n
+            n.id === id ? { ...n, x: n.x + info.offset.x, y: n.y + info.offset.y } : n
         ));
     };
 
@@ -226,7 +226,7 @@ export function SynergySection() {
                                     dragConstraints={containerRef}
                                     dragElastic={0}
                                     dragMomentum={false}
-                                    onDrag={(e, info) => handleDrag(node.id, info)}
+                                    onDragEnd={(e, info) => handleDragEnd(node.id, info)}
                                     initial={{ x: node.x, y: node.y }}
                                     animate={isVictory ? { 
                                         x: (dimensions.width / 2) + Math.cos(nodes.indexOf(node) * (Math.PI * 2) / nodes.length) * 180, 

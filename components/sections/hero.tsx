@@ -19,10 +19,6 @@ export function Hero() {
                 
                 {/* Columna Izquierda: Textos */}
                 <div className="flex flex-col items-center text-center lg:items-start lg:text-left space-y-6 z-10">
-                    <FadeIn delay={0.1}>
-                        <Badge>{t.hero.badge}</Badge>
-                    </FadeIn>
-                    
                     <FadeIn delay={0.2}>
                         <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-foreground leading-[1.1]">
                             {t.hero.greeting} <br />
