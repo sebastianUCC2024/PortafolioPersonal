@@ -14,7 +14,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
         // Diccionario de variantes visuales (Aquí inyectamos la estética futurista)
         const variants = {
-            primary: "bg-brand-cyan text-white shadow-xl hover:-translate-y-1 hover:bg-brand-cyan-hover hover:shadow-2xl font-semibold",
+            primary: "bg-brand-cyan text-white dark:text-zinc-950 shadow-xl hover:-translate-y-1 hover:bg-brand-cyan-hover hover:shadow-2xl font-semibold",
             outline: "border border-brand-cyan/50 text-brand-cyan hover:border-brand-cyan hover:bg-brand-cyan/10 hover:-translate-y-1",
             ghost: "text-foreground hover:bg-card-bg hover:text-brand-cyan",
         };

@@ -227,15 +227,12 @@ export function SynergySection() {
                                     dragElastic={0}
                                     dragMomentum={false}
                                     onDrag={(e, info) => handleDrag(node.id, info)}
+                                    initial={{ x: node.x, y: node.y }}
                                     animate={isVictory ? { 
                                         x: (dimensions.width / 2) + Math.cos(nodes.indexOf(node) * (Math.PI * 2) / nodes.length) * 180, 
                                         y: (dimensions.height / 2) + Math.sin(nodes.indexOf(node) * (Math.PI * 2) / nodes.length) * 180
-                                    } : { x: node.x, y: node.y }}
-                                    transition={isVictory ? { duration: 2, type: "spring", bounce: 0.4 } : { type: "tween", duration: 0 }}
-                                    style={{ 
-                                        x: node.x, 
-                                        y: node.y 
-                                    }}
+                                    } : undefined}
+                                    transition={isVictory ? { duration: 2, type: "spring", bounce: 0.4 } : undefined}
                                     className="absolute flex items-center justify-center cursor-grab active:cursor-grabbing w-0 h-0"
                                 >
                                     {/* Pulsación / Radar detrás del nodo */}
@@ -278,8 +275,8 @@ export function SynergySection() {
                                         transition={{ delay: 1.5 }}
                                         className="relative z-10 flex flex-col items-center"
                                     >
-                                        <Network size={50} className="text-white mb-6 animate-pulse" />
-                                        <h3 className="text-4xl md:text-6xl font-primary font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan via-white to-brand-cyan mb-4 tracking-wider drop-shadow-[0_0_20px_var(--brand-cyan)] text-center">
+                                        <Network size={50} className="text-brand-cyan mb-6 animate-pulse" />
+                                        <h3 className="text-4xl md:text-6xl font-primary font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan via-foreground to-brand-cyan mb-4 tracking-wider drop-shadow-sm text-center">
                                             SISTEMA UNIFICADO
                                         </h3>
                                         <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto text-center px-6 leading-relaxed mb-8">
@@ -292,12 +289,12 @@ export function SynergySection() {
                                             transition={{ delay: 2.5 }}
                                             className="flex flex-col items-center gap-4"
                                         >
-                                            <div className="px-4 py-2 bg-brand-cyan/20 border border-brand-cyan/50 rounded-full flex items-center gap-2 mb-2 shadow-[0_0_15px_var(--brand-cyan)]">
-                                                <Sparkles size={16} className="text-white animate-pulse" />
-                                                <span className="text-sm text-white font-bold tracking-wider">RECOMPENSA DESBLOQUEADA</span>
+                                            <div className="px-4 py-2 bg-brand-cyan/20 border border-brand-cyan/50 rounded-full flex items-center gap-2 mb-2 shadow-lg">
+                                                <Sparkles size={16} className="text-brand-cyan animate-pulse" />
+                                                <span className="text-sm text-brand-cyan font-bold tracking-wider">RECOMPENSA DESBLOQUEADA</span>
                                             </div>
                                             
-                                            <Button variant="primary" size="lg" className="gap-3 shadow-[0_0_20px_var(--brand-cyan)] hover:shadow-[0_0_40px_var(--brand-cyan)] transition-shadow font-bold group border border-brand-cyan/20" onClick={() => window.open('/cv.pdf', '_blank')}>
+                                            <Button variant="primary" size="lg" className="gap-3 transition-shadow font-bold group" onClick={() => window.open('/cv.pdf', '_blank')}>
                                                 <FileText size={22} className="group-hover:scale-110 transition-transform" />
                                                 Descargar CV Ampliado
                                                 <Download size={18} className="opacity-80 group-hover:translate-y-1 transition-transform" />
