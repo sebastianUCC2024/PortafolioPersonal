@@ -72,9 +72,9 @@ export const en = {
     },
     about: {
         title: "About Me",
-        description1: "Passionate about creating digital experiences that combine exceptional design with robust and scalable code. I always work under the premise that details make the difference.",
-        description2: "Throughout my studies at UCC, I have specialized in front-end architecture and standardized methodologies, ensuring that every product is intuitive and fast.",
-        skillsTitle: "Technologies I've recently studied and applied in real projects:",
+        description1: "Software Engineering student passionate about building modern and scalable web solutions. I specialize in transforming real-world problems into intuitive applications using JavaScript, TypeScript, and Python, always following clean code principles and high-impact functional design.",
+        description2: "With experience in developing dashboards and management systems, my focus is on process optimization and creating memorable, efficient user experiences.",
+        skillsTitle: "Key Technologies:",
         skills: [
             "React.js / Next.js",
             "Tailwind CSS v4 & UI/UX",

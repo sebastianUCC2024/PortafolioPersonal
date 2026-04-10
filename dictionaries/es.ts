@@ -72,9 +72,9 @@ export const es = {
     },
     about: {
         title: "Conóceme",
-        description1: "Apasionado por crear experiencias digitales que combinen un diseño excepcional con un código robusto y escalable. Trabajo siempre bajo la premisa de que los detalles hacen la diferencia.",
-        description2: "A lo largo de mis estudios en la UCC, me he especializado en arquitectura front-end y metodologías estandarizadas, asegurando que cada producto sea intuitivo y rápido.",
-        skillsTitle: "Tecnologías que más he estudiado y aplicado en proyectos reales últimamente:",
+        description1: "Ingeniero de Software en formación apasionado por crear soluciones web modernas y escalables. Me especializo en transformar problemas reales en aplicaciones intuitivas mediante el uso de JavaScript, TypeScript y Python, siempre bajo principios de código limpio y diseño funcional de alto impacto.",
+        description2: "Con experiencia en el desarrollo de dashboards y sistemas de gestión, mi enfoque se centra en la optimización de procesos y la creación de experiencias de usuario memorables y eficientes.",
+        skillsTitle: "Tecnologías clave:",
         skills: [
             "React.js / Next.js",
             "Tailwind CSS v4 & UI/UX",
