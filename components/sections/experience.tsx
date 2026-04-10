@@ -44,7 +44,7 @@ export function Experience() {
                         </div>
                     </div>
 
-                    <p className="text-muted text-lg leading-relaxed mb-10 border-l-2 border-brand-cyan/20 pl-6">
+                    <p className="text-muted text-lg leading-relaxed mb-10 border-l-2 border-brand-cyan/20 pl-6 text-justify">
                         {t.experience.description}
                     </p>
 

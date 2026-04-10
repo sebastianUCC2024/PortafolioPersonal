@@ -30,12 +30,17 @@ export function Navbar() {
         <header className="fixed top-0 w-full z-50 border-b border-brand-cyan/10 bg-background/80 backdrop-blur-md transition-colors duration-300">
             <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 
-                {/* Logo minimalista textual */}
+                {/* Logo con icono personalizado (Versión Final Corregida) */}
                 <a href="#" className="flex items-center gap-2 group">
-                    <div className="w-10 h-10 rounded-full border-2 border-brand-cyan flex items-center justify-center bg-brand-cyan/10 group-hover:bg-brand-cyan transition-colors">
-                        <span className="font-primary font-bold text-lg text-brand-cyan group-hover:text-background">JP</span>
+                    <div className="w-18 h-18 relative transition-transform duration-500 group-hover:scale-110 flex items-center justify-center">
+                        <img 
+                            src="/logo.png" 
+                            alt="Logo" 
+                            className="w-full h-full object-contain mix-blend-multiply dark:invert dark:mix-blend-screen transition-all" 
+                        />
                     </div>
                 </a>
+                
 
                 {/* Navegación de Escritorio */}
                 <nav className="hidden md:flex gap-8 items-center font-secondary">

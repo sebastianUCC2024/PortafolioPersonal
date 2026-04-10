@@ -27,7 +27,7 @@ export function Contact() {
                             <h3 className="text-3xl md:text-4xl font-bold font-primary text-foreground leading-tight mb-6">
                                 {t.contact.subtitle}
                             </h3>
-                            <p className="text-muted text-lg leading-relaxed max-w-md">
+                            <p className="text-muted text-lg leading-relaxed max-w-md text-justify">
                                 {t.contact.description}
                             </p>
                         </div>

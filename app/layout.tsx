@@ -23,8 +23,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Juan Patiño | Frontend Developer",
-  description: "Portafolio profesional de Juan Patiño. Desarrollador Frontend y Diseñador UI/UX.",
+  title: "Juan Sebastián Patiño | Software Developer",
+  description: "Portafolio profesional de Juan Sebastián Patiño. Desarrollador de Software y Soluciones Web Inteligentes.",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({

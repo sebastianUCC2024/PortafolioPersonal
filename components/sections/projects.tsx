@@ -109,7 +109,7 @@ function SpotlightCard({ project }: { project: any }) {
                     </h3>
                 </div>
                 
-                <p className="text-muted text-lg md:text-xl mb-8 leading-relaxed">
+                <p className="text-muted text-lg md:text-xl mb-8 leading-relaxed text-justify">
                     {project.description}
                 </p>
                 

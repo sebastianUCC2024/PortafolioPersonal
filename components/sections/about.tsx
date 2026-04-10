@@ -25,7 +25,7 @@ export function About() {
                             <div className="w-24 h-1 bg-brand-cyan/30 rounded-full" />
                         </div>
 
-                        <div className="space-y-6 text-muted text-lg leading-relaxed">
+                        <div className="space-y-6 text-muted text-lg leading-relaxed text-justify">
                             <p>{t.about.description1}</p>
                             <p>{t.about.description2}</p>
                         </div>
