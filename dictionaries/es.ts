@@ -1,36 +1,56 @@
 export const es = {
     hero: {
-        badge: "FRONT-END DEVELOPER",
+        badge: "Desarrollador de Software | Soluciones Web Inteligentes",
         greeting: "Hola, soy",
-        name: "Juan",
+        name: "Juan Sebastián",
         lastName: "Patiño",
-        description: "Construyendo interfaces memorables y experiencias digitales futuristas con un enfoque minimalista y gran atención al detalle visual.",
+        description: "Construyo aplicaciones web modernas, eficientes y centradas en el usuario, combinando lógica sólida con diseño funcional. Actualmente desarrollo sistemas, dashboards y plataformas digitales utilizando Python, JavaScript y tecnologías modernas.",
         primaryBtn: "Ver mis proyectos",
         secondaryBtn: "Conóceme"
     },
     projects: {
-        title: "Mis Proyectos",
+        title: "Proyectos Destacados",
         placeholder: "Previsualización",
         items: [
             {
-                status: "En Curso",
-                title: "Dashboard Interactivo",
-                description: "Aplicación SaaS para visualización de datos en tiempo real. Integra paneles personalizables y reportes detallados.",
-                stack: ["Next.js", "Tailwind CSS", "Recharts", "Zustand"],
-                previewUrl: "#",
-                githubUrl: "#",
-                previewText: "Vista previa",
-                githubText: "Ver código"
+                status: "Destacado",
+                title: "Agrigo - Gestión Agrícola",
+                description: "Sistema robusto para la administración agrícola. Combina lógica de negocio compleja con una arquitectura modular para optimizar recursos institucionales.",
+                stack: ["React", "Python", "PostgreSQL", "Modular Architecture"],
+                previewUrl: "https://github.com/sebastianUCC2024/agrigo-backend",
+                githubUrl: "https://github.com/sebastianUCC2024/agrigo-backend",
+                previewText: "Ver Proyecto",
+                githubText: "Repositorio"
             },
             {
-                status: "Completado",
-                title: "Sistema de Checkout",
-                description: "Flujo de pagos de alta conversión con validaciones asíncronas y diseño enfocado en la experiencia de usuario (UX).",
-                stack: ["React", "Stripe API", "Framer Motion", "React Hook Form"],
-                previewUrl: "#",
-                githubUrl: "#",
-                previewText: "Vista previa",
-                githubText: "Ver código"
+                status: "SaaS",
+                title: "Dashboard Administrativo",
+                description: "Interfaz de gestión con visualización de datos en tiempo real. Enfocado en la eficiencia operativa y una experiencia de usuario (UX) limpia.",
+                stack: ["Next.js", "TypeScript", "Tailwind CSS", "Recharts"],
+                previewUrl: "https://github.com/sebastianUCC2024/dashboard",
+                githubUrl: "https://github.com/sebastianUCC2024/dashboard",
+                previewText: "Ver Proyecto",
+                githubText: "Repositorio"
+            },
+            {
+                status: "E-commerce",
+                title: "Tienda Virtual",
+                description: "Plataforma de comercio virtual con servicios backend modulares que garantizan un flujo de compra fluido y escalable.",
+                stack: ["Python", "Flask", "REST APIs", "SQL"],
+                previewUrl: "https://github.com/sebastianUCC2024/TiendaVirtual",
+                githubUrl: "https://github.com/sebastianUCC2024/TiendaVirtual",
+                previewText: "Ver Proyecto",
+                githubText: "Repositorio"
+            },
+            {
+                status: "Logística",
+                title: "Gestión de Recursos",
+                description: "Software especializado en la asignación inteligente de recursos basado en principios de ingeniería de software para organizaciones.",
+                stack: ["Python", "Analítica", "Diseño de Sistemas"],
+                previewUrl: "https://github.com/sebastianUCC2024/GestionRecursos",
+                githubUrl: "https://github.com/sebastianUCC2024/GestionRecursos",
+                previewText: "Ver Proyecto",
+                githubText: "Repositorio"
             }
         ]
     },
@@ -128,6 +148,8 @@ export const es = {
             { id: "pegasus", name: "Pegaso (Núcleo)", description: "El caballo alado. El motor central entre Rendimiento, TypeScript, Arquitectura y APIs." }
         ],
         finalMissionObj: "Andrómeda (Red Global)",
+        progressTitle: "Progreso de Misión",
+        connectHelp: "Conecta los nodos para completar la figura",
     },
     synergyNodes: {
         react: "React & Next.js",

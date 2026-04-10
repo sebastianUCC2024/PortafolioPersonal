@@ -36,16 +36,7 @@ export function Hero() {
                         </p>
                     </FadeIn>
                     
-                    <FadeIn delay={0.4}>
-                        <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-4">
-                            <Button variant="primary" size="lg">
-                                {t.hero.primaryBtn}
-                            </Button>
-                            <Button variant="outline" size="lg">
-                                {t.hero.secondaryBtn}
-                            </Button>
-                        </div>
-                    </FadeIn>
+                    {/* Botones eliminados por solicitud del usuario */}
                 </div>
 
                 {/* Columna Derecha: Avatar / Elemento Gráfico */}

@@ -1,36 +1,56 @@
 export const en = {
     hero: {
-        badge: "FRONT-END DEVELOPER",
+        badge: "Software Developer | Intelligent Web Solutions",
         greeting: "Hello, I'm",
-        name: "Juan",
+        name: "Juan Sebastián",
         lastName: "Patiño",
-        description: "Building memorable interfaces and futuristic digital experiences with a minimalist approach and great attention to visual detail.",
+        description: "I build modern, efficient, and user-centered web applications, combining solid logic with functional design. Currently developing systems, dashboards, and digital platforms using Python, JavaScript, and modern technologies.",
         primaryBtn: "View my projects",
         secondaryBtn: "About me"
     },
     projects: {
-        title: "My Projects",
+        title: "Featured Projects",
         placeholder: "Image Preview",
         items: [
             {
-                status: "In Progress",
-                title: "Interactive Dashboard",
-                description: "SaaS application for real-time data visualization. Integrates customizable panels and detailed reports.",
-                stack: ["Next.js", "Tailwind CSS", "Recharts", "Zustand"],
-                previewUrl: "#",
-                githubUrl: "#",
-                previewText: "Live preview",
-                githubText: "View code"
+                status: "Featured",
+                title: "Agrigo - Agricultural Management",
+                description: "Robust system for agricultural administration. Combines complex business logic with a modular architecture to optimize institutional resources.",
+                stack: ["React", "Python", "PostgreSQL", "Modular Architecture"],
+                previewUrl: "https://github.com/sebastianUCC2024/agrigo-backend",
+                githubUrl: "https://github.com/sebastianUCC2024/agrigo-backend",
+                previewText: "View Project",
+                githubText: "Repository"
             },
             {
-                status: "Completed",
-                title: "Checkout System",
-                description: "High-conversion payment flow with asynchronous validations and UX-focused design.",
-                stack: ["React", "Stripe API", "Framer Motion", "React Hook Form"],
-                previewUrl: "#",
-                githubUrl: "#",
-                previewText: "Live preview",
-                githubText: "View code"
+                status: "SaaS",
+                title: "Administrative Dashboard",
+                description: "Management interface with real-time data visualization. Focused on operational efficiency and a clean user experience (UX).",
+                stack: ["Next.js", "TypeScript", "Tailwind CSS", "Recharts"],
+                previewUrl: "https://github.com/sebastianUCC2024/dashboard",
+                githubUrl: "https://github.com/sebastianUCC2024/dashboard",
+                previewText: "View Project",
+                githubText: "Repository"
+            },
+            {
+                status: "E-commerce",
+                title: "Virtual Store",
+                description: "Virtual commerce platform with modular backend services ensuring a smooth and scalable shopping flow.",
+                stack: ["Python", "Flask", "REST APIs", "SQL"],
+                previewUrl: "https://github.com/sebastianUCC2024/TiendaVirtual",
+                githubUrl: "https://github.com/sebastianUCC2024/TiendaVirtual",
+                previewText: "View Project",
+                githubText: "Repository"
+            },
+            {
+                status: "Logistics",
+                title: "Resource Management",
+                description: "Software specialized in intelligent resource allocation based on software engineering principles for organizations.",
+                stack: ["Python", "Analytics", "System Design"],
+                previewUrl: "https://github.com/sebastianUCC2024/GestionRecursos",
+                githubUrl: "https://github.com/sebastianUCC2024/GestionRecursos",
+                previewText: "View Project",
+                githubText: "Repository"
             }
         ]
     },
@@ -128,6 +148,8 @@ export const en = {
             { id: "pegasus", name: "Pegasus (Core)", description: "The winged horse. The central engine connecting Performance, TypeScript, Architecture, and APIs." }
         ],
         finalMissionObj: "Andromeda (Global Network)",
+        progressTitle: "Mission Progress",
+        connectHelp: "Connect nodes to complete the figure",
     },
     synergyNodes: {
         react: "React & Next.js",

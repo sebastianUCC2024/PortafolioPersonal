@@ -42,13 +42,13 @@ export default function RootLayout({
           min-h-screen
           flex flex-col
           relative
-          md:cursor-none
+          flex flex-col
+          relative
         `}
       >
         <AmbientBackground />
         <Starfield />
         <NoiseFilter />
-        <CustomCursor />
         <ScrollProgress />
         <LanguageProvider>
           <ThemeProvider>

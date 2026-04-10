@@ -26,11 +26,55 @@ const INITIAL_STARS: StarNode[] = [
 ];
 
 const TARGET_CONSTELLATIONS = [
-    { id: "orion", nodes: ["design", "react", "ui", "ts"], edges: [["design", "react"], ["react", "ui"], ["ui", "ts"]] },
-    { id: "lyra", nodes: ["db", "backend", "arch"], edges: [["db", "backend"], ["backend", "arch"]] },
-    { id: "cassiopeia", nodes: ["ts", "perf", "react"], edges: [["ts", "perf"], ["perf", "react"]] },
-    { id: "cygnus", nodes: ["db", "backend", "react", "ui"], edges: [["db", "backend"], ["backend", "react"], ["react", "ui"]] },
-    { id: "pegasus", nodes: ["perf", "ts", "arch", "backend"], edges: [["perf", "ts"], ["ts", "arch"], ["arch", "backend"]] }
+    { 
+        id: "orion", 
+        nodes: ["perf", "ts", "react", "ui", "design", "arch", "db", "backend"], 
+        edges: [["perf", "ts"], ["perf", "react"], ["ts", "design"], ["react", "ui"], ["ui", "design"], ["react", "db"], ["design", "arch"], ["perf", "backend"]],
+        positions: { 
+            backend: {x: 0, y: -200},
+            perf: {x: -160, y: -150}, ts: {x: 160, y: -130}, 
+            react: {x: -100, y: -15}, ui: {x: 0, y: 0}, design: {x: 100, y: 15},
+            db: {x: -120, y: 180}, arch: {x: 140, y: 160}
+        }
+    },
+    { 
+        id: "lyra", 
+        nodes: ["perf", "ts", "arch", "db", "backend"], 
+        edges: [["perf", "ts"], ["ts", "arch"], ["arch", "db"], ["db", "backend"], ["backend", "ts"]],
+        positions: { 
+            perf: {x: 0, y: -120}, 
+            ts: {x: -30, y: -40}, arch: {x: 30, y: -40}, 
+            db: {x: 40, y: 60}, backend: {x: -20, y: 60} 
+        }
+    },
+    { 
+        id: "cassiopeia", 
+        nodes: ["ts", "perf", "react", "ui", "design"], 
+        edges: [["ts", "perf"], ["perf", "react"], ["react", "ui"], ["ui", "design"]],
+        positions: { 
+            ts: {x: -120, y: -50}, perf: {x: -60, y: 50}, 
+            react: {x: 0, y: -20}, 
+            ui: {x: 60, y: 50}, design: {x: 120, y: -50} 
+        }
+    },
+    { 
+        id: "cygnus", 
+        nodes: ["db", "backend", "react", "ui", "arch"], 
+        edges: [["db", "backend"], ["backend", "react"], ["backend", "ui"], ["backend", "arch"]],
+        positions: { 
+            db: {x: 0, y: -150}, backend: {x: 0, y: 0}, react: {x: 0, y: 150}, 
+            ui: {x: -120, y: 0}, arch: {x: 120, y: 0} 
+        }
+    },
+    { 
+        id: "pegasus", 
+        nodes: ["perf", "ts", "arch", "backend"], 
+        edges: [["perf", "ts"], ["ts", "arch"], ["arch", "backend"], ["backend", "perf"]],
+        positions: { 
+            perf: {x: -100, y: -100}, ts: {x: 100, y: -100}, 
+            arch: {x: 100, y: 100}, backend: {x: -100, y: 100} 
+        }
+    }
 ];
 
 export function SynergySection() {
@@ -44,6 +88,7 @@ export function SynergySection() {
     // Level System State
     const [activeMissionId, setActiveMissionId] = useState<string | null>(null);
     const [discoveredConstellations, setDiscoveredConstellations] = useState<string[]>([]);
+    const [rewardMissionId, setRewardMissionId] = useState<string | null>(null);
 
     // Derived states
     const [isUltimateVictory, setIsUltimateVictory] = useState(false);
@@ -99,22 +144,19 @@ export function SynergySection() {
         const mission = TARGET_CONSTELLATIONS.find(c => c.id === activeMissionId);
         if (!mission) return { x: node.x, y: node.y };
 
-        const nodeIndexInMission = mission.nodes.indexOf(node.id);
+        const missionNodePos = (mission as any).positions?.[node.id];
         
-        if (nodeIndexInMission !== -1) {
-            // Node is IN the mission -> Form a geometric shape in the center
-            const radius = 130;
-            const angle = (nodeIndexInMission * (Math.PI * 2)) / mission.nodes.length;
+        if (missionNodePos) {
+            // Use specific position for this mission
             return {
-                x: (dimensions.width / 2) + Math.cos(angle - Math.PI/2) * radius,
-                y: (dimensions.height / 2) + Math.sin(angle - Math.PI/2) * radius
+                x: (dimensions.width / 2) + missionNodePos.x,
+                y: (dimensions.height / 2) + missionNodePos.y
             };
         } else {
             // Node is NOT in the mission -> Scatter them predictably to the edges
             const outerRadius = Math.min(dimensions.width, dimensions.height) / 2 + 50;
             const angle = (index * (Math.PI * 2)) / nodes.length;
             return {
-                // Limit scatter within canvas with padding
                 x: Math.max(50, Math.min(dimensions.width - 50, (dimensions.width / 2) + Math.cos(angle) * outerRadius)),
                 y: Math.max(50, Math.min(dimensions.height - 50, (dimensions.height / 2) + Math.sin(angle) * outerRadius))
             };
@@ -175,32 +217,49 @@ export function SynergySection() {
             const totalTargetEdges = mission.edges?.length || 1;
             setProgress(Math.round((matchedEdges / totalTargetEdges) * 100));
 
-            if (!discoveredConstellations.includes(mission.id)) {
-                let isGraphConnected = false;
+            // Check if all mission nodes form a connected component exclusively among themselves
+            const startNode = mission.nodes[0];
+            const visited = new Set<string>();
+            const queue = [startNode];
+            visited.add(startNode);
 
-                // Check if all mission nodes form a connected component exclusively among themselves
-                const startNode = mission.nodes[0];
-                const visited = new Set<string>();
-                const queue = [startNode];
-                visited.add(startNode);
-
-                while (queue.length > 0) {
-                    const current = queue.shift()!;
-                    // Only traverse through edges that hit mission nodes
-                    for (const neighbor of adjacencyList.get(current) || []) {
-                        if (mission.nodes.includes(neighbor) && !visited.has(neighbor)) {
-                            visited.add(neighbor);
-                            queue.push(neighbor);
-                        }
+            while (queue.length > 0) {
+                const current = queue.shift()!;
+                for (const neighbor of adjacencyList.get(current) || []) {
+                    if (mission.nodes.includes(neighbor) && !visited.has(neighbor)) {
+                        visited.add(neighbor);
+                        queue.push(neighbor);
                     }
                 }
+            }
 
-                if (visited.size === mission.nodes.length) {
-                    setDiscoveredConstellations(prev => [...prev, mission.id]);
+            const isCurrentlyComplete = visited.size === mission.nodes.length;
+            
+            if (isCurrentlyComplete && !discoveredConstellations.includes(mission.id)) {
+                setDiscoveredConstellations(prev => [...prev, mission.id]);
+            }
+
+            // Trigger reward if it just became complete
+            // We only trigger if it's currently complete and the reward popup is not already showing
+            // To allow "repeating", we must ensure it triggers again after a reset.
+            if (isCurrentlyComplete && !rewardMissionId) {
+                // If it's complete and we haven't shown a reward for this specific completion state yet
+                // We'll use the progress at 100% as a proxy or just the fact that it's complete.
+                // To avoid it popping up constantly while at 100%, we'll check if it was already 100% in a state?
+                // Actually, the user can just close it, and then if they move a node and move it back, it might pop again.
+                // That's fine if they "repeat" it.
+                if (progress === 100 && !discoveredConstellations.includes(mission.id + "_reward_shown")) {
+                     setRewardMissionId(mission.id);
+                     setDiscoveredConstellations(prev => [...prev, mission.id + "_reward_shown"]);
+                }
+            } else if (!isCurrentlyComplete) {
+                // Reset the "shown" flag if it becomes incomplete, allowing it to trigger again
+                if (discoveredConstellations.includes(mission.id + "_reward_shown")) {
+                    setDiscoveredConstellations(prev => prev.filter(id => id !== mission.id + "_reward_shown"));
                 }
             }
         }
-    }, [userEdges, nodes, isUltimateVictory, activeMissionId, discoveredConstellations]);
+    }, [userEdges, nodes, isUltimateVictory, activeMissionId, discoveredConstellations, rewardMissionId, progress]);
 
     // Handlers
     const handleDragEnd = (id: string, info: any) => {
@@ -275,7 +334,7 @@ export function SynergySection() {
     const isFinalUnlocked = discoveredConstellations.length === TARGET_CONSTELLATIONS.length;
 
     return (
-        <section className="py-32 relative overflow-hidden bg-background">
+        <section className="py-20 relative overflow-hidden bg-background">
             <div className="max-w-7xl mx-auto px-6">
                 
                 <FadeIn className="mb-12 text-center flex flex-col items-center">
@@ -290,9 +349,9 @@ export function SynergySection() {
                 <div className="grid lg:grid-cols-4 gap-8 items-start relative">
                     
                     {/* Controles y Panel de Pistas / Nivel Selector */}
-                    <FadeIn delay={0.2} className="lg:col-span-1 flex flex-col gap-6">
+                    <FadeIn delay={0.2} className="lg:col-span-1 flex flex-col gap-4">
                         
-                         <div className="bg-card-bg/50 border border-brand-cyan/20 rounded-3xl p-6 backdrop-blur-md flex flex-col gap-4">
+                         <div className="bg-card-bg/50 border border-brand-cyan/20 rounded-3xl p-5 backdrop-blur-md flex flex-col gap-3">
                             <h4 className="text-sm font-bold font-primary uppercase tracking-widest text-brand-cyan mb-2">
                                 {t.synergy.missionsTitle || "Misiones"}
                             </h4>
@@ -365,7 +424,7 @@ export function SynergySection() {
                             ref={containerRef} 
                             onPointerDown={handleContainerPointerDown}
                             onPointerMove={handleContainerPointerMove}
-                            className="relative w-full h-[600px] bg-card-bg/50 border border-brand-cyan/20 rounded-[2rem] overflow-hidden shadow-2xl backdrop-blur-md select-none touch-none"
+                            className="relative w-full h-[400px] md:h-[500px] bg-card-bg/50 border border-brand-cyan/20 rounded-[2rem] overflow-hidden shadow-2xl backdrop-blur-md select-none touch-none"
                         >
                             {/* Grilla Animada Parallax */}
                             <motion.div 
@@ -392,29 +451,33 @@ export function SynergySection() {
                                 </div>
                             )}
 
-                            {/* UI de Ayuda con barra de progreso */}
-                            {activeMissionId && !isUltimateVictory && (
-                                <FadeIn className="absolute top-6 left-1/2 -translate-x-1/2 z-20 w-auto min-w-[300px] pointer-events-none">
-                                    <div className="bg-background/80 border border-brand-cyan/20 px-6 py-4 rounded-2xl backdrop-blur-md shadow-lg flex flex-col gap-3">
-                                        <div className="flex justify-between items-center gap-8">
-                                            <span className="text-xs font-bold uppercase tracking-widest text-brand-cyan">
-                                                Progreso de Constelación
-                                            </span>
-                                            <span className="text-sm font-mono font-bold text-foreground">{progress}%</span>
-                                        </div>
-                                        <div className="w-full h-1.5 bg-muted rounded-full overflow-hidden">
-                                            <motion.div 
-                                                initial={{ width: 0 }}
-                                                animate={{ width: `${progress}%` }}
-                                                className="h-full bg-brand-cyan shadow-[0_0_10px_var(--brand-cyan)]"
-                                            />
-                                        </div>
-                                        <p className="text-[10px] text-muted uppercase tracking-tighter text-center">
-                                            Conecta los nodos brillantes para formar la figura
-                                        </p>
-                                    </div>
-                                </FadeIn>
-                            )}
+                             {/* UI de Ayuda con barra de progreso vertical reducida */}
+                             {activeMissionId && !isUltimateVictory && (
+                                 <FadeIn className="absolute top-4 right-4 z-20 w-auto min-w-[180px] md:min-w-[220px] pointer-events-none">
+                                     <div className="bg-background/80 border border-brand-cyan/20 px-4 py-3 rounded-xl backdrop-blur-md shadow-lg flex items-center gap-4">
+                                         <div className="flex flex-col flex-1 gap-1">
+                                             <div className="flex flex-col gap-0">
+                                                 <span className="text-[10px] font-bold uppercase tracking-wider text-brand-cyan">
+                                                     {t.synergy.progressTitle || "Progreso"}
+                                                 </span>
+                                                 <span className="text-xl font-mono font-bold text-foreground leading-tight">{progress}%</span>
+                                             </div>
+                                             <p className="text-[8px] text-muted uppercase tracking-normal">
+                                                 {t.synergy.connectHelp || "Conecta los nodos"}
+                                             </p>
+                                         </div>
+                                         
+                                         {/* Barra Vertical más pequeña */}
+                                         <div className="w-1.5 h-12 bg-muted rounded-full overflow-hidden relative">
+                                             <motion.div 
+                                                 initial={{ height: 0 }}
+                                                 animate={{ height: `${progress}%` }}
+                                                 className="absolute bottom-0 left-0 right-0 bg-brand-cyan shadow-[0_0_10px_var(--brand-cyan)]"
+                                             />
+                                         </div>
+                                     </div>
+                                 </FadeIn>
+                             )}
 
                             {/* Canvas SVG para Ejes (Líneas) */}
                             <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
@@ -431,6 +494,14 @@ export function SynergySection() {
                                                 const n2 = nodes.find(n => n.id === toId);
                                                 if (!n1 || !n2) return null;
                                                 
+                                                // Check if user already connected these two nodes
+                                                const isConnected = userEdges.some(ue => 
+                                                    (ue.from === fromId && ue.to === toId) || 
+                                                    (ue.from === toId && ue.to === fromId)
+                                                );
+                                                
+                                                if (isConnected) return null;
+
                                                 const p1 = getDynamicNodePosition(n1, nodes.indexOf(n1));
                                                 const p2 = getDynamicNodePosition(n2, nodes.indexOf(n2));
                                                 
@@ -537,10 +608,11 @@ export function SynergySection() {
                                             <div className="absolute w-16 h-16 rounded-full bg-transparent z-10" />
 
                                             {/* Texto de la etiqueta */}
-                                            <div className={`absolute top-8 w-40 text-center pointer-events-none transition-all duration-500
-                                                ${isSelected ? 'translate-y-2' : ''}
+                                            <div className={`absolute w-32 text-center pointer-events-none transition-all duration-500
+                                                ${isSelected ? 'scale-110' : ''}
+                                                ${node.id === 'ui' && activeMissionId === 'orion' ? 'bottom-8' : 'top-8'}
                                             `}>
-                                                <span className={`text-xs font-mono tracking-widest font-bold transition-colors duration-300
+                                                <span className={`text-[10px] md:text-xs font-mono tracking-wider font-bold transition-colors duration-300
                                                     ${isUltimateVictory || isSelected ? 'text-white drop-shadow-[0_0_5px_var(--brand-cyan)]' : 'text-brand-cyan/80'}
                                                 `}>
                                                     {t.synergyNodes?.[node.id as keyof typeof t.synergyNodes] || node.label}
@@ -551,6 +623,42 @@ export function SynergySection() {
                                 })}
                             </div>
 
+                            {/* Recompensa Individual */}
+                            <AnimatePresence>
+                                {rewardMissionId && (
+                                    <motion.div 
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        exit={{ opacity: 0 }}
+                                        className="absolute inset-0 z-40 bg-background/60 backdrop-blur-md flex flex-col items-center justify-center p-8 text-center"
+                                    >
+                                        <motion.div
+                                            initial={{ scale: 0.9, y: 20 }}
+                                            animate={{ scale: 1, y: 0 }}
+                                            className="bg-card-bg/90 border border-brand-cyan/30 p-8 rounded-3xl max-w-md shadow-2xl"
+                                        >
+                                            <div className="w-16 h-16 bg-brand-cyan/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                                                <Star className="text-brand-cyan" size={32} />
+                                            </div>
+                                            <h4 className="text-2xl font-bold font-primary text-brand-cyan mb-2">
+                                                {t.synergy.constellations.find((c: any) => c.id === rewardMissionId)?.name}
+                                            </h4>
+                                            <p className="text-foreground/80 mb-8 leading-relaxed">
+                                                {t.synergy.constellations.find((c: any) => c.id === rewardMissionId)?.description}
+                                            </p>
+                                            <div className="flex flex-col gap-3">
+                                                <Button variant="primary" size="md" className="gap-2" onClick={() => window.open('/cv.pdf', '_blank')}>
+                                                    <Download size={18} /> {t.synergy.downloadCV}
+                                                </Button>
+                                                <Button variant="ghost" size="sm" onClick={() => setRewardMissionId(null)}>
+                                                    Continuar Explorando
+                                                </Button>
+                                            </div>
+                                        </motion.div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+
                             {/* Recompensa Final (Victoria) */}
                             <AnimatePresence>
                                 {isUltimateVictory && (
@@ -558,7 +666,7 @@ export function SynergySection() {
                                         initial={{ opacity: 0, scale: 0.8 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         transition={{ delay: 1, duration: 1 }}
-                                        className="absolute inset-0 z-30 flex flex-col items-center justify-center pointer-events-none"
+                                        className="absolute inset-0 z-50 flex flex-col items-center justify-center pointer-events-none"
                                     >
                                         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.9)_0%,transparent_80%)]" />
                                         

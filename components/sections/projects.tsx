@@ -124,12 +124,16 @@ function SpotlightCard({ project }: { project: any }) {
 
                 {/* Acciones */}
                 <div className="flex flex-wrap gap-4 mt-auto pt-4 border-t border-brand-cyan/10">
-                    <Button variant="primary" size="md">
-                        {project.previewText} <ExternalLink className="ml-1 w-4 h-4 inline-block" />
-                    </Button>
-                    <Button variant="outline" size="md">
-                        {project.githubText}
-                    </Button>
+                    <a href={project.previewUrl} target="_blank" rel="noopener noreferrer">
+                        <Button variant="primary" size="md">
+                            {project.previewText} <ExternalLink className="ml-1 w-4 h-4 inline-block" />
+                        </Button>
+                    </a>
+                    <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                        <Button variant="outline" size="md">
+                            {project.githubText}
+                        </Button>
+                    </a>
                 </div>
             </div>
 
