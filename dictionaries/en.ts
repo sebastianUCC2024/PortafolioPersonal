@@ -86,19 +86,19 @@ export const en = {
         title: "Testimonials",
         items: [
             {
-                quote: "Juan is an extremely organized developer. His ability to transform complex designs into clean code is exceptional.",
-                name: "Carlos",
-                role: "Lead Frontend Engineer"
+                quote: "A professional with strong analytical skills. His focus on clean architecture and scalable code has been key in the projects we've shared.",
+                name: "Eduar Patiño",
+                role: "Software Engineer"
             },
             {
-                quote: "The level of attention to detail he puts into every component is something I've rarely seen. Excellent teammate.",
-                name: "Camila",
-                role: "Product Designer"
+                quote: "He stands out for his attention to detail and commitment to quality. He always seeks the best experience for the end user in every interface he develops.",
+                name: "Lucy Patiño",
+                role: "UX Analyst"
             },
             {
-                quote: "Not only does he write code fast, he ensures it's maintainable and understands the product vision at an architectural level.",
-                name: "Andrés",
-                role: "Tech Lead"
+                quote: "Juan Sebastián has an innate ability to solve complex problems simply and efficiently. He is an excellent teammate and a great technical asset.",
+                name: "Carlos Buesaquillo",
+                role: "Fullstack Developer"
             }
         ]
     },
@@ -139,17 +139,40 @@ export const en = {
             reset: "Reset Network"
         },
         onboarding: "Tap a star and then another to connect them.",
+        selectPrompt: "Select a Constellation",
+        progressTitle: "Progress",
+        rewardTitle: "Constellation Discovered",
+        continueBtn: "Continue Exploring",
+        connectHelp: "Connect the nodes",
         missionsTitle: "Neural Missions:",
         constellations: [
-            { id: "orion", name: "Orion (Frontend)", description: "The hunter. Revealed by mastering Figma, Design, UI/UX, and React." },
-            { id: "lyra", name: "Lyra (Data)", description: "The celestial lyre. Composed of the harmony of Databases, APIs, and Architecture." },
-            { id: "cassiopeia", name: "Cassiopeia (Performance)", description: "The queen. Flows across TypeScript, Performance, and React." },
-            { id: "cygnus", name: "Cygnus (Fullstack)", description: "The intergalactic swan. Unifies Frontend (UI, React) with Backend (API, DB)." },
-            { id: "pegasus", name: "Pegasus (Core)", description: "The winged horse. The central engine connecting Performance, TypeScript, Architecture, and APIs." }
+            { 
+                id: "orion", 
+                name: "Orion (Frontend)", 
+                description: "Known as The Hunter, Orion dominates the winter sky. In your neural architecture, this constellation represents visual space mastery and technical precision. Just as the hunter tracks his prey, a Frontend developer seeks pixel perfection, unifying Figma aesthetics, React structure, and UI/UX elegance in a stellar dance of interactivity." 
+            },
+            { 
+                id: "lyra", 
+                name: "Lyra (Data)", 
+                description: "The celestial Lyre, the instrument of Orpheus whose music could enchant rocks and rivers. This constellation symbolizes absolute harmony between data systems and backend architecture. It represents the melodic flow of information traveling through robust APIs and optimized Databases, creating a digital symphony of efficiency and stability." 
+            },
+            { 
+                id: "cassiopeia", 
+                name: "Cassiopeia (Performance)", 
+                description: "The Queen on her throne, a constellation that never sets in the northern hemisphere. In modern development, Cassiopeia embodies the unwavering solidity of code written in TypeScript and the elegance of high performance. It is the symbol of an application structured to endure, shining with clear logic and flawless execution regardless of system load." 
+            },
+            { 
+                id: "cygnus", 
+                name: "Cygnus (Fullstack)", 
+                description: "The Swan, also called the Northern Cross, flies along the silver path of the Milky Way. This figure represents Fullstack integration at its finest. Just as the swan unites the heavens, you have achieved the unification of Frontend (UI, React) with Backend solidity (API, DB), creating a balanced flight between the interface and the engine that drives it." 
+            },
+            { 
+                id: "pegasus", 
+                name: "Pegasus (Core)", 
+                description: "The mythical Winged Horse symbolizing speed and the ability to rise above earthly limitations. Pegasus is the central engine of your neural network, the heart where Architecture, Performance, TypeScript, and APIs converge. It represents the infrastructure that allows an application not only to function but to soar toward global scalability." 
+            }
         ],
         finalMissionObj: "Andromeda (Global Network)",
-        progressTitle: "Mission Progress",
-        connectHelp: "Connect nodes to complete the figure",
     },
     synergyNodes: {
         react: "React & Next.js",

@@ -28,13 +28,15 @@ const INITIAL_STARS: StarNode[] = [
 const TARGET_CONSTELLATIONS = [
     { 
         id: "orion", 
-        nodes: ["perf", "ts", "react", "ui", "design", "arch", "db", "backend"], 
-        edges: [["perf", "ts"], ["perf", "react"], ["ts", "design"], ["react", "ui"], ["ui", "design"], ["react", "db"], ["design", "arch"], ["perf", "backend"]],
+        nodes: ["perf", "ts", "backend", "react", "db", "ui", "design", "arch"], 
+        edges: [
+            ["perf", "ts"], ["ts", "db"], ["db", "arch"], ["arch", "design"], ["design", "ui"], ["ui", "perf"], // Body perimeter
+            ["backend", "react"], ["react", "db"] // Belt (approx)
+        ],
         positions: { 
-            backend: {x: 0, y: -200},
-            perf: {x: -160, y: -150}, ts: {x: 160, y: -130}, 
-            react: {x: -100, y: -15}, ui: {x: 0, y: 0}, design: {x: 100, y: 15},
-            db: {x: -120, y: 180}, arch: {x: 140, y: 160}
+            perf: {x: -120, y: -140}, ts: {x: 120, y: -130}, 
+            backend: {x: -40, y: -10}, react: {x: 0, y: 0}, db: {x: 40, y: 10},
+            ui: {x: -110, y: 140}, design: {x: 0, y: 160}, arch: {x: 110, y: 140}
         }
     },
     { 
@@ -42,9 +44,9 @@ const TARGET_CONSTELLATIONS = [
         nodes: ["perf", "ts", "arch", "db", "backend"], 
         edges: [["perf", "ts"], ["ts", "arch"], ["arch", "db"], ["db", "backend"], ["backend", "ts"]],
         positions: { 
-            perf: {x: 0, y: -120}, 
-            ts: {x: -30, y: -40}, arch: {x: 30, y: -40}, 
-            db: {x: 40, y: 60}, backend: {x: -20, y: 60} 
+            perf: {x: 0, y: -140}, // Vega
+            ts: {x: -40, y: -60}, arch: {x: 40, y: -60}, 
+            db: {x: 60, y: 60}, backend: {x: -20, y: 60} 
         }
     },
     { 
@@ -52,9 +54,9 @@ const TARGET_CONSTELLATIONS = [
         nodes: ["ts", "perf", "react", "ui", "design"], 
         edges: [["ts", "perf"], ["perf", "react"], ["react", "ui"], ["ui", "design"]],
         positions: { 
-            ts: {x: -120, y: -50}, perf: {x: -60, y: 50}, 
-            react: {x: 0, y: -20}, 
-            ui: {x: 60, y: 50}, design: {x: 120, y: -50} 
+            ts: {x: -160, y: -60}, perf: {x: -80, y: 60}, 
+            react: {x: 0, y: -30}, 
+            ui: {x: 80, y: 60}, design: {x: 160, y: -60} 
         }
     },
     { 
@@ -62,8 +64,11 @@ const TARGET_CONSTELLATIONS = [
         nodes: ["db", "backend", "react", "ui", "arch"], 
         edges: [["db", "backend"], ["backend", "react"], ["backend", "ui"], ["backend", "arch"]],
         positions: { 
-            db: {x: 0, y: -150}, backend: {x: 0, y: 0}, react: {x: 0, y: 150}, 
-            ui: {x: -120, y: 0}, arch: {x: 120, y: 0} 
+            db: {x: 0, y: -160}, // Tail
+            backend: {x: 0, y: 20}, // Body
+            react: {x: 0, y: 200}, // Head
+            ui: {x: -140, y: 20}, // Wing
+            arch: {x: 140, y: 20} // Wing
         }
     },
     { 
@@ -71,8 +76,8 @@ const TARGET_CONSTELLATIONS = [
         nodes: ["perf", "ts", "arch", "backend"], 
         edges: [["perf", "ts"], ["ts", "arch"], ["arch", "backend"], ["backend", "perf"]],
         positions: { 
-            perf: {x: -100, y: -100}, ts: {x: 100, y: -100}, 
-            arch: {x: 100, y: 100}, backend: {x: -100, y: 100} 
+            perf: {x: -120, y: -120}, ts: {x: 120, y: -120}, 
+            arch: {x: 120, y: 120}, backend: {x: -120, y: 120} 
         }
     }
 ];
@@ -445,8 +450,8 @@ export function SynergySection() {
                             {/* UI de Ayuda Inicial (Cero Misiones Seleccionadas) */}
                             {!activeMissionId && (
                                 <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none opacity-60">
-                                    <span className="text-xl md:text-3xl font-primary text-muted font-bold tracking-widest uppercase">
-                                        Selecciona una Constelación
+                                    <span className="text-xl md:text-3xl font-primary text-muted font-bold tracking-widest uppercase text-center px-4">
+                                        {t.synergy.selectPrompt}
                                     </span>
                                 </div>
                             )}
@@ -641,9 +646,9 @@ export function SynergySection() {
                                                 <Star className="text-brand-cyan" size={32} />
                                             </div>
                                             <h4 className="text-2xl font-bold font-primary text-brand-cyan mb-2">
-                                                {t.synergy.constellations.find((c: any) => c.id === rewardMissionId)?.name}
+                                                {t.synergy.rewardTitle} - {t.synergy.constellations.find((c: any) => c.id === rewardMissionId)?.name}
                                             </h4>
-                                            <p className="text-foreground/80 mb-8 leading-relaxed">
+                                            <p className="text-foreground/80 mb-8 leading-relaxed max-h-[150px] overflow-y-auto px-2 custom-scrollbar text-sm md:text-base">
                                                 {t.synergy.constellations.find((c: any) => c.id === rewardMissionId)?.description}
                                             </p>
                                             <div className="flex flex-col gap-3">
@@ -651,7 +656,7 @@ export function SynergySection() {
                                                     <Download size={18} /> {t.synergy.downloadCV}
                                                 </Button>
                                                 <Button variant="ghost" size="sm" onClick={() => setRewardMissionId(null)}>
-                                                    Continuar Explorando
+                                                    {t.synergy.continueBtn}
                                                 </Button>
                                             </div>
                                         </motion.div>

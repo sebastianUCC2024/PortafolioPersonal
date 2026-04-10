@@ -86,19 +86,19 @@ export const es = {
         title: "Testimonios",
         items: [
             {
-                quote: "Juan es un dev sumamente organizado. Su habilidad para transformar diseños complejos en código limpio es excepcional.",
-                name: "Carlos",
-                role: "Lead Frontend Engineer"
+                quote: "Un profesional con gran capacidad de análisis. Su enfoque en la arquitectura limpia y el código escalable ha sido clave en los proyectos que hemos compartido.",
+                name: "Eduar Patiño",
+                role: "Software Engineer"
             },
             {
-                quote: "El nivel de atención al detalle que pone en cada componente es algo que rara vez he visto. Un excelente compañero de equipo.",
-                name: "Camila",
-                role: "Product Designer"
+                quote: "Destaca por su atención al detalle y su compromiso con la calidad. Siempre busca la mejor experiencia para el usuario final en cada interfaz que desarrolla.",
+                name: "Lucy Patiño",
+                role: "UX Analyst"
             },
             {
-                quote: "No solo escribe código rápido, se asegura que sea mantenible y entienda la visión del producto a nivel arquitectónico.",
-                name: "Andrés",
-                role: "Tech Lead"
+                quote: "Juan Sebastián tiene una habilidad innata para resolver problemas complejos de forma sencilla y eficiente. Es un excelente compañero de equipo y un gran aporte técnico.",
+                name: "Carlos Buesaquillo",
+                role: "Fullstack Developer"
             }
         ]
     },
@@ -139,24 +139,47 @@ export const es = {
             reset: "Reiniciar Red"
         },
         onboarding: "Selecciona una estrella y luego otra para conectarlas.",
+        selectPrompt: "Selecciona una Constelación",
+        progressTitle: "Progreso",
+        rewardTitle: "Constelación Descubierta",
+        continueBtn: "Continuar Explorando",
+        connectHelp: "Conecta los nodos",
         missionsTitle: "Misiones Neurales:",
         constellations: [
-            { id: "orion", name: "Orión (Frontend)", description: "El cazador. Se revela al dominar Figma, Diseño, UI/UX y React." },
-            { id: "lyra", name: "Lyra (Datos)", description: "La lira celestial. Compuesta por la armonía de Bases de Datos, APIs y Arquitectura." },
-            { id: "cassiopeia", name: "Casiopea (Rendimiento)", description: "La reina. Fluye conectando TypeScript, Rendimiento y React." },
-            { id: "cygnus", name: "Cygnus (Fullstack)", description: "El cisne intergaláctico. Unifica Frontend (UI, React) con Backend (API, DB)." },
-            { id: "pegasus", name: "Pegaso (Núcleo)", description: "El caballo alado. El motor central entre Rendimiento, TypeScript, Arquitectura y APIs." }
+            { 
+                id: "orion", 
+                name: "Orión (Frontend)", 
+                description: "Conocido como El Cazador, Orión domina el firmamento invernal. En tu arquitectura neural, esta constelación representa la maestría del espacio visual y la precisión técnica. Al igual que el cazador rastrea su presa, un desarrollador Front-end busca la perfección en el píxel, unificando la estética de Figma, la estructura de React y la elegancia de UI/UX en una danza estelar de interactividad." 
+            },
+            { 
+                id: "lyra", 
+                name: "Lyra (Datos)", 
+                description: "La Lira celestial, el instrumento de Orfeo cuya música podía encantar a las rocas y los ríos. Esta constelación simboliza la armonía absoluta entre los sistemas de datos y la arquitectura de backend. Representa el flujo melódico de la información que viaja a través de APIs robustas y bases de Datos optimizadas, creando una sinfonía digital de eficiencia y estabilidad." 
+            },
+            { 
+                id: "cassiopeia", 
+                name: "Casiopea (Rendimiento)", 
+                description: "La Reina en su trono, una constelación que nunca se pone en el hemisferio norte. En el desarrollo moderno, Casiopea encarna la solidez inquebrantable del código escrito en TypeScript y la elegancia del alto rendimiento. Es el símbolo de una aplicación estructurada para perdurar, brillando con una lógica clara y una ejecución impecable sin importar la carga del sistema." 
+            },
+            { 
+                id: "cygnus", 
+                name: "Cygnus (Fullstack)", 
+                description: "El Cisne, también llamado la Cruz del Norte, vuela a lo largo del camino plateado de la Vía Láctea. Esta figura representa la integración Fullstack en su máxima expresión. Al igual que el cisne une los cielos, tú has logrado unificar el Frontend (UI, React) con la solidez del Backend (API, DB), creando un vuelo equilibrado entre la interfaz y el motor que la impulsa." 
+            },
+            { 
+                id: "pegasus", 
+                name: "Pegaso (Núcleo)", 
+                description: "El mítico Caballo Alado que simboliza la velocidad y la capacidad de elevarse sobre las limitaciones terrenales. Pegaso es el motor central de tu red neural, el corazón donde la Arquitectura, el Rendimiento, TypeScript y las APIs convergen. Representa la infraestructura que permite que una aplicación no solo funcione, sino que vuele hacia la escalabilidad global." 
+            }
         ],
         finalMissionObj: "Andrómeda (Red Global)",
-        progressTitle: "Progreso de Misión",
-        connectHelp: "Conecta los nodos para completar la figura",
     },
     synergyNodes: {
         react: "React & Next.js",
         ts: "TypeScript",
         ui: "UI / UX",
         arch: "Arquitectura",
-        perf: "Performance",
+        perf: "Rendimiento",
         backend: "APIs",
         db: "Bases de Datos",
         design: "Figma"
