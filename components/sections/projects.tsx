@@ -91,13 +91,17 @@ function SpotlightCard({ project }: { project: any }) {
             
             {/* Columna Izquierda: Imagen / Placeholder gigante */}
             <div className="relative z-10 w-full aspect-video md:aspect-[4/3] rounded-2xl bg-card-bg border border-brand-cyan/20 flex flex-col items-center justify-center overflow-hidden shadow-inner">
-                 <div className="absolute inset-0 bg-brand-cyan/5 group-hover:bg-transparent transition-colors duration-500" />
-                 {/* Icon placeholder centrado lucide */}
-                 <div className="w-20 h-20 rounded-2xl bg-background backdrop-blur border border-brand-cyan/20 flex items-center justify-center transition-transform duration-500 group-hover:scale-110 shadow-lg">
-                     <Code2 className="w-10 h-10 text-brand-cyan opacity-80" />
-                 </div>
-                 {/* Texto decorativo para el placeholder */}
-                 <span className="mt-6 text-sm font-medium text-muted tracking-widest uppercase">{t.projects.placeholder}</span>
+                 {project.image ? (
+                     <img src={project.image} alt={project.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                 ) : (
+                     <>
+                         <div className="absolute inset-0 bg-brand-cyan/5 group-hover:bg-transparent transition-colors duration-500" />
+                         <div className="w-20 h-20 rounded-2xl bg-background backdrop-blur border border-brand-cyan/20 flex items-center justify-center transition-transform duration-500 group-hover:scale-110 shadow-lg">
+                             <Code2 className="w-10 h-10 text-brand-cyan opacity-80" />
+                         </div>
+                         <span className="mt-6 text-sm font-medium text-muted tracking-widest uppercase">{t.projects.placeholder}</span>
+                     </>
+                 )}
             </div>
 
             {/* Columna Derecha: Información */}
