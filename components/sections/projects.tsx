@@ -129,11 +129,6 @@ function SpotlightCard({ project }: { project: any }) {
                             {project.previewText} <ExternalLink className="ml-1 w-4 h-4 inline-block" />
                         </Button>
                     </a>
-                    <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
-                        <Button variant="outline" size="md">
-                            {project.githubText}
-                        </Button>
-                    </a>
                 </div>
             </div>
 

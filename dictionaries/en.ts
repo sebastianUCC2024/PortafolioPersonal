@@ -149,27 +149,27 @@ export const en = {
             { 
                 id: "orion", 
                 name: "Orion (Frontend)", 
-                description: "Known as The Hunter, Orion dominates the winter sky. In your neural architecture, this constellation represents visual space mastery and technical precision. Just as the hunter tracks his prey, a Frontend developer seeks pixel perfection, unifying Figma aesthetics, React structure, and UI/UX elegance in a stellar dance of interactivity." 
+                description: "Visual space mastery and technical precision. Unifies Figma aesthetics, React structure, and UI/UX elegance into a flawless user experience." 
             },
             { 
                 id: "lyra", 
                 name: "Lyra (Data)", 
-                description: "The celestial Lyre, the instrument of Orpheus whose music could enchant rocks and rivers. This constellation symbolizes absolute harmony between data systems and backend architecture. It represents the melodic flow of information traveling through robust APIs and optimized Databases, creating a digital symphony of efficiency and stability." 
+                description: "Harmony between data systems and backend architecture. Represents the flow of information through robust APIs and optimized databases." 
             },
             { 
                 id: "cassiopeia", 
                 name: "Cassiopeia (Performance)", 
-                description: "The Queen on her throne, a constellation that never sets in the northern hemisphere. In modern development, Cassiopeia embodies the unwavering solidity of code written in TypeScript and the elegance of high performance. It is the symbol of an application structured to endure, shining with clear logic and flawless execution regardless of system load." 
+                description: "Unwavering TypeScript code solidity and high performance. An application structured to endure with clear logic and flawless execution." 
             },
             { 
                 id: "cygnus", 
                 name: "Cygnus (Fullstack)", 
-                description: "The Swan, also called the Northern Cross, flies along the silver path of the Milky Way. This figure represents Fullstack integration at its finest. Just as the swan unites the heavens, you have achieved the unification of Frontend (UI, React) with Backend solidity (API, DB), creating a balanced flight between the interface and the engine that drives it." 
+                description: "Fullstack integration at its finest. Unifies Frontend (UI, React) with Backend solidity (API, DB) into a balanced and scalable system." 
             },
             { 
                 id: "pegasus", 
                 name: "Pegasus (Core)", 
-                description: "The mythical Winged Horse symbolizing speed and the ability to rise above earthly limitations. Pegasus is the central engine of your neural network, the heart where Architecture, Performance, TypeScript, and APIs converge. It represents the infrastructure that allows an application not only to function but to soar toward global scalability." 
+                description: "The central engine where Architecture, Performance, TypeScript, and APIs converge to elevate an application to global scalability." 
             }
         ],
         finalMissionObj: "Andromeda (Global Network)",

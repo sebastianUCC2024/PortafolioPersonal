@@ -149,27 +149,27 @@ export const es = {
             { 
                 id: "orion", 
                 name: "Orión (Frontend)", 
-                description: "Conocido como El Cazador, Orión domina el firmamento invernal. En tu arquitectura neural, esta constelación representa la maestría del espacio visual y la precisión técnica. Al igual que el cazador rastrea su presa, un desarrollador Front-end busca la perfección en el píxel, unificando la estética de Figma, la estructura de React y la elegancia de UI/UX en una danza estelar de interactividad." 
+                description: "Maestría del espacio visual y precisión técnica. Unifica Figma, React y UI/UX en una experiencia de usuario impecable." 
             },
             { 
                 id: "lyra", 
                 name: "Lyra (Datos)", 
-                description: "La Lira celestial, el instrumento de Orfeo cuya música podía encantar a las rocas y los ríos. Esta constelación simboliza la armonía absoluta entre los sistemas de datos y la arquitectura de backend. Representa el flujo melódico de la información que viaja a través de APIs robustas y bases de Datos optimizadas, creando una sinfonía digital de eficiencia y estabilidad." 
+                description: "Armonía entre datos y backend. Representa el flujo de información a través de APIs robustas y bases de datos optimizadas." 
             },
             { 
                 id: "cassiopeia", 
                 name: "Casiopea (Rendimiento)", 
-                description: "La Reina en su trono, una constelación que nunca se pone en el hemisferio norte. En el desarrollo moderno, Casiopea encarna la solidez inquebrantable del código escrito en TypeScript y la elegancia del alto rendimiento. Es el símbolo de una aplicación estructurada para perdurar, brillando con una lógica clara y una ejecución impecable sin importar la carga del sistema." 
+                description: "Solidez del código TypeScript y alto rendimiento. Una aplicación estructurada para perdurar con lógica clara y ejecución impecable." 
             },
             { 
                 id: "cygnus", 
                 name: "Cygnus (Fullstack)", 
-                description: "El Cisne, también llamado la Cruz del Norte, vuela a lo largo del camino plateado de la Vía Láctea. Esta figura representa la integración Fullstack en su máxima expresión. Al igual que el cisne une los cielos, tú has logrado unificar el Frontend (UI, React) con la solidez del Backend (API, DB), creando un vuelo equilibrado entre la interfaz y el motor que la impulsa." 
+                description: "Integración Fullstack en su máxima expresión. Une el Frontend con la solidez del Backend creando un sistema equilibrado." 
             },
             { 
                 id: "pegasus", 
                 name: "Pegaso (Núcleo)", 
-                description: "El mítico Caballo Alado que simboliza la velocidad y la capacidad de elevarse sobre las limitaciones terrenales. Pegaso es el motor central de tu red neural, el corazón donde la Arquitectura, el Rendimiento, TypeScript y las APIs convergen. Representa la infraestructura que permite que una aplicación no solo funcione, sino que vuele hacia la escalabilidad global." 
+                description: "El motor central donde Arquitectura, Rendimiento, TypeScript y APIs convergen para elevar una aplicación a escala global." 
             }
         ],
         finalMissionObj: "Andrómeda (Red Global)",

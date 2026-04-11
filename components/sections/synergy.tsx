@@ -360,7 +360,7 @@ export function SynergySection() {
                             <h4 className="text-sm font-bold font-primary uppercase tracking-widest text-brand-cyan mb-2">
                                 {t.synergy.missionsTitle || "Misiones"}
                             </h4>
-                            <div className="flex flex-col gap-1">
+                            <div className="flex flex-col gap-1 flex-1">
                                 {t.synergy.constellations?.map((c: any) => {
                                     const isFound = discoveredConstellations.includes(c.id);
                                     const isActive = activeMissionId === c.id;
@@ -382,7 +382,7 @@ export function SynergySection() {
                                                 <h5 className={`font-semibold text-sm ${isActive ? 'text-brand-cyan' : isFound ? 'text-foreground' : 'text-muted-foreground'}`}>{c.name}</h5>
                                             </div>
                                             {(isFound || isActive) && (
-                                                <p className="text-xs text-muted leading-relaxed mt-2 pl-7">
+                                                <p className="text-xs text-muted leading-relaxed mt-2 pl-7 text-justify">
                                                     {c.description}
                                                 </p>
                                             )}
@@ -390,24 +390,11 @@ export function SynergySection() {
                                     )
                                 })}
 
-                                {/* Misión Final Secreta */}
-                                <div className="mt-4 pt-4 border-t border-brand-cyan/10">
-                                    <button 
-                                        disabled={!isFinalUnlocked}
-                                        onClick={() => playMission("final")}
-                                        className={`w-full flex items-center justify-between p-4 rounded-xl border transition-all duration-500
-                                            ${isFinalUnlocked 
-                                                ? activeMissionId === "final" ? 'bg-brand-cyan/20 border-brand-cyan/50 shadow-[0_0_20px_rgba(0,229,153,0.2)]' : 'bg-brand-cyan/10 border-brand-cyan/30 hover:bg-brand-cyan/20 cursor-pointer animate-pulse'
-                                                : 'bg-background/50 border-white/5 opacity-50 cursor-not-allowed'}
-                                        `}
-                                    >
-                                        <div className="flex items-center gap-3">
-                                            {isFinalUnlocked ? <Star className="text-brand-cyan" size={20} /> : <Lock className="text-muted" size={20} />}
-                                            <span className={`font-bold text-sm tracking-wider uppercase ${isFinalUnlocked ? 'text-brand-cyan' : 'text-muted'}`}>
-                                                 {t.synergy.finalMissionObj || "Red Global"}
-                                            </span>
-                                        </div>
-                                    </button>
+                                {/* Instrucción */}
+                                <div className="mt-auto pt-4 border-t border-brand-cyan/10">
+                                    <p className="text-xs text-muted leading-relaxed text-center px-2">
+                                        {t.synergy.onboarding}
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -424,12 +411,12 @@ export function SynergySection() {
                         
                     </FadeIn>
 
-                    <FadeIn delay={0.3} className="lg:col-span-3 relative">
+                    <FadeIn delay={0.3} className="lg:col-span-3 flex flex-col">
                         <div 
                             ref={containerRef} 
                             onPointerDown={handleContainerPointerDown}
                             onPointerMove={handleContainerPointerMove}
-                            className="relative w-full h-[400px] md:h-[500px] bg-card-bg/50 border border-brand-cyan/20 rounded-[2rem] overflow-hidden shadow-2xl backdrop-blur-md select-none touch-none"
+                            className="relative w-full flex-1 min-h-[400px] md:min-h-[500px] bg-card-bg/50 border border-brand-cyan/20 rounded-[2rem] overflow-hidden shadow-2xl backdrop-blur-md select-none touch-none"
                         >
                             {/* Grilla Animada Parallax */}
                             <motion.div 
@@ -447,14 +434,7 @@ export function SynergySection() {
                             
                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-cyan/5 rounded-full blur-[80px] pointer-events-none" />
 
-                            {/* UI de Ayuda Inicial (Cero Misiones Seleccionadas) */}
-                            {!activeMissionId && (
-                                <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none opacity-60">
-                                    <span className="text-xl md:text-3xl font-primary text-muted font-bold tracking-widest uppercase text-center px-4">
-                                        {t.synergy.selectPrompt}
-                                    </span>
-                                </div>
-                            )}
+
 
                              {/* UI de Ayuda con barra de progreso vertical reducida */}
                              {activeMissionId && !isUltimateVictory && (
@@ -648,7 +628,7 @@ export function SynergySection() {
                                             <h4 className="text-2xl font-bold font-primary text-brand-cyan mb-2">
                                                 {t.synergy.rewardTitle} - {t.synergy.constellations.find((c: any) => c.id === rewardMissionId)?.name}
                                             </h4>
-                                            <p className="text-foreground/80 mb-8 leading-relaxed max-h-[150px] overflow-y-auto px-2 custom-scrollbar text-sm md:text-base">
+                                            <p className="text-foreground/80 mb-8 leading-relaxed max-h-[150px] overflow-y-auto px-2 custom-scrollbar text-sm md:text-base text-justify">
                                                 {t.synergy.constellations.find((c: any) => c.id === rewardMissionId)?.description}
                                             </p>
                                             <div className="flex flex-col gap-3">
