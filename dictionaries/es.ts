@@ -56,7 +56,7 @@ export const es = {
     },
     experience: {
         title: "Experiencia Académica",
-        badge: "2020 - Presente",
+        badge: "2024 - Presente",
         degree: "Ingeniería de Software",
         university: "Universidad Cooperativa de Colombia",
         description: "Formación integral con enfoque en desarrollo de aplicaciones escalables, arquitectura de software y metodologías de trabajo ágil. Destacado por la creación de proyectos prácticos orientados a resolver problemas del mundo real.",

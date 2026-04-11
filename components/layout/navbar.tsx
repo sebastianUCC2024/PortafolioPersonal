@@ -39,6 +39,9 @@ export function Navbar() {
                             className="w-full h-full object-contain mix-blend-multiply dark:invert dark:mix-blend-screen transition-all" 
                         />
                     </div>
+                    <span className="text-lg font-bold font-primary text-foreground tracking-tight group-hover:text-brand-cyan transition-colors duration-300">
+                        Sebastián
+                    </span>
                 </a>
                 
 
