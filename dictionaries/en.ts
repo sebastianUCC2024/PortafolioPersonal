@@ -114,7 +114,7 @@ export const en = {
         messagePlaceholder: "Tell me about your project...",
         submitBtn: "Send message",
         locationLabel: "Location",
-        location: "Bogota, Colombia"
+        location: "Pasto, Colombia"
     },
     footer: {
         copyright: "Designed and built by",

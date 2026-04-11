@@ -114,7 +114,7 @@ export const es = {
         messagePlaceholder: "Cuéntame sobre tu proyecto...",
         submitBtn: "Enviar mensaje",
         locationLabel: "Ubicación",
-        location: "Bogotá, Colombia"
+        location: "Pasto, Colombia"
     },
     footer: {
         copyright: "Diseñado y desarrollado por",
