@@ -36,7 +36,7 @@ export function Navbar() {
                         <img 
                             src="/logo.png" 
                             alt="Logo" 
-                            className="w-full h-full object-contain mix-blend-multiply dark:invert dark:mix-blend-screen transition-all" 
+                            className="w-full h-full object-contain brightness-0 dark:invert dark:brightness-100 opacity-90 group-hover:opacity-100 transition-all" 
                         />
                     </div>
                     <span className="text-lg font-bold font-primary text-foreground tracking-tight group-hover:text-brand-cyan transition-colors duration-300">
