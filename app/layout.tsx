@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Outfit } from "next/font/google";
+import { Space_Grotesk, Plus_Jakarta_Sans } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { LanguageProvider } from "@/hooks/use-language";
 import { SmoothScrollProvider } from "@/components/providers/smooth-scroll";
@@ -12,14 +12,16 @@ import { AmbientBackground } from "@/components/animations/ambient-background";
 import { Starfield } from "@/components/animations/starfield";
 import "./globals.css";
 
-const outfit = Outfit({
-  variable: "--font-outfit",
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
-const inter = Inter({
-  variable: "--font-inter",
+const plusJakarta = Plus_Jakarta_Sans({
+  variable: "--font-plus-jakarta",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -38,16 +40,7 @@ export default function RootLayout({
   return (
     <html lang="es" suppressHydrationWarning>
       <body
-        className={`
-          ${outfit.variable} 
-          ${inter.variable} 
-          antialiased 
-          min-h-screen
-          flex flex-col
-          relative
-          flex flex-col
-          relative
-        `}
+        className={[spaceGrotesk.variable, plusJakarta.variable, "antialiased", "min-h-screen", "flex", "flex-col", "relative"].join(" ")}
       >
         <AmbientBackground />
         <Starfield />
