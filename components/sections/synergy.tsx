@@ -351,12 +351,40 @@ export function SynergySection() {
                     </p>
                 </FadeIn>
 
-                <div className="grid lg:grid-cols-4 gap-8 items-start relative">
+                <div className="grid lg:grid-cols-4 gap-6 items-start relative">
                     
                     {/* Controles y Panel de Pistas / Nivel Selector */}
                     <FadeIn delay={0.2} className="lg:col-span-1 flex flex-col gap-4">
                         
-                         <div className="bg-card-bg/50 border border-brand-cyan/20 rounded-3xl p-5 backdrop-blur-md flex flex-col gap-3">
+                        {/* Móvil: chips horizontales scrolleables */}
+                        <div className="lg:hidden flex flex-col gap-3">
+                            <h4 className="text-xs font-bold font-primary uppercase tracking-widest text-brand-cyan">
+                                {t.synergy.missionsTitle || "Misiones"}
+                            </h4>
+                            <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-none">
+                                {t.synergy.constellations?.map((c: any) => {
+                                    const isFound = discoveredConstellations.includes(c.id);
+                                    const isActive = activeMissionId === c.id;
+                                    return (
+                                        <button
+                                            key={c.id}
+                                            onClick={() => playMission(c.id)}
+                                            className={`shrink-0 flex items-center gap-2 px-3 py-2 rounded-full border text-xs font-semibold transition-all duration-300
+                                                ${isActive ? 'bg-brand-cyan/20 border-brand-cyan/50 text-brand-cyan' : isFound ? 'border-brand-cyan/20 text-foreground' : 'border-brand-cyan/10 text-muted-foreground opacity-70'}`}
+                                        >
+                                            {isFound ? <CheckCircle2 size={12} className="text-brand-cyan" /> : <Circle size={12} />}
+                                            {c.name}
+                                        </button>
+                                    );
+                                })}
+                            </div>
+                            {activeMissionId && (
+                                <p className="text-[10px] text-muted text-center">{t.synergy.onboarding}</p>
+                            )}
+                        </div>
+
+                        {/* Desktop: panel vertical */}
+                         <div className="hidden lg:flex bg-card-bg/50 border border-brand-cyan/20 rounded-3xl p-5 backdrop-blur-md flex-col gap-3">
                             <h4 className="text-sm font-bold font-primary uppercase tracking-widest text-brand-cyan mb-2">
                                 {t.synergy.missionsTitle || "Misiones"}
                             </h4>
@@ -416,7 +444,7 @@ export function SynergySection() {
                             ref={containerRef} 
                             onPointerDown={handleContainerPointerDown}
                             onPointerMove={handleContainerPointerMove}
-                            className="relative w-full flex-1 min-h-[400px] md:min-h-[500px] bg-card-bg/50 border border-brand-cyan/20 rounded-[2rem] overflow-hidden shadow-2xl backdrop-blur-md select-none touch-none"
+                            className="relative w-full flex-1 min-h-[320px] md:min-h-[500px] bg-card-bg/50 border border-brand-cyan/20 rounded-[2rem] overflow-hidden shadow-2xl backdrop-blur-md select-none touch-none"
                         >
                             {/* Grilla Animada Parallax */}
                             <motion.div 
