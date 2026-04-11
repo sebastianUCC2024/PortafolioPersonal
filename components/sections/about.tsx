@@ -29,26 +29,6 @@ export function About() {
                             <p>{t.about.description1}</p>
                             <p>{t.about.description2}</p>
                         </div>
-
-                        {/* Redes Sociales "Abstractas" */}
-                        <div className="flex flex-wrap gap-4 mt-10">
-                            <Button 
-                                variant="outline" 
-                                size="sm" 
-                                className="px-6 rounded-xl hover:bg-brand-cyan hover:text-background"
-                                onClick={() => window.open('https://www.linkedin.com/in/juan-sebastian-patiño-a26461329/?trk=opento_sprofile_details', '_blank')}
-                            >
-                                LinkedIn
-                            </Button>
-                            <Button 
-                                variant="outline" 
-                                size="sm" 
-                                className="px-6 rounded-xl hover:bg-brand-cyan hover:text-background"
-                                onClick={() => window.open('https://github.com/sebastianUCC2024', '_blank')}
-                            >
-                                GitHub
-                            </Button>
-                        </div>
                     </FadeIn>
 
                     {/* Columna Derecha: Bloque de Tecnologías / Skills Destacado */}
