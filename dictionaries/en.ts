@@ -86,19 +86,19 @@ export const en = {
         title: "Testimonials",
         items: [
             {
-                quote: "Juan has shown exceptional technical progression. His commitment to best practices and clean architecture stands out even from his training stage.",
-                name: "Eduar Patiño",
-                role: "Senior Software Engineer / Mentor"
+                quote: "Juan Sebastián always showed a genuine curiosity for technology. He was the kind of student who never settled for the basics — he always wanted to understand how things worked under the hood. A young man with a bright future.",
+                name: "Fabián Ordóñez",
+                role: "Technology Teacher — Colegio Francisco José de Caldas"
             },
             {
-                quote: "He possesses a critical eye for usability and aesthetics. He has been able to transform complex requirements into intuitive visual solutions with great technical maturity.",
-                name: "Lucy Patiño",
-                role: "UX/UI Director / Reviewer"
+                quote: "What stood out most about Juan was his analytical mindset. In physics, where many students gave up, he looked for the logic behind every problem. That way of thinking will take him very far.",
+                name: "Alexandra Yela",
+                role: "Physics Teacher — Colegio Francisco José de Caldas"
             },
             {
-                quote: "His ability to learn new technologies and apply them immediately to solve real-world problems is amazing. He is a talent with a bright future.",
-                name: "Carlos Buesaquillo",
-                role: "Tech Lead / Consultant"
+                quote: "Juan Sebastián is a young man with great emotional intelligence and determination. He always handled pressure with maturity and stayed focused on his goals. It is a pride to see him grow professionally.",
+                name: "Liliana Ortiz",
+                role: "School Psychologist — Colegio Francisco José de Caldas"
             }
         ]
     },

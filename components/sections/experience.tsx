@@ -38,9 +38,9 @@ export function Experience() {
                                 {t.experience.university}
                             </h4>
                         </div>
-                        {/* Decoración de marca de agua */}
-                        <div className="hidden md:flex flex-col w-20 h-20 rounded-2xl bg-brand-cyan/5 border border-brand-cyan/20 items-center justify-center shrink-0 shadow-inner rotate-3 group-hover:rotate-0 transition-transform duration-500">
-                            <span className="text-brand-cyan text-2xl font-primary font-bold bg-clip-text text-transparent bg-gradient-to-r from-brand-cyan to-brand-cyan-hover">UCC</span>
+                        {/* Logo UCC */}
+                        <div className="hidden md:flex w-20 h-20 rounded-2xl bg-white border border-brand-cyan/20 items-center justify-center shrink-0 shadow-inner rotate-3 group-hover:rotate-0 transition-transform duration-500 overflow-hidden p-1">
+                            <img src="/ucc.png" alt="Universidad Cooperativa de Colombia" className="w-full h-full object-contain" />
                         </div>
                     </div>
 

@@ -86,19 +86,19 @@ export const es = {
         title: "Testimonios",
         items: [
             {
-                quote: "Juan ha demostrado una progresión técnica excepcional. Su compromiso con las mejores prácticas y la arquitectura limpia destaca incluso desde su etapa de formación.",
-                name: "Eduar Patiño",
-                role: "Senior Software Engineer / Mentor"
+                quote: "Juan Sebastián siempre mostró una curiosidad genuina por la tecnología. Era de los estudiantes que no se conformaba con lo básico, siempre quería entender cómo funcionaban las cosas por dentro. Un chico con mucho futuro.",
+                name: "Fabián Ordóñez",
+                role: "Profesor de Tecnología — Colegio Francisco José de Caldas"
             },
             {
-                quote: "Posee un ojo crítico para la usabilidad y la estética. Ha sabido transformar requerimientos complejos en soluciones visuales intuitivas con gran madurez técnica.",
-                name: "Lucy Patiño",
-                role: "UX/UI Director / Revisor"
+                quote: "Lo que más me llamaba la atención de Juan era su capacidad de análisis. En física, donde muchos se rendían, él buscaba la lógica detrás de cada problema. Esa mentalidad lo llevará muy lejos.",
+                name: "Alexandra Yela",
+                role: "Profesora de Física — Colegio Francisco José de Caldas"
             },
             {
-                quote: "Su capacidad para aprender nuevas tecnologías y aplicarlas de inmediato para resolver problemas reales es sorprendente. Es un talento con un futuro brillante.",
-                name: "Carlos Buesaquillo",
-                role: "Tech Lead / Consultor"
+                quote: "Juan Sebastián es un joven con una gran inteligencia emocional y mucha determinación. Siempre supo manejar la presión con madurez y enfocarse en sus metas. Es un orgullo verlo crecer profesionalmente.",
+                name: "Liliana Ortiz",
+                role: "Psicóloga — Colegio Francisco José de Caldas"
             }
         ]
     },
