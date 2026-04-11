@@ -86,19 +86,19 @@ export const en = {
         title: "Testimonials",
         items: [
             {
-                quote: "A professional with strong analytical skills. His focus on clean architecture and scalable code has been key in the projects we've shared.",
+                quote: "Juan has shown exceptional technical progression. His commitment to best practices and clean architecture stands out even from his training stage.",
                 name: "Eduar Patiño",
-                role: "Software Engineer"
+                role: "Senior Software Engineer / Mentor"
             },
             {
-                quote: "He stands out for his attention to detail and commitment to quality. He always seeks the best experience for the end user in every interface he develops.",
+                quote: "He possesses a critical eye for usability and aesthetics. He has been able to transform complex requirements into intuitive visual solutions with great technical maturity.",
                 name: "Lucy Patiño",
-                role: "UX Analyst"
+                role: "UX/UI Director / Reviewer"
             },
             {
-                quote: "Juan Sebastián has an innate ability to solve complex problems simply and efficiently. He is an excellent teammate and a great technical asset.",
+                quote: "His ability to learn new technologies and apply them immediately to solve real-world problems is amazing. He is a talent with a bright future.",
                 name: "Carlos Buesaquillo",
-                role: "Fullstack Developer"
+                role: "Tech Lead / Consultant"
             }
         ]
     },

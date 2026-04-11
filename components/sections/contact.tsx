@@ -4,6 +4,7 @@ import { useLanguage } from "@/hooks/use-language";
 import { Button } from "@/components/ui/button";
 import { FadeIn } from "@/components/animations/fade-in";
 import { Mail, MapPin } from "lucide-react";
+import { GithubIcon, LinkedinIcon } from "@/components/ui/icons";
 
 export function Contact() {
     const { t } = useLanguage();
@@ -53,6 +54,30 @@ export function Contact() {
                                 <div className="flex flex-col">
                                     <span className="text-muted text-sm uppercase tracking-wider">{t.contact.locationLabel}</span>
                                     <span className="text-foreground font-medium">{t.contact.location}</span>
+                                </div>
+                            </div>
+
+                            <div className="flex items-center gap-4 group">
+                                <div className="w-12 h-12 rounded-full bg-brand-cyan/10 border border-brand-cyan/30 flex items-center justify-center text-brand-cyan transition-transform group-hover:scale-110">
+                                    <LinkedinIcon size={20} />
+                                </div>
+                                <div className="flex flex-col">
+                                    <span className="text-muted text-sm uppercase tracking-wider">LinkedIn</span>
+                                    <a href="https://www.linkedin.com/in/juan-sebastian-patiño-a26461329/?trk=opento_sprofile_details" target="_blank" rel="noopener noreferrer" className="text-foreground font-medium hover:text-brand-cyan transition-colors">
+                                        Juan Sebastián Patiño
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div className="flex items-center gap-4 group">
+                                <div className="w-12 h-12 rounded-full bg-brand-cyan/10 border border-brand-cyan/30 flex items-center justify-center text-brand-cyan transition-transform group-hover:scale-110">
+                                    <GithubIcon size={20} />
+                                </div>
+                                <div className="flex flex-col">
+                                    <span className="text-muted text-sm uppercase tracking-wider">GitHub</span>
+                                    <a href="https://github.com/sebastianUCC2024" target="_blank" rel="noopener noreferrer" className="text-foreground font-medium hover:text-brand-cyan transition-colors">
+                                        @sebastianUCC2024
+                                    </a>
                                 </div>
                             </div>
                         </div>

@@ -24,7 +24,7 @@ export function Testimonials() {
                     {t.testimonials.items.map((testimonial, index) => (
                         <div 
                             key={index} 
-                            className="group relative rounded-3xl bg-card-bg/50 border border-brand-cyan/10 p-8 hover:bg-card-bg hover:border-brand-cyan/30 transition-all duration-300 flex flex-col gap-6"
+                            className="group relative rounded-3xl bg-card-bg/50 border border-brand-cyan/10 p-8 hover:bg-card-bg hover:border-brand-cyan/30 transition-all duration-300 flex flex-col gap-6 h-full"
                         >
                             {/* Icono de comillas decorativo */}
                             <div className="absolute top-6 right-8 text-5xl font-serif text-brand-cyan/10 group-hover:text-brand-cyan/20 transition-colors">
