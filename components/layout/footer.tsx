@@ -1,7 +1,6 @@
 "use client";
 
 import { useLanguage } from "@/hooks/use-language";
-import { Github, Linkedin } from "lucide-react";
 
 export function Footer() {
     const { t } = useLanguage();
@@ -17,7 +16,7 @@ export function Footer() {
         <footer className="border-t border-brand-cyan/10 bg-background mt-12">
             <div className="max-w-7xl mx-auto px-6 py-12">
 
-                {/* Top Section: Logo + Nav + Social */}
+                {/* Top Section: Logo + Nav */}
                 <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-10">
                     
                     {/* Logo + Nombre (igual que el navbar) */}
@@ -46,28 +45,6 @@ export function Footer() {
                             </a>
                         ))}
                     </nav>
-
-                    {/* Redes Sociales */}
-                    <div className="flex items-center gap-4">
-                        <a 
-                            href="https://github.com/sebastianUCC2024" 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
-                            className="w-10 h-10 rounded-full border border-brand-cyan/20 flex items-center justify-center text-muted hover:text-brand-cyan hover:border-brand-cyan/50 hover:bg-brand-cyan/5 transition-all duration-300"
-                            aria-label="GitHub"
-                        >
-                            <Github size={18} />
-                        </a>
-                        <a 
-                            href="https://www.linkedin.com/in/juan-sebastian-patiño-a26461329/" 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
-                            className="w-10 h-10 rounded-full border border-brand-cyan/20 flex items-center justify-center text-muted hover:text-brand-cyan hover:border-brand-cyan/50 hover:bg-brand-cyan/5 transition-all duration-300"
-                            aria-label="LinkedIn"
-                        >
-                            <Linkedin size={18} />
-                        </a>
-                    </div>
                 </div>
 
                 {/* Divider */}
