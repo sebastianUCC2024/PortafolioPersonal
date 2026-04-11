@@ -7,6 +7,7 @@ import { StaggerGrid } from "@/components/animations/stagger-grid";
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { Code2, ExternalLink } from "lucide-react";
+import { GithubIcon } from "@/components/ui/icons";
 
 export function Projects() {
     const { t } = useLanguage();
@@ -78,7 +79,7 @@ function SpotlightCard({ project }: { project: any }) {
             onBlur={handleBlur}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            className="group relative grid lg:grid-cols-2 gap-8 items-stretch rounded-3xl bg-card-bg/50 border border-brand-cyan/10 p-6 md:p-8 overflow-hidden transition-all duration-500"
+            className="group relative grid lg:grid-cols-5 gap-8 items-center rounded-3xl bg-card-bg/50 border border-brand-cyan/10 p-6 md:p-8 overflow-hidden transition-all duration-500"
         >
             {/* Spotlight Background Flash */}
             <div
@@ -89,49 +90,52 @@ function SpotlightCard({ project }: { project: any }) {
                 }}
             />
             
-            {/* Columna Izquierda: Imagen / Placeholder gigante */}
-            <div className="relative z-10 w-full aspect-video md:aspect-[4/3] rounded-2xl bg-card-bg border border-brand-cyan/20 flex flex-col items-center justify-center overflow-hidden shadow-inner">
+            {/* Columna Izquierda: Imagen */}
+            <div className="relative z-10 lg:col-span-2 w-full aspect-video rounded-2xl bg-card-bg border border-brand-cyan/20 flex flex-col items-center justify-center overflow-hidden shadow-inner">
                  {project.image ? (
                      <img src={project.image} alt={project.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                  ) : (
                      <>
                          <div className="absolute inset-0 bg-brand-cyan/5 group-hover:bg-transparent transition-colors duration-500" />
-                         <div className="w-20 h-20 rounded-2xl bg-background backdrop-blur border border-brand-cyan/20 flex items-center justify-center transition-transform duration-500 group-hover:scale-110 shadow-lg">
-                             <Code2 className="w-10 h-10 text-brand-cyan opacity-80" />
+                         <div className="w-16 h-16 rounded-2xl bg-background backdrop-blur border border-brand-cyan/20 flex items-center justify-center transition-transform duration-500 group-hover:scale-110 shadow-lg">
+                             <Code2 className="w-8 h-8 text-brand-cyan opacity-80" />
                          </div>
-                         <span className="mt-6 text-sm font-medium text-muted tracking-widest uppercase">{t.projects.placeholder}</span>
+                         <span className="mt-4 text-xs font-medium text-muted tracking-widest uppercase">{t.projects.placeholder}</span>
                      </>
                  )}
             </div>
 
             {/* Columna Derecha: Información */}
-            <div className="relative z-10 flex flex-col justify-center">
-                <div className="mb-4">
-                    <Badge className="mb-4">{project.status}</Badge>
-                    <h3 className="text-2xl md:text-4xl font-bold font-primary text-foreground group-hover:text-brand-cyan transition-colors duration-300">
+            <div className="relative z-10 lg:col-span-3 flex flex-col justify-center">
+                <div className="mb-3">
+                    <Badge className="mb-3">{project.status}</Badge>
+                    <h3 className="text-2xl md:text-3xl font-bold font-primary text-foreground group-hover:text-brand-cyan transition-colors duration-300">
                         {project.title}
                     </h3>
                 </div>
                 
-                <p className="text-muted text-lg md:text-xl mb-8 leading-relaxed text-justify">
+                <p className="text-muted text-base mb-6 leading-relaxed text-justify">
                     {project.description}
                 </p>
                 
                 {/* Stack de Tech */}
-                <div className="flex flex-wrap gap-2 mb-8">
+                <div className="flex flex-wrap gap-2 mb-6">
                     {project.stack.map((tech: string) => (
-                        <span key={tech} className="px-3 py-1 rounded-md bg-background border border-brand-cyan/10 text-sm md:text-base text-foreground/80 font-medium">
+                        <span key={tech} className="px-3 py-1 rounded-md bg-background border border-brand-cyan/10 text-sm text-foreground/80 font-medium">
                             {tech}
                         </span>
                     ))}
                 </div>
 
                 {/* Acciones */}
-                <div className="flex flex-wrap gap-4 mt-auto pt-4 border-t border-brand-cyan/10">
+                <div className="flex items-center gap-4 mt-auto pt-4 border-t border-brand-cyan/10">
                     <a href={project.previewUrl} target="_blank" rel="noopener noreferrer">
                         <Button variant="primary" size="md">
                             {project.previewText} <ExternalLink className="ml-1 w-4 h-4 inline-block" />
                         </Button>
+                    </a>
+                    <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-brand-cyan/20 flex items-center justify-center text-muted hover:text-brand-cyan hover:border-brand-cyan/50 transition-all duration-300">
+                        <GithubIcon size={18} />
                     </a>
                 </div>
             </div>
