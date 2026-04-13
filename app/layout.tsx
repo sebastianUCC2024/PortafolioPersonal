@@ -7,6 +7,7 @@ import { SmoothScrollProvider } from "@/components/providers/smooth-scroll";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { DecorativeElements } from "@/components/layout/minimal-wrapper";
+import { LoadingScreen } from "@/components/ui/loading-screen";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -39,6 +40,7 @@ export default function RootLayout({
       <body
         className={[spaceGrotesk.variable, plusJakarta.variable, "antialiased", "min-h-screen", "flex", "flex-col", "relative"].join(" ")}
       >
+        <LoadingScreen />
         <LanguageProvider>
           <MinimalModeProvider>
             <DecorativeElements />
