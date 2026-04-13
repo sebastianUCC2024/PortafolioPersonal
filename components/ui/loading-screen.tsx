@@ -8,17 +8,17 @@ export function LoadingScreen() {
     const [progress, setProgress] = useState(0);
 
     useEffect(() => {
-        // Simular progreso de carga
+        // Simular progreso de carga más rápido
         const interval = setInterval(() => {
             setProgress(prev => {
                 if (prev >= 100) {
                     clearInterval(interval);
-                    setTimeout(() => setIsLoading(false), 500);
+                    setTimeout(() => setIsLoading(false), 300);
                     return 100;
                 }
-                return prev + Math.random() * 15;
+                return prev + Math.random() * 20;
             });
-        }, 150);
+        }, 100);
 
         return () => clearInterval(interval);
     }, []);
