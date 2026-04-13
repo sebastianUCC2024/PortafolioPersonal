@@ -164,38 +164,3 @@ h1, h2, h3, h4, h5, h6 {
 img {
   content-visibility: auto;
 }
-
-/* Animaciones de scroll - Estado inicial */
-[data-scroll-reveal] {
-  opacity: 0;
-}
-
-[data-scroll-reveal="fade"] {
-  opacity: 0;
-}
-
-[data-scroll-reveal="slide-up"] {
-  opacity: 0;
-  transform: translateY(3rem);
-}
-
-[data-scroll-reveal="slide-left"] {
-  opacity: 0;
-  transform: translateX(3rem);
-}
-
-[data-scroll-reveal="slide-right"] {
-  opacity: 0;
-  transform: translateX(-3rem);
-}
-
-[data-scroll-reveal="zoom"] {
-  opacity: 0;
-  transform: scale(0.95);
-}
-
-/* Estado visible */
-[data-scroll-reveal].visible {
-  opacity: 1;
-  transform: translate(0) scale(1);
-}

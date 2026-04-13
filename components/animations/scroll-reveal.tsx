@@ -1,7 +1,9 @@
 "use client";
 
-import { useScrollAnimation } from "@/hooks/use-scroll-animation";
+import { motion } from "framer-motion";
 import { ReactNode } from "react";
+import { useInView } from "framer-motion";
+import { useRef } from "react";
 
 interface ScrollRevealProps {
     children: ReactNode;
@@ -16,21 +18,48 @@ export function ScrollReveal({
     className = "",
     animation = "fade",
     delay = 0,
-    duration = 0.6,
+    duration = 0.8,
 }: ScrollRevealProps) {
-    const { ref, isVisible } = useScrollAnimation({ threshold: 0.1, triggerOnce: true });
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+    const variants = {
+        fade: {
+            hidden: { opacity: 0 },
+            visible: { opacity: 1 },
+        },
+        "slide-up": {
+            hidden: { opacity: 0, y: 50 },
+            visible: { opacity: 1, y: 0 },
+        },
+        "slide-left": {
+            hidden: { opacity: 0, x: 50 },
+            visible: { opacity: 1, x: 0 },
+        },
+        "slide-right": {
+            hidden: { opacity: 0, x: -50 },
+            visible: { opacity: 1, x: 0 },
+        },
+        zoom: {
+            hidden: { opacity: 0, scale: 0.9 },
+            visible: { opacity: 1, scale: 1 },
+        },
+    };
 
     return (
-        <div
+        <motion.div
             ref={ref}
-            data-scroll-reveal={animation}
-            className={`transition-all ease-out ${isVisible ? 'visible' : ''} ${className}`}
-            style={{
-                transitionDuration: `${duration}s`,
-                transitionDelay: isVisible ? `${delay}s` : '0s',
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            variants={variants[animation]}
+            transition={{
+                duration,
+                delay,
+                ease: [0.25, 0.1, 0.25, 1],
             }}
+            className={className}
         >
             {children}
-        </div>
+        </motion.div>
     );
 }
