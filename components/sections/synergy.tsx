@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/hooks/use-language";
+import { useMinimalMode } from "@/hooks/use-minimal-mode";
 import { Network, Sparkles, FileText, Download, CheckCircle2, Circle, RotateCcw, Lock, Star } from "lucide-react";
 import { FadeIn } from "@/components/animations/fade-in";
 import { ScrollReveal } from "@/components/animations/scroll-reveal";
@@ -85,6 +86,7 @@ const TARGET_CONSTELLATIONS = [
 
 export function SynergySection() {
     const { t } = useLanguage();
+    const { isMinimal } = useMinimalMode();
     
     // Core game state
     const [nodes, setNodes] = useState<StarNode[]>(INITIAL_STARS);
@@ -450,21 +452,25 @@ export function SynergySection() {
                             onPointerMove={handleContainerPointerMove}
                             className="relative w-full h-[500px] sm:h-[550px] md:h-[600px] lg:h-[650px] xl:h-[700px] bg-card-bg/50 border border-brand-cyan/20 rounded-[2rem] overflow-hidden shadow-2xl backdrop-blur-md select-none touch-none"
                         >
-                            {/* Grilla Animada Parallax */}
-                            <motion.div 
-                                animate={{ backgroundPosition: ["0px 0px", "100px 100px"] }}
-                                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                                className="absolute inset-0 opacity-[0.03] dark:opacity-10 pointer-events-none" 
-                                style={{ 
-                                    backgroundImage: `
-                                    linear-gradient(to right, var(--brand-cyan) 1px, transparent 1px),
-                                    linear-gradient(to bottom, var(--brand-cyan) 1px, transparent 1px)
-                                    `, 
-                                    backgroundSize: '100px 100px' 
-                                }} 
-                            />
+                            {/* Grilla Animada Parallax - Ocultar en modo minimalista */}
+                            {!isMinimal && (
+                                <motion.div 
+                                    animate={{ backgroundPosition: ["0px 0px", "100px 100px"] }}
+                                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                                    className="absolute inset-0 opacity-[0.03] dark:opacity-10 pointer-events-none" 
+                                    style={{ 
+                                        backgroundImage: `
+                                        linear-gradient(to right, var(--brand-cyan) 1px, transparent 1px),
+                                        linear-gradient(to bottom, var(--brand-cyan) 1px, transparent 1px)
+                                        `, 
+                                        backgroundSize: '100px 100px' 
+                                    }} 
+                                />
+                            )}
                             
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-cyan/5 rounded-full blur-[80px] pointer-events-none" />
+                            {!isMinimal && (
+                                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-cyan/5 rounded-full blur-[80px] pointer-events-none" />
+                            )}
 
 
 
@@ -498,8 +504,8 @@ export function SynergySection() {
 
                             {/* Canvas SVG para Ejes (Líneas) */}
                             <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
-                                {/* Guía Visual (Líneas trazadoras) */}
-                                {activeMissionId && !isUltimateVictory && (
+                                {/* Guía Visual (Líneas trazadoras) - Ocultar en modo minimalista */}
+                                {!isMinimal && activeMissionId && !isUltimateVictory && (
                                     <g className="opacity-30 scale-[1.01]">
                                         {(() => {
                                             const mission = TARGET_CONSTELLATIONS.find(c => c.id === activeMissionId);
