@@ -132,3 +132,35 @@ h1, h2, h3, h4, h5, h6 {
 .dark .minimal-mode footer {
   border-color: #333333 !important;
 }
+
+
+/* Optimizaciones de rendimiento */
+.will-change-transform {
+  will-change: transform;
+}
+
+/* Reducir repaints en animaciones */
+.ambient-background,
+.starfield {
+  contain: layout style paint;
+}
+
+/* Optimizar scroll */
+* {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Optimizar imágenes */
+img {
+  content-visibility: auto;
+}

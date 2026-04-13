@@ -1,10 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { memo } from "react";
 
-export function AmbientBackground() {
+export const AmbientBackground = memo(function AmbientBackground() {
     return (
-        <div className="fixed inset-0 z-[-20] overflow-hidden pointer-events-none">
+        <div className="fixed inset-0 z-[-20] overflow-hidden pointer-events-none ambient-background">
             {/* Orbe 1 - Verde oscuro */}
             <motion.div
                 animate={{
@@ -17,7 +18,7 @@ export function AmbientBackground() {
                     repeat: Infinity,
                     ease: "easeInOut"
                 }}
-                className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-[#0a4d3c]/20 dark:bg-brand-cyan/20 blur-[120px] md:blur-[200px]"
+                className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-[#0a4d3c]/20 dark:bg-brand-cyan/20 blur-[120px] md:blur-[200px] will-change-transform"
             />
 
             {/* Orbe 2 - Verde oscuro */}
@@ -33,7 +34,7 @@ export function AmbientBackground() {
                     ease: "easeInOut",
                     delay: 2
                 }}
-                className="absolute bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-[#0a4d3c]/15 dark:bg-[rgba(0,180,229,0.15)] blur-[120px] md:blur-[250px]"
+                className="absolute bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-[#0a4d3c]/15 dark:bg-[rgba(0,180,229,0.15)] blur-[120px] md:blur-[250px] will-change-transform"
             />
 
             {/* Orbe 3 - Verde oscuro (Centro) */}

@@ -504,9 +504,9 @@ export function SynergySection() {
 
                             {/* Canvas SVG para Ejes (Líneas) */}
                             <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
-                                {/* Guía Visual (Líneas trazadoras) - Ocultar en modo minimalista */}
-                                {!isMinimal && activeMissionId && !isUltimateVictory && (
-                                    <g className="opacity-30 scale-[1.01]">
+                                {/* Guía Visual (Líneas trazadoras) - Mantener siempre para intuitividad */}
+                                {activeMissionId && !isUltimateVictory && (
+                                    <g className={isMinimal ? "opacity-20" : "opacity-30 scale-[1.01]"}>
                                         {(() => {
                                             const mission = TARGET_CONSTELLATIONS.find(c => c.id === activeMissionId);
                                             if (!mission || !mission.edges) return null;
