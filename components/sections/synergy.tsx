@@ -339,7 +339,7 @@ export function SynergySection() {
     const isFinalUnlocked = discoveredConstellations.length === TARGET_CONSTELLATIONS.length;
 
     return (
-        <section className="py-20 relative overflow-hidden bg-background">
+        <section className="py-20 relative overflow-hidden">
             <div className="max-w-7xl mx-auto px-6">
                 
                 <FadeIn className="mb-12 text-center flex flex-col items-center">

@@ -13,7 +13,7 @@ export function Footer() {
     ];
 
     return (
-        <footer className="border-t border-brand-cyan/10 bg-background mt-12">
+        <footer className="border-t border-brand-cyan/10 dark:border-brand-cyan/20 backdrop-blur-md mt-12">
             <div className="max-w-7xl mx-auto px-6 py-12">
 
                 {/* Top Section: Logo + Nav */}
@@ -48,7 +48,7 @@ export function Footer() {
                 </div>
 
                 {/* Divider */}
-                <div className="w-full h-px bg-gradient-to-r from-transparent via-brand-cyan/20 to-transparent mb-8" />
+                <div className="w-full h-px bg-gradient-to-r from-transparent via-brand-cyan/20 dark:via-brand-cyan/30 to-transparent mb-8" />
 
                 {/* Bottom: Copyright */}
                 <div className="flex flex-col sm:flex-row justify-between items-center gap-3 text-sm text-muted">

@@ -27,7 +27,7 @@ export function Projects() {
                 {/* Grid de Proyectos */}
                 <StaggerGrid className="grid grid-cols-1 gap-12 lg:gap-20">
                     {t.projects.items.map((project, index) => (
-                        <SpotlightCard key={index} project={project} />
+                        <SpotlightCard key={index} project={project} index={index} />
                     ))}
                 </StaggerGrid>
 
@@ -37,12 +37,14 @@ export function Projects() {
 }
 
 // Componente individual separado para mantener su propio estado del ratón
-function SpotlightCard({ project }: { project: any }) {
+function SpotlightCard({ project, index }: { project: any; index: number }) {
     const { t } = useLanguage();
     const divRef = useRef<HTMLDivElement>(null);
     const [isFocused, setIsFocused] = useState(false);
     const [position, setPosition] = useState({ x: 0, y: 0 });
     const [opacity, setOpacity] = useState(0);
+    
+    const isEven = index % 2 === 0;
 
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
         if (!divRef.current || isFocused) return;
@@ -91,7 +93,7 @@ function SpotlightCard({ project }: { project: any }) {
             />
             
             {/* Columna Izquierda: Imagen */}
-            <div className="relative z-10 lg:col-span-2 w-full aspect-video rounded-2xl bg-card-bg border border-brand-cyan/20 flex flex-col items-center justify-center overflow-hidden shadow-inner">
+            <div className={`relative z-10 lg:col-span-2 w-full aspect-video rounded-2xl bg-card-bg border border-brand-cyan/20 flex flex-col items-center justify-center overflow-hidden shadow-inner ${isEven ? 'lg:order-1' : 'lg:order-2'}`}>
                  {project.image ? (
                      <img src={project.image} alt={project.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                  ) : (
@@ -106,7 +108,7 @@ function SpotlightCard({ project }: { project: any }) {
             </div>
 
             {/* Columna Derecha: Información */}
-            <div className="relative z-10 lg:col-span-3 flex flex-col justify-center">
+            <div className={`relative z-10 lg:col-span-3 flex flex-col justify-center ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
                 <div className="mb-3">
                     <Badge className="mb-3">{project.status}</Badge>
                     <h3 className="text-2xl md:text-3xl font-bold font-primary text-foreground group-hover:text-brand-cyan transition-colors duration-300">

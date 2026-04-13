@@ -27,7 +27,7 @@ export function Navbar() {
     const currentTheme = theme === "system" ? systemTheme : theme;
 
     return (
-        <header className="fixed top-0 w-full z-50 border-b border-brand-cyan/10 bg-background/80 backdrop-blur-md transition-colors duration-300">
+        <header className="fixed top-0 w-full z-50 border-b border-brand-cyan/10 dark:border-brand-cyan/20 backdrop-blur-lg transition-colors duration-300 shadow-sm dark:shadow-brand-cyan/5">
             <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
 
                 {/* Logo con icono personalizado (Versión Final Corregida) */}
@@ -76,7 +76,7 @@ export function Navbar() {
                     {/* Botón cambiar Tema */}
                     {mounted && (
                         <button 
-                            className="w-10 h-10 rounded-full flex items-center justify-center text-foreground hover:bg-card-bg hover:text-brand-cyan transition-colors border border-transparent hover:border-brand-cyan/20" 
+                            className="w-10 h-10 rounded-full flex items-center justify-center text-foreground hover:bg-brand-cyan/10 hover:text-brand-cyan transition-all duration-300 border border-brand-cyan/20 hover:border-brand-cyan/40" 
                             onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
                             aria-label="Toggle Theme"
                         >

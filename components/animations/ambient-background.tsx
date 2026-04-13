@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 export function AmbientBackground() {
     return (
         <div className="fixed inset-0 z-[-20] overflow-hidden pointer-events-none">
-            {/* Orbe 1 - Verde oscuro sutil */}
+            {/* Orbe 1 - Verde oscuro */}
             <motion.div
                 animate={{
                     x: ["0%", "20%", "-20%", "0%"],
@@ -17,10 +17,10 @@ export function AmbientBackground() {
                     repeat: Infinity,
                     ease: "easeInOut"
                 }}
-                className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-[#0a4d3c]/12 dark:bg-brand-cyan/20 blur-[120px] md:blur-[200px]"
+                className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-[#0a4d3c]/20 dark:bg-brand-cyan/20 blur-[120px] md:blur-[200px]"
             />
 
-            {/* Orbe 2 - Verde oscuro más sutil */}
+            {/* Orbe 2 - Verde oscuro */}
             <motion.div
                 animate={{
                     x: ["0%", "-30%", "10%", "0%"],
@@ -33,10 +33,10 @@ export function AmbientBackground() {
                     ease: "easeInOut",
                     delay: 2
                 }}
-                className="absolute bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-[#0a4d3c]/10 dark:bg-[rgba(0,180,229,0.15)] blur-[120px] md:blur-[250px]"
+                className="absolute bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] rounded-full bg-[#0a4d3c]/15 dark:bg-[rgba(0,180,229,0.15)] blur-[120px] md:blur-[250px]"
             />
 
-            {/* Orbe 3 - Verde oscuro muy sutil (Centro) */}
+            {/* Orbe 3 - Verde oscuro (Centro) */}
             <motion.div
                 animate={{
                     x: ["0%", "15%", "-15%", "0%"],
@@ -49,7 +49,7 @@ export function AmbientBackground() {
                     ease: "easeInOut",
                     delay: 5
                 }}
-                className="absolute top-[30%] left-[30%] w-[40vw] h-[40vw] rounded-full bg-[#0a4d3c]/8 dark:bg-brand-cyan/10 blur-[100px] md:blur-[180px]"
+                className="absolute top-[30%] left-[30%] w-[40vw] h-[40vw] rounded-full bg-[#0a4d3c]/10 dark:bg-brand-cyan/10 blur-[100px] md:blur-[180px]"
             />
         </div>
     );
