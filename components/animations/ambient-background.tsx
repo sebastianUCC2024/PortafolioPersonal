@@ -50,8 +50,8 @@ export const AmbientBackground = memo(function AmbientBackground() {
                     ease: "easeInOut",
                     delay: 5
                 }}
-                className="absolute top-[30%] left-[30%] w-[40vw] h-[40vw] rounded-full bg-[#0a4d3c]/10 dark:bg-brand-cyan/10 blur-[100px] md:blur-[180px]"
+                className="absolute top-[30%] left-[30%] w-[40vw] h-[40vw] rounded-full bg-[#0a4d3c]/10 dark:bg-brand-cyan/10 blur-[100px] md:blur-[180px] will-change-transform"
             />
         </div>
     );
-}
+});
