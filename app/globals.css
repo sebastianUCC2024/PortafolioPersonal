@@ -1,17 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  /* Fondo Light Mode: Blanco puro/nieve con textos grises corporativos */
-  --background: #ffffff;
-  --foreground: #18181b; /* zinc-900 */
+  /* Fondo Light Mode: Blanco suave con toque cálido */
+  --background: #fafaf9; /* stone-50 */
+  --foreground: #1c1917; /* stone-900 */
   
-  /* Accent Color: Slate elegante en vez de neón */
-  --brand-cyan: #334155; /* slate-700 */
-  --brand-cyan-hover: #0f172a; /* slate-900 */
+  /* Accent Color: Verde oscuro elegante */
+  --brand-cyan: #0a4d3c; /* verde oscuro profundo */
+  --brand-cyan-hover: #083d30; /* verde aún más oscuro */
   
   /* Cards y Componentes modo claro */
-  --card-bg: #f4f4f5; /* zinc-100 */
-  --muted: #71717a; /* zinc-500 */
+  --card-bg: #ffffff; /* blanco puro para cards */
+  --muted: #78716c; /* stone-500 */
 }
 
 .dark {
