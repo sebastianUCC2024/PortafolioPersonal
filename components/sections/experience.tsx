@@ -3,6 +3,7 @@
 import { useLanguage } from "@/hooks/use-language";
 import { Badge } from "@/components/ui/badge";
 import { FadeIn } from "@/components/animations/fade-in";
+import { ScrollReveal } from "@/components/animations/scroll-reveal";
 import { GraduationCap, CheckCircle2 } from "lucide-react";
 
 export function Experience() {
@@ -13,15 +14,17 @@ export function Experience() {
             <div className="max-w-4xl mx-auto px-6">
                 
                 {/* Título de Sección centrado */}
-                <FadeIn className="mb-16 text-center flex flex-col items-center">
-                    <h2 className="text-3xl md:text-5xl font-bold font-primary mb-4 text-foreground">
-                        <span className="text-brand-cyan">/</span> {t.experience.title}
-                    </h2>
-                    <div className="w-24 h-1 bg-brand-cyan/30 rounded-full" />
-                </FadeIn>
+                <ScrollReveal animation="slide-up" delay={0.1}>
+                    <div className="mb-16 text-center flex flex-col items-center">
+                        <h2 className="text-3xl md:text-5xl font-bold font-primary mb-4 text-foreground">
+                            <span className="text-brand-cyan">/</span> {t.experience.title}
+                        </h2>
+                        <div className="w-24 h-1 bg-brand-cyan/30 rounded-full" />
+                    </div>
+                </ScrollReveal>
 
                 {/* Tarjeta de Experiencia Principal */}
-                <FadeIn delay={0.2}>
+                <ScrollReveal animation="zoom" delay={0.2}>
                     <div className="relative rounded-3xl bg-card-bg/80 border-t-2 border-l border-r border-b border-t-brand-cyan/50 border-brand-cyan/10 p-8 md:p-12 shadow-2xl backdrop-blur-sm overflow-hidden group">
                         
                         {/* Elemento decorativo visual */}
@@ -65,7 +68,7 @@ export function Experience() {
                     </div>
 
                 </div>
-                </FadeIn>
+                </ScrollReveal>
 
             </div>
         </section>

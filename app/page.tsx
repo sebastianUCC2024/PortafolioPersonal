@@ -1,5 +1,6 @@
 "use client";
 
+import { useMinimalMode } from "@/hooks/use-minimal-mode";
 import { Hero } from "@/components/sections/hero";
 import { Projects } from "@/components/sections/projects";
 import { Experience } from "@/components/sections/experience";
@@ -9,8 +10,10 @@ import { Contact } from "@/components/sections/contact";
 import { SynergySection } from "@/components/sections/synergy";
 
 export default function Home() {
+    const { isMinimal } = useMinimalMode();
+
     return (
-        <main className="flex-grow flex flex-col min-h-screen">
+        <main className={`flex-grow flex flex-col min-h-screen transition-all duration-500 ${isMinimal ? 'minimal-mode' : ''}`}>
             <Hero />
             <Projects />
             <Experience />

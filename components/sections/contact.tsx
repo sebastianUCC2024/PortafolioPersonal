@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useLanguage } from "@/hooks/use-language";
 import { Button } from "@/components/ui/button";
 import { FadeIn } from "@/components/animations/fade-in";
+import { ScrollReveal } from "@/components/animations/scroll-reveal";
 import { Mail, MapPin, CheckCircle, XCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/icons";
@@ -41,17 +42,20 @@ export function Contact() {
             </AnimatePresence>
             <div className="max-w-7xl mx-auto px-6">
                 
-                <FadeIn className="mb-16 md:mb-24 flex flex-col">
-                    <h2 className="text-3xl md:text-5xl font-bold font-primary mb-4 text-foreground">
-                        <span className="text-brand-cyan">/</span> {t.contact.title}
-                    </h2>
-                    <div className="w-24 h-1 bg-brand-cyan/30 rounded-full" />
-                </FadeIn>
+                <ScrollReveal animation="slide-up" delay={0.1}>
+                    <div className="mb-16 md:mb-24 flex flex-col">
+                        <h2 className="text-3xl md:text-5xl font-bold font-primary mb-4 text-foreground">
+                            <span className="text-brand-cyan">/</span> {t.contact.title}
+                        </h2>
+                        <div className="w-24 h-1 bg-brand-cyan/30 rounded-full" />
+                    </div>
+                </ScrollReveal>
 
                 <div className="grid lg:grid-cols-2 gap-16 items-start">
                     
                     {/* Columna Izquierda: Información */}
-                    <FadeIn delay={0.1} className="flex flex-col gap-8">
+                    <ScrollReveal animation="slide-right" delay={0.2}>
+                        <div className="flex flex-col gap-8">
                         <div>
                             <h3 className="text-3xl md:text-4xl font-bold font-primary text-foreground leading-tight mb-6">
                                 {t.contact.subtitle}
@@ -108,15 +112,17 @@ export function Contact() {
                                     </a>
                                 </div>
                             </div>
+                            </div>
                         </div>
-                    </FadeIn>
+                    </ScrollReveal>
 
                     {/* Columna Derecha: Formulario */}
-                    <FadeIn delay={0.2} className="relative group">
-                        {/* Glow effect */}
-                        <div className="absolute inset-0 bg-brand-cyan/5 rounded-3xl blur-xl group-hover:bg-brand-cyan/10 transition-colors duration-500 -z-10" />
-                        
-                        <form className="bg-card-bg/80 border border-brand-cyan/20 p-8 md:p-10 rounded-3xl shadow-2xl backdrop-blur-md flex flex-col gap-6" onSubmit={async (e) => {
+                    <ScrollReveal animation="slide-left" delay={0.3}>
+                        <div className="relative group">
+                            {/* Glow effect */}
+                            <div className="absolute inset-0 bg-brand-cyan/5 rounded-3xl blur-xl group-hover:bg-brand-cyan/10 transition-colors duration-500 -z-10" />
+                            
+                            <form className="bg-card-bg/80 border border-brand-cyan/20 p-8 md:p-10 rounded-3xl shadow-2xl backdrop-blur-md flex flex-col gap-6" onSubmit={async (e) => {
                                 e.preventDefault();
                                 const form = e.currentTarget;
                                 const name = (form.elements.namedItem('name') as HTMLInputElement).value.trim();
@@ -187,7 +193,8 @@ export function Contact() {
                                 {t.contact.submitBtn}
                             </Button>
                         </form>
-                    </FadeIn>
+                        </div>
+                    </ScrollReveal>
 
                 </div>
             </div>

@@ -2,14 +2,11 @@ import type { Metadata } from "next";
 import { Space_Grotesk, Plus_Jakarta_Sans } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { LanguageProvider } from "@/hooks/use-language";
+import { MinimalModeProvider } from "@/hooks/use-minimal-mode";
 import { SmoothScrollProvider } from "@/components/providers/smooth-scroll";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
-import { CustomCursor } from "@/components/ui/custom-cursor";
-import { NoiseFilter } from "@/components/ui/noise-filter";
-import { ScrollProgress } from "@/components/ui/scroll-progress";
-import { AmbientBackground } from "@/components/animations/ambient-background";
-import { Starfield } from "@/components/animations/starfield";
+import { DecorativeElements } from "@/components/layout/minimal-wrapper";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -42,18 +39,17 @@ export default function RootLayout({
       <body
         className={[spaceGrotesk.variable, plusJakarta.variable, "antialiased", "min-h-screen", "flex", "flex-col", "relative"].join(" ")}
       >
-        <AmbientBackground />
-        <Starfield />
-        <NoiseFilter />
-        <ScrollProgress />
         <LanguageProvider>
-          <ThemeProvider>
-            <SmoothScrollProvider>
-              <Navbar />
-              {children}
-              <Footer />
-            </SmoothScrollProvider>
-          </ThemeProvider>
+          <MinimalModeProvider>
+            <DecorativeElements />
+            <ThemeProvider>
+              <SmoothScrollProvider>
+                <Navbar />
+                {children}
+                <Footer />
+              </SmoothScrollProvider>
+            </ThemeProvider>
+          </MinimalModeProvider>
         </LanguageProvider>
       </body>
     </html>

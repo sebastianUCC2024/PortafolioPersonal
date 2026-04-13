@@ -38,8 +38,15 @@ export function Footer() {
                         {navLinks.map((link) => (
                             <a 
                                 key={link.name} 
-                                href={link.href} 
-                                className="text-sm font-medium text-muted hover:text-brand-cyan transition-colors duration-300"
+                                href={link.href}
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    const target = document.querySelector(link.href);
+                                    if (target) {
+                                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                    }
+                                }}
+                                className="text-sm font-medium text-muted hover:text-brand-cyan transition-colors duration-300 cursor-pointer"
                             >
                                 {link.name}
                             </a>

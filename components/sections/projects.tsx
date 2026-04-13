@@ -4,6 +4,7 @@ import { useLanguage } from "@/hooks/use-language";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { StaggerGrid } from "@/components/animations/stagger-grid";
+import { ScrollReveal } from "@/components/animations/scroll-reveal";
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { Code2, ExternalLink } from "lucide-react";
@@ -17,19 +18,23 @@ export function Projects() {
             <div className="max-w-7xl mx-auto px-6">
                 
                 {/* Título de Sección */}
-                <div className="mb-16 md:mb-24">
-                    <h2 className="text-3xl md:text-5xl font-bold font-primary mb-4 text-foreground">
-                        <span className="text-brand-cyan">/</span> {t.projects.title}
-                    </h2>
-                    <div className="w-24 h-1 bg-brand-cyan/30 rounded-full" />
-                </div>
+                <ScrollReveal animation="slide-up" delay={0.1}>
+                    <div className="mb-16 md:mb-24">
+                        <h2 className="text-3xl md:text-5xl font-bold font-primary mb-4 text-foreground">
+                            <span className="text-brand-cyan">/</span> {t.projects.title}
+                        </h2>
+                        <div className="w-24 h-1 bg-brand-cyan/30 rounded-full" />
+                    </div>
+                </ScrollReveal>
 
                 {/* Grid de Proyectos */}
-                <StaggerGrid className="grid grid-cols-1 gap-12 lg:gap-20">
+                <div className="grid grid-cols-1 gap-12 lg:gap-20">
                     {t.projects.items.map((project, index) => (
-                        <SpotlightCard key={index} project={project} index={index} />
+                        <ScrollReveal key={index} animation="slide-up" delay={0.2 + index * 0.1}>
+                            <SpotlightCard project={project} index={index} />
+                        </ScrollReveal>
                     ))}
-                </StaggerGrid>
+                </div>
 
             </div>
         </section>
@@ -131,14 +136,24 @@ function SpotlightCard({ project, index }: { project: any; index: number }) {
 
                 {/* Acciones */}
                 <div className="flex items-center gap-4 mt-auto pt-4 border-t border-brand-cyan/10">
-                    <a href={project.previewUrl} target="_blank" rel="noopener noreferrer">
+                    <a href={project.previewUrl} target="_blank" rel="noopener noreferrer" className="relative group/btn">
                         <Button variant="primary" size="md">
                             {project.previewText} <ExternalLink className="ml-1 w-4 h-4 inline-block" />
                         </Button>
+                        {/* Tooltip */}
+                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-card-bg border border-brand-cyan/20 rounded-lg shadow-lg opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap z-50">
+                            <p className="text-xs font-medium text-foreground">Ver proyecto en vivo</p>
+                        </div>
                     </a>
-                    <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-brand-cyan/20 flex items-center justify-center text-muted hover:text-brand-cyan hover:border-brand-cyan/50 transition-all duration-300">
-                        <GithubIcon size={18} />
-                    </a>
+                    <div className="relative group/github">
+                        <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-brand-cyan/20 flex items-center justify-center text-muted hover:text-brand-cyan hover:border-brand-cyan/50 transition-all duration-300">
+                            <GithubIcon size={18} />
+                        </a>
+                        {/* Tooltip */}
+                        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-card-bg border border-brand-cyan/20 rounded-lg shadow-lg opacity-0 group-hover/github:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap z-50">
+                            <p className="text-xs font-medium text-foreground">Ver código fuente</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 

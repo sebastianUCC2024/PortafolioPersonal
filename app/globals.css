@@ -50,3 +50,86 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-space-grotesk), system-ui, sans-serif;
 }
+
+/* Modo Minimalista */
+.minimal-mode {
+  /* Ocultar elementos decorativos */
+  --brand-cyan: #000000;
+  --brand-cyan-hover: #333333;
+}
+
+.minimal-mode .ambient-background,
+.minimal-mode .starfield,
+.minimal-mode .noise-filter,
+.minimal-mode .scroll-progress {
+  display: none !important;
+}
+
+/* Simplificar cards en modo minimalista */
+.minimal-mode section {
+  background: transparent !important;
+}
+
+.minimal-mode .bg-card-bg,
+.minimal-mode [class*="bg-card-bg"] {
+  background: transparent !important;
+  border: 1px solid #e5e5e5 !important;
+  box-shadow: none !important;
+}
+
+.dark .minimal-mode .bg-card-bg,
+.dark .minimal-mode [class*="bg-card-bg"] {
+  border-color: #333333 !important;
+}
+
+/* Remover efectos visuales */
+.minimal-mode [class*="shadow"],
+.minimal-mode [class*="blur"],
+.minimal-mode [class*="glow"] {
+  box-shadow: none !important;
+  filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Simplificar bordes */
+.minimal-mode [class*="border-brand-cyan"] {
+  border-color: #e5e5e5 !important;
+}
+
+.dark .minimal-mode [class*="border-brand-cyan"] {
+  border-color: #333333 !important;
+}
+
+/* Remover animaciones de fondo */
+.minimal-mode [class*="animate-"],
+.minimal-mode .absolute.inset-0 {
+  animation: none !important;
+}
+
+/* Simplificar colores de texto */
+.minimal-mode .text-brand-cyan {
+  color: #000000 !important;
+}
+
+.dark .minimal-mode .text-brand-cyan {
+  color: #ffffff !important;
+}
+
+/* Ocultar elementos decorativos específicos */
+.minimal-mode .rounded-full[class*="border-brand-cyan"],
+.minimal-mode [class*="bg-brand-cyan/"] {
+  display: none !important;
+}
+
+/* Simplificar navbar y footer */
+.minimal-mode header,
+.minimal-mode footer {
+  background: var(--background) !important;
+  backdrop-filter: none !important;
+  border-color: #e5e5e5 !important;
+}
+
+.dark .minimal-mode header,
+.dark .minimal-mode footer {
+  border-color: #333333 !important;
+}

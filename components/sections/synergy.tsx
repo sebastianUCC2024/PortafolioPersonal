@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/hooks/use-language";
 import { Network, Sparkles, FileText, Download, CheckCircle2, Circle, RotateCcw, Lock, Star } from "lucide-react";
 import { FadeIn } from "@/components/animations/fade-in";
+import { ScrollReveal } from "@/components/animations/scroll-reveal";
 import { Button } from "@/components/ui/button";
 
 interface StarNode {
@@ -340,21 +341,24 @@ export function SynergySection() {
 
     return (
         <section className="py-20 relative overflow-hidden">
-            <div className="max-w-7xl mx-auto px-6">
+            <div className="max-w-[1400px] mx-auto px-6">
                 
-                <FadeIn className="mb-12 text-center flex flex-col items-center">
-                    <h2 className="text-3xl md:text-5xl font-bold font-primary mb-4 text-foreground">
-                        <span className="text-brand-cyan">/</span> {t.synergy.title}
-                    </h2>
-                    <p className="text-muted text-lg max-w-2xl">
-                        {t.synergy.description}
-                    </p>
-                </FadeIn>
+                <ScrollReveal animation="slide-up" delay={0.1}>
+                    <div className="mb-12 text-center flex flex-col items-center">
+                        <h2 className="text-3xl md:text-5xl font-bold font-primary mb-4 text-foreground">
+                            <span className="text-brand-cyan">/</span> {t.synergy.title}
+                        </h2>
+                        <p className="text-muted text-lg max-w-2xl">
+                            {t.synergy.description}
+                        </p>
+                    </div>
+                </ScrollReveal>
 
-                <div className="grid lg:grid-cols-4 gap-6 items-start relative">
+                <div className="flex flex-col lg:flex-row gap-6 items-stretch relative">
                     
                     {/* Controles y Panel de Pistas / Nivel Selector */}
-                    <FadeIn delay={0.2} className="lg:col-span-1 flex flex-col gap-4">
+                    <ScrollReveal animation="slide-right" delay={0.2}>
+                        <div className="lg:w-80 flex-shrink-0 flex flex-col gap-4">
                         
                         {/* Móvil: chips horizontales scrolleables */}
                         <div className="lg:hidden flex flex-col gap-3">
@@ -436,15 +440,15 @@ export function SynergySection() {
                                 <RotateCcw size={16} /> {t.synergy.tools?.reset || "Reiniciar Constelación actual"}
                             </button>
                         )}
-                        
-                    </FadeIn>
+                        </div>
+                    </ScrollReveal>
 
-                    <FadeIn delay={0.3} className="lg:col-span-3 flex flex-col">
+                    <div className="flex-1 min-w-0">
                         <div 
                             ref={containerRef} 
                             onPointerDown={handleContainerPointerDown}
                             onPointerMove={handleContainerPointerMove}
-                            className="relative w-full flex-1 min-h-[320px] md:min-h-[500px] bg-card-bg/50 border border-brand-cyan/20 rounded-[2rem] overflow-hidden shadow-2xl backdrop-blur-md select-none touch-none"
+                            className="relative w-full h-[500px] sm:h-[550px] md:h-[600px] lg:h-[650px] xl:h-[700px] bg-card-bg/50 border border-brand-cyan/20 rounded-[2rem] overflow-hidden shadow-2xl backdrop-blur-md select-none touch-none"
                         >
                             {/* Grilla Animada Parallax */}
                             <motion.div 
@@ -719,8 +723,8 @@ export function SynergySection() {
                                 )}
                             </AnimatePresence>
                             
+                            </div>
                         </div>
-                    </FadeIn>
                 </div>
             </div>
         </section>
