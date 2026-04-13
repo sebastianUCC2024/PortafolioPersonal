@@ -116,8 +116,55 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Ocultar elementos decorativos específicos */
-.minimal-mode .rounded-full[class*="border-brand-cyan"],
-.minimal-mode [class*="bg-brand-cyan/"] {
+.minimal-mode .rounded-full[class*="border-brand-cyan"]:not(img):not([class*="w-64"]):not([class*="w-12"]),
+.minimal-mode [class*="bg-brand-cyan/"]:not([class*="w-64"]) {
+  display: none !important;
+}
+
+/* NO ocultar la imagen del hero ni avatares */
+.minimal-mode img,
+.minimal-mode [class*="w-64"][class*="h-64"],
+.minimal-mode [class*="w-12"][class*="h-12"] {
+  display: block !important;
+}
+
+/* Simplificar los anillos decorativos del hero */
+.minimal-mode .absolute[class*="animate-"]:not(img) {
+  display: none !important;
+}
+
+/* Ocultar elementos del canvas de constelaciones en modo minimalista */
+.minimal-mode svg g {
+  display: none !important;
+}
+
+.minimal-mode svg line:not([stroke-dasharray]) {
+  stroke: #666666 !important;
+  stroke-width: 1 !important;
+}
+
+.dark .minimal-mode svg line:not([stroke-dasharray]) {
+  stroke: #999999 !important;
+}
+
+.minimal-mode svg text {
+  fill: currentColor !important;
+  font-size: 12px !important;
+}
+
+/* Simplificar los nodos (círculos) del canvas */
+.minimal-mode motion-div[class*="rounded-full"] {
+  background: transparent !important;
+  border-color: #666666 !important;
+}
+
+.dark .minimal-mode motion-div[class*="rounded-full"] {
+  border-color: #999999 !important;
+}
+
+/* Ocultar la grilla animada de fondo */
+.minimal-mode [class*="backgroundImage"],
+.minimal-mode [style*="backgroundImage"] {
   display: none !important;
 }
 
