@@ -143,6 +143,7 @@ h1, h2, h3, h4, h5, h6 {
 .ambient-background,
 .starfield {
   contain: layout style paint;
+  content-visibility: auto;
 }
 
 /* Optimizar scroll */
@@ -150,6 +151,7 @@ h1, h2, h3, h4, h5, h6 {
   scroll-behavior: smooth;
 }
 
+/* Reducir motion para usuarios con preferencias de accesibilidad */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -157,10 +159,46 @@ h1, h2, h3, h4, h5, h6 {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
 /* Optimizar imágenes */
 img {
   content-visibility: auto;
+}
+
+/* Optimización de fuentes */
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+}
+
+/* Optimización de GPU para animaciones */
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Lazy loading de imágenes */
+img[loading="lazy"] {
+  content-visibility: auto;
+}
+
+/* Optimización de backdrop-blur */
+.backdrop-blur-lg,
+.backdrop-blur-md {
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  will-change: backdrop-filter;
+}
+
+/* Optimización de sombras */
+.shadow-2xl,
+.shadow-xl {
+  will-change: box-shadow;
 }
