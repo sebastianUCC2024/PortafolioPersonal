@@ -51,28 +51,33 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-space-grotesk), system-ui, sans-serif;
 }
 
-/* Modo Minimalista */
+/* Modo Minimalista - Solo quitar decoraciones, mantener funcionalidad */
 .minimal-mode {
-  /* Ocultar elementos decorativos */
   --brand-cyan: #000000;
   --brand-cyan-hover: #333333;
 }
 
+.dark .minimal-mode {
+  --brand-cyan: #ffffff;
+  --brand-cyan-hover: #cccccc;
+}
+
+/* Ocultar solo elementos decorativos de fondo */
 .minimal-mode .ambient-background,
 .minimal-mode .starfield,
-.minimal-mode .noise-filter,
-.minimal-mode .scroll-progress {
+.minimal-mode .noise-filter {
   display: none !important;
 }
 
-/* Simplificar cards en modo minimalista */
-.minimal-mode section {
-  background: transparent !important;
+/* Mantener scroll progress pero simplificado */
+.minimal-mode .scroll-progress {
+  opacity: 0.3;
 }
 
+/* Simplificar cards pero mantener hover y transiciones */
 .minimal-mode .bg-card-bg,
 .minimal-mode [class*="bg-card-bg"] {
-  background: transparent !important;
+  background: var(--background) !important;
   border: 1px solid #e5e5e5 !important;
   box-shadow: none !important;
 }
@@ -82,13 +87,10 @@ h1, h2, h3, h4, h5, h6 {
   border-color: #333333 !important;
 }
 
-/* Remover efectos visuales */
-.minimal-mode [class*="shadow"],
-.minimal-mode [class*="blur"],
-.minimal-mode [class*="glow"] {
+/* Remover solo sombras grandes decorativas */
+.minimal-mode [class*="shadow-2xl"],
+.minimal-mode [class*="shadow-xl"] {
   box-shadow: none !important;
-  filter: none !important;
-  backdrop-filter: none !important;
 }
 
 /* Simplificar bordes */
@@ -100,13 +102,7 @@ h1, h2, h3, h4, h5, h6 {
   border-color: #333333 !important;
 }
 
-/* Remover animaciones de fondo */
-.minimal-mode [class*="animate-"],
-.minimal-mode .absolute.inset-0 {
-  animation: none !important;
-}
-
-/* Simplificar colores de texto */
+/* Simplificar colores de acento */
 .minimal-mode .text-brand-cyan {
   color: #000000 !important;
 }
@@ -115,64 +111,20 @@ h1, h2, h3, h4, h5, h6 {
   color: #ffffff !important;
 }
 
-/* Ocultar elementos decorativos específicos */
-.minimal-mode .rounded-full[class*="border-brand-cyan"]:not(img):not([class*="w-64"]):not([class*="w-12"]),
-.minimal-mode [class*="bg-brand-cyan/"]:not([class*="w-64"]) {
+/* Ocultar solo anillos decorativos del hero */
+.minimal-mode #hero .absolute.rounded-full[class*="border"]:not([class*="w-64"]) {
   display: none !important;
 }
 
-/* NO ocultar la imagen del hero ni avatares */
-.minimal-mode img,
-.minimal-mode [class*="w-64"][class*="h-64"],
-.minimal-mode [class*="w-12"][class*="h-12"] {
+/* Proteger imágenes */
+.minimal-mode img {
   display: block !important;
-}
-
-/* Simplificar los anillos decorativos del hero */
-.minimal-mode .absolute[class*="animate-"]:not(img) {
-  display: none !important;
-}
-
-/* Ocultar elementos del canvas de constelaciones en modo minimalista */
-.minimal-mode svg g {
-  display: none !important;
-}
-
-.minimal-mode svg line:not([stroke-dasharray]) {
-  stroke: #666666 !important;
-  stroke-width: 1 !important;
-}
-
-.dark .minimal-mode svg line:not([stroke-dasharray]) {
-  stroke: #999999 !important;
-}
-
-.minimal-mode svg text {
-  fill: currentColor !important;
-  font-size: 12px !important;
-}
-
-/* Simplificar los nodos (círculos) del canvas */
-.minimal-mode motion-div[class*="rounded-full"] {
-  background: transparent !important;
-  border-color: #666666 !important;
-}
-
-.dark .minimal-mode motion-div[class*="rounded-full"] {
-  border-color: #999999 !important;
-}
-
-/* Ocultar la grilla animada de fondo */
-.minimal-mode [class*="backgroundImage"],
-.minimal-mode [style*="backgroundImage"] {
-  display: none !important;
 }
 
 /* Simplificar navbar y footer */
 .minimal-mode header,
 .minimal-mode footer {
   background: var(--background) !important;
-  backdrop-filter: none !important;
   border-color: #e5e5e5 !important;
 }
 
