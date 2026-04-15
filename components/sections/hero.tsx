@@ -46,17 +46,18 @@ export function Hero() {
                     <div className="absolute w-[300px] h-[300px] md:w-[440px] md:h-[440px] rounded-full border border-brand-cyan/10 animate-[spin_15s_linear_infinite_reverse]" />
                     
                     {/* Círculo principal del Avatar */}
-                    <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full bg-card-bg border-2 border-brand-cyan/50 shadow-[0_0_30px_rgba(0,229,153,0.15)] flex items-center justify-center overflow-hidden group">
+                    <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full bg-white border-2 border-brand-cyan/50 shadow-[0_0_30px_rgba(0,229,153,0.15)] flex items-center justify-center overflow-hidden group">
                         
                         {/* Filtro interactivo en hover */}
                         <div className="absolute inset-0 bg-brand-cyan/20 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none" />
                         
                         {/* Imagen de perfil */}
                         <Image 
-                            src="/portafolio.jpg"
-                            alt="Foto de perfil"
+                            src="/perfil-profesional.jpg"
+                            alt="Foto de perfil profesional"
                             fill
                             className="object-cover transition-transform duration-500 group-hover:scale-110"
+                            style={{ objectPosition: '50% 25%' }}
                             priority
                         />
                     </div>
