@@ -33,10 +33,10 @@ export function Navbar() {
 
     return (
         <header className="fixed top-0 w-full z-[100] border-b border-brand-cyan/10 dark:border-brand-cyan/20 backdrop-blur-lg bg-background/80 transition-colors duration-300 shadow-sm dark:shadow-brand-cyan/5">
-            <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
 
                 {/* Logo con icono personalizado (Versión Final Corregida) */}
-                <a href="#" className="flex items-center gap-2 group">
+                <a href="#" className="flex items-center gap-2 group z-[110]">
                     <div className="w-10 h-10 relative transition-transform duration-500 group-hover:scale-110 flex items-center justify-center">
                         <img 
                             src="/logo.png" 
@@ -173,110 +173,135 @@ export function Navbar() {
 
                 {/* Menú de Hamburguesa para Mobile */}
                 <button
-                    className="lg:hidden text-brand-cyan"
+                    className="lg:hidden text-brand-cyan z-[110] p-2"
                     onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                    aria-label="Toggle menu"
                 >
-                    {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                    {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
                 </button>
             </div>
 
             {/* Navegación Desplegable Mobile */}
             {isMobileMenuOpen && (
-                <div className="lg:hidden fixed top-16 left-0 right-0 bottom-0 bg-background/98 backdrop-blur-lg z-[90] overflow-y-auto">
-                    <div className="flex flex-col p-6 gap-2 max-w-md mx-auto">
-                        {/* Enlaces de navegación */}
-                        <nav className="flex flex-col gap-2 pb-4 border-b border-brand-cyan/10">
-                            {navLinks.map((link) => (
-                                <a 
-                                    key={link.name} 
-                                    href={link.href} 
-                                    onClick={(e) => {
-                                        e.preventDefault();
-                                        setIsMobileMenuOpen(false);
-                                        const target = document.querySelector(link.href);
-                                        if (target) {
-                                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                        }
-                                    }}
-                                    className="text-lg font-semibold text-foreground hover:text-brand-cyan hover:bg-brand-cyan/5 cursor-pointer transition-all py-3 px-4 rounded-lg"
+                <>
+                    {/* Overlay para cerrar el menú al hacer click fuera */}
+                    <div 
+                        className="lg:hidden fixed inset-0 bg-black/50 z-[95]"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                    />
+                    
+                    {/* Menú deslizable desde la derecha */}
+                    <div className="lg:hidden fixed top-0 right-0 bottom-0 w-[85%] max-w-sm bg-background border-l border-brand-cyan/20 z-[98] overflow-y-auto shadow-2xl animate-slideInRight">
+                        <div className="flex flex-col h-full">
+                            {/* Header del menú */}
+                            <div className="flex items-center justify-between p-6 border-b border-brand-cyan/10">
+                                <span className="text-lg font-bold font-primary text-foreground">Menú</span>
+                                <button
+                                    onClick={() => setIsMobileMenuOpen(false)}
+                                    className="text-brand-cyan p-2 hover:bg-brand-cyan/10 rounded-full transition-colors"
+                                    aria-label="Close menu"
                                 >
-                                    {link.name}
-                                </a>
-                            ))}
-                        </nav>
-                        
-                        <div className="flex flex-col gap-0 pt-2">
-                            {/* Descargar CV Mobile */}
-                            <div className="flex justify-between items-center py-4 px-4 hover:bg-brand-cyan/5 rounded-lg transition-colors">
-                                <span className="text-sm font-medium text-muted">{language === "es" ? "Hoja de Vida" : "Resume"}</span>
-                                <button 
-                                    className="flex items-center gap-2 font-semibold text-brand-cyan hover:text-brand-cyan/80 transition-colors text-sm" 
-                                    onClick={() => {
-                                        window.open('/cv.pdf', '_blank');
-                                        setIsMobileMenuOpen(false);
-                                    }}
-                                >
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                                        <polyline points="14 2 14 8 20 8"/>
-                                        <line x1="16" y1="13" x2="8" y2="13"/>
-                                        <line x1="16" y1="17" x2="8" y2="17"/>
-                                        <polyline points="10 9 9 9 8 9"/>
-                                    </svg>
-                                    {language === "es" ? "Descargar" : "Download"}
+                                    <X size={24} />
                                 </button>
                             </div>
-                            
-                            {/* Tema Mobile */}
-                            {mounted && (
-                                <>
-                                    <div className="flex justify-between items-center py-4 px-4 border-t border-brand-cyan/10 hover:bg-brand-cyan/5 rounded-lg transition-colors">
-                                        <span className="text-sm font-medium text-muted">{language === "es" ? "Apariencia" : "Appearance"}</span>
-                                        <button 
-                                            className="flex items-center gap-2 font-semibold text-foreground text-sm hover:text-brand-cyan transition-colors" 
-                                            onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
+
+                            {/* Contenido del menú */}
+                            <div className="flex-1 overflow-y-auto p-6">
+                                {/* Enlaces de navegación */}
+                                <nav className="flex flex-col gap-2 pb-6 border-b border-brand-cyan/10">
+                                    {navLinks.map((link) => (
+                                        <a 
+                                            key={link.name} 
+                                            href={link.href} 
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                setIsMobileMenuOpen(false);
+                                                const target = document.querySelector(link.href);
+                                                if (target) {
+                                                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                                }
+                                            }}
+                                            className="text-lg font-semibold text-foreground hover:text-brand-cyan hover:bg-brand-cyan/5 cursor-pointer transition-all py-3 px-4 rounded-lg"
                                         >
-                                            {currentTheme === "dark" ? <><Sun size={18} /> {t.theme.light}</> : <><Moon size={18} /> {t.theme.dark}</>}
+                                            {link.name}
+                                        </a>
+                                    ))}
+                                </nav>
+                        
+                                <div className="flex flex-col gap-0 pt-4">
+                                    {/* Descargar CV Mobile */}
+                                    <div className="flex justify-between items-center py-4 px-4 hover:bg-brand-cyan/5 rounded-lg transition-colors">
+                                        <span className="text-sm font-medium text-muted">{language === "es" ? "Hoja de Vida" : "Resume"}</span>
+                                        <button 
+                                            className="flex items-center gap-2 font-semibold text-brand-cyan hover:text-brand-cyan/80 transition-colors text-sm" 
+                                            onClick={() => {
+                                                window.open('/cv.pdf', '_blank');
+                                                setIsMobileMenuOpen(false);
+                                            }}
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                                <polyline points="14 2 14 8 20 8"/>
+                                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                                <line x1="16" y1="17" x2="8" y2="17"/>
+                                                <polyline points="10 9 9 9 8 9"/>
+                                            </svg>
+                                            {language === "es" ? "Descargar" : "Download"}
                                         </button>
                                     </div>
                                     
-                                    {/* Modo Minimalista Mobile */}
+                                    {/* Tema Mobile */}
+                                    {mounted && (
+                                        <>
+                                            <div className="flex justify-between items-center py-4 px-4 border-t border-brand-cyan/10 hover:bg-brand-cyan/5 rounded-lg transition-colors">
+                                                <span className="text-sm font-medium text-muted">{language === "es" ? "Apariencia" : "Appearance"}</span>
+                                                <button 
+                                                    className="flex items-center gap-2 font-semibold text-foreground text-sm hover:text-brand-cyan transition-colors" 
+                                                    onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
+                                                >
+                                                    {currentTheme === "dark" ? <><Sun size={18} /> {t.theme.light}</> : <><Moon size={18} /> {t.theme.dark}</>}
+                                                </button>
+                                            </div>
+                                            
+                                            {/* Modo Minimalista Mobile */}
+                                            <div className="flex justify-between items-center py-4 px-4 border-t border-brand-cyan/10 hover:bg-brand-cyan/5 rounded-lg transition-colors">
+                                                <div className="flex flex-col">
+                                                    <span className="text-sm font-medium text-muted">{language === "es" ? "Modo Minimalista" : "Minimal Mode"}</span>
+                                                    <span className="text-xs text-muted/60">{language === "es" ? "Diseño simplificado" : "Simplified design"}</span>
+                                                </div>
+                                                <button 
+                                                    className="flex items-center gap-2 font-semibold text-foreground text-sm hover:text-brand-cyan transition-colors" 
+                                                    onClick={toggleMinimal}
+                                                >
+                                                    {isMinimal ? <><Maximize2 size={18} /> {language === "es" ? "Completo" : "Full"}</> : <><Minimize2 size={18} /> {language === "es" ? "Minimal" : "Minimal"}</>}
+                                                </button>
+                                            </div>
+                                        </>
+                                    )}
+                                    
+                                    {/* Idioma Mobile */}
                                     <div className="flex justify-between items-center py-4 px-4 border-t border-brand-cyan/10 hover:bg-brand-cyan/5 rounded-lg transition-colors">
-                                        <div className="flex flex-col">
-                                            <span className="text-sm font-medium text-muted">{language === "es" ? "Modo Minimalista" : "Minimal Mode"}</span>
-                                            <span className="text-xs text-muted/60">{language === "es" ? "Diseño simplificado" : "Simplified design"}</span>
+                                        <span className="text-sm font-medium text-muted">{language === "es" ? "Idioma" : "Language"}</span>
+                                        <div className="flex gap-3">
+                                            <button 
+                                                onClick={() => { setLanguage("es"); setIsMobileMenuOpen(false); }} 
+                                                className={`font-bold text-sm px-3 py-1.5 rounded-lg transition-colors ${language === "es" ? "text-brand-cyan bg-brand-cyan/10" : "text-muted hover:text-foreground"}`}
+                                            >
+                                                ES
+                                            </button>
+                                            <button 
+                                                onClick={() => { setLanguage("en"); setIsMobileMenuOpen(false); }} 
+                                                className={`font-bold text-sm px-3 py-1.5 rounded-lg transition-colors ${language === "en" ? "text-brand-cyan bg-brand-cyan/10" : "text-muted hover:text-foreground"}`}
+                                            >
+                                                EN
+                                            </button>
                                         </div>
-                                        <button 
-                                            className="flex items-center gap-2 font-semibold text-foreground text-sm hover:text-brand-cyan transition-colors" 
-                                            onClick={toggleMinimal}
-                                        >
-                                            {isMinimal ? <><Maximize2 size={18} /> {language === "es" ? "Completo" : "Full"}</> : <><Minimize2 size={18} /> {language === "es" ? "Minimal" : "Minimal"}</>}
-                                        </button>
                                     </div>
-                                </>
-                            )}
-                            
-                            {/* Idioma Mobile */}
-                            <div className="flex justify-between items-center py-4 px-4 border-t border-brand-cyan/10 hover:bg-brand-cyan/5 rounded-lg transition-colors">
-                                <span className="text-sm font-medium text-muted">{language === "es" ? "Idioma" : "Language"}</span>
-                                <div className="flex gap-4">
-                                    <button 
-                                        onClick={() => { setLanguage("es"); setIsMobileMenuOpen(false); }} 
-                                        className={`font-bold text-sm px-3 py-1 rounded-lg transition-colors ${language === "es" ? "text-brand-cyan bg-brand-cyan/10" : "text-muted hover:text-foreground"}`}
-                                    >
-                                        {language === "es" ? "Español" : "Spanish"}
-                                    </button>
-                                    <button 
-                                        onClick={() => { setLanguage("en"); setIsMobileMenuOpen(false); }} 
-                                        className={`font-bold text-sm px-3 py-1 rounded-lg transition-colors ${language === "en" ? "text-brand-cyan bg-brand-cyan/10" : "text-muted hover:text-foreground"}`}
-                                    >
-                                        English
-                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </>
             )}
         </header>
     );
