@@ -17,50 +17,50 @@ interface StarNode {
 }
 
 const INITIAL_STARS: StarNode[] = [
-    { id: "react", label: "React", x: 250, y: 200 },
-    { id: "nextjs", label: "Next.js", x: 550, y: 180 },
-    { id: "ts", label: "TypeScript", x: 650, y: 350 },
-    { id: "ui", label: "UI/UX", x: 150, y: 450 },
-    { id: "arch", label: "Arquitectura", x: 700, y: 500 },
-    { id: "perf", label: "Performance", x: 400, y: 80 },
-    { id: "backend", label: "APIs", x: 300, y: 300 },
-    { id: "db", label: "Databases", x: 500, y: 400 },
-    { id: "design", label: "Figma", x: 600, y: 550 },
-    { id: "python", label: "Python", x: 100, y: 250 },
-    { id: "cloud", label: "Cloud", x: 450, y: 500 },
-    { id: "docker", label: "Docker", x: 200, y: 350 },
-    { id: "git", label: "Git", x: 550, y: 250 },
-    { id: "testing", label: "Testing", x: 350, y: 550 },
-    { id: "node", label: "Node.js", x: 650, y: 150 },
-    { id: "graphql", label: "GraphQL", x: 500, y: 100 },
-    { id: "mongodb", label: "MongoDB", x: 150, y: 150 },
+    { id: "react", label: "React", x: 0.35, y: 0.30 },
+    { id: "nextjs", label: "Next.js", x: 0.70, y: 0.25 },
+    { id: "ts", label: "TypeScript", x: 0.80, y: 0.55 },
+    { id: "ui", label: "UI/UX", x: 0.20, y: 0.70 },
+    { id: "arch", label: "Arquitectura", x: 0.85, y: 0.80 },
+    { id: "perf", label: "Performance", x: 0.50, y: 0.15 },
+    { id: "backend", label: "APIs", x: 0.40, y: 0.50 },
+    { id: "db", label: "Databases", x: 0.65, y: 0.65 },
+    { id: "design", label: "Figma", x: 0.75, y: 0.88 },
+    { id: "python", label: "Python", x: 0.15, y: 0.35 },
+    { id: "cloud", label: "Cloud", x: 0.58, y: 0.82 },
+    { id: "docker", label: "Docker", x: 0.28, y: 0.58 },
+    { id: "git", label: "Git", x: 0.72, y: 0.40 },
+    { id: "testing", label: "Testing", x: 0.45, y: 0.88 },
+    { id: "node", label: "Node.js", x: 0.82, y: 0.22 },
+    { id: "graphql", label: "GraphQL", x: 0.62, y: 0.18 },
+    { id: "mongodb", label: "MongoDB", x: 0.18, y: 0.22 },
 ];
 
 const TARGET_CONSTELLATIONS = [
     { 
         id: "orion", 
-        nodes: ["perf", "ts", "backend", "react", "db", "ui", "design", "python", "docker", "git", "node"], 
+        nodes: ["perf", "docker", "ts", "git", "backend", "react", "db", "node", "ui", "design"], 
         edges: [
-            ["perf", "ts"], // Hombros
-            ["perf", "python"], ["python", "docker"], ["docker", "backend"], // Brazo izq
-            ["ts", "git"], ["git", "node"], ["node", "db"], // Brazo der
-            ["perf", "backend"], ["ts", "db"], // Hombros a cinturón
+            ["perf", "docker"], // Hombro izquierdo
+            ["perf", "ts"], // Hombro derecho
+            ["docker", "backend"], // Brazo izquierdo
+            ["ts", "git"], ["git", "node"], // Brazo derecho
             ["backend", "react"], ["react", "db"], // Cinturón
-            ["backend", "ui"], ["db", "design"], // Pies
+            ["node", "db"], // Conexión brazo a cinturón
+            ["backend", "ui"], ["db", "design"], // Piernas
             ["ui", "design"], // Base
         ],
         positions: { 
-            perf: {x: -130, y: -200}, 
-            ts: {x: 130, y: -180}, 
-            python: {x: -200, y: -90}, 
-            docker: {x: -180, y: 0}, 
-            backend: {x: -60, y: -40}, 
-            react: {x: 0, y: -35}, 
-            db: {x: 60, y: -40}, 
-            git: {x: 200, y: -90}, 
-            node: {x: 180, y: 0}, 
-            ui: {x: -100, y: 180}, 
-            design: {x: 120, y: 190}, 
+            perf: {x: 0, y: -220}, 
+            docker: {x: -100, y: -140},
+            ts: {x: 100, y: -140}, 
+            git: {x: 180, y: -80}, 
+            node: {x: 150, y: 0}, 
+            backend: {x: -50, y: -40}, 
+            react: {x: 0, y: -30}, 
+            db: {x: 50, y: -40}, 
+            ui: {x: -90, y: 140}, 
+            design: {x: 90, y: 140}, 
         }
     },
     { 
@@ -101,8 +101,8 @@ const TARGET_CONSTELLATIONS = [
         edges: [
             ["perf", "ts"], ["ts", "docker"], // Cola
             ["docker", "backend"], ["backend", "react"], ["react", "cloud"], // Cuerpo
-            ["ui", "git"], ["git", "backend"], // Ala izq
-            ["arch", "graphql"], ["graphql", "backend"], // Ala der
+            ["ui", "git"], ["git", "backend"], // Ala izquierda
+            ["arch", "graphql"], ["graphql", "backend"], // Ala derecha
         ],
         positions: { 
             perf: {x: 0, y: -220}, 
@@ -119,11 +119,10 @@ const TARGET_CONSTELLATIONS = [
     },
     { 
         id: "leo", 
-        nodes: ["perf", "ts", "backend", "react", "db", "arch", "python"], 
+        nodes: ["perf", "ts", "backend", "react", "db", "arch"], 
         edges: [
             ["perf", "ts"], ["ts", "backend"], ["backend", "react"],
-            ["react", "db"], ["db", "arch"],
-            ["arch", "backend"], ["backend", "python"],
+            ["react", "db"], ["db", "arch"], ["arch", "backend"],
         ],
         positions: { 
             perf: {x: -140, y: -140},
@@ -132,7 +131,6 @@ const TARGET_CONSTELLATIONS = [
             react: {x: 80, y: 60}, 
             db: {x: 140, y: 140}, 
             arch: {x: 40, y: 120},
-            python: {x: -50, y: 70}, 
         }
     }
 ];
@@ -186,32 +184,50 @@ export function SynergySection() {
     const getDynamicNodePosition = (node: StarNode, index: number): { x: number, y: number } => {
         if (isUltimateVictory) {
             // All nodes form a massive ring for the ultimate victory
+            const radius = Math.min(dimensions.width, dimensions.height) * 0.35;
             return {
-                x: (dimensions.width / 2) + Math.cos(index * (Math.PI * 2) / nodes.length) * 180,
-                y: (dimensions.height / 2) + Math.sin(index * (Math.PI * 2) / nodes.length) * 180
+                x: (dimensions.width / 2) + Math.cos(index * (Math.PI * 2) / nodes.length) * radius,
+                y: (dimensions.height / 2) + Math.sin(index * (Math.PI * 2) / nodes.length) * radius
             };
         }
 
-        if (!activeMissionId) return { x: node.x, y: node.y }; // Default position if no mission
+        if (!activeMissionId) {
+            // Default position using relative coordinates with padding
+            const padding = 0.08; // 8% padding from edges
+            return { 
+                x: padding * dimensions.width + node.x * (dimensions.width * (1 - 2 * padding)), 
+                y: padding * dimensions.height + node.y * (dimensions.height * (1 - 2 * padding))
+            };
+        }
 
         if (activeMissionId === "final") {
             // Final Mission: similar to victory but before connecting
+            const radius = Math.min(dimensions.width, dimensions.height) * 0.32;
             return {
-                x: (dimensions.width / 2) + Math.cos(index * (Math.PI * 2) / nodes.length) * 160,
-                y: (dimensions.height / 2) + Math.sin(index * (Math.PI * 2) / nodes.length) * 160
+                x: (dimensions.width / 2) + Math.cos(index * (Math.PI * 2) / nodes.length) * radius,
+                y: (dimensions.height / 2) + Math.sin(index * (Math.PI * 2) / nodes.length) * radius
             };
         }
 
         const mission = TARGET_CONSTELLATIONS.find(c => c.id === activeMissionId);
-        if (!mission) return { x: node.x, y: node.y };
+        if (!mission) {
+            const padding = 0.08;
+            return { 
+                x: padding * dimensions.width + node.x * (dimensions.width * (1 - 2 * padding)), 
+                y: padding * dimensions.height + node.y * (dimensions.height * (1 - 2 * padding))
+            };
+        }
 
         const missionNodePos = (mission as any).positions?.[node.id];
         
         if (missionNodePos) {
-            // Use specific position for this mission
+            // Use specific position for this mission (scaled to canvas size)
+            // Use a larger scale for smaller screens
+            const baseSize = Math.min(dimensions.width, dimensions.height);
+            const scale = baseSize < 500 ? baseSize / 500 : baseSize / 600;
             return {
-                x: (dimensions.width / 2) + missionNodePos.x,
-                y: (dimensions.height / 2) + missionNodePos.y
+                x: (dimensions.width / 2) + missionNodePos.x * scale,
+                y: (dimensions.height / 2) + missionNodePos.y * scale
             };
         } else {
             // Node is NOT in the mission -> Scatter them predictably to the edges
@@ -340,6 +356,14 @@ export function SynergySection() {
             return;
         }
 
+        // Validar que el nodo pertenece a la misión activa
+        const mission = TARGET_CONSTELLATIONS.find(c => c.id === activeMissionId);
+        if (activeMissionId !== "final" && mission && !mission.nodes.includes(id)) {
+            // El nodo no pertenece a esta constelación, no permitir selección
+            setSelectedNodeId(null);
+            return;
+        }
+
         // Mechanics: Click-to-Connect / Drag-to-Connect hybrid
         if (!selectedNodeId) {
             setSelectedNodeId(id);
@@ -347,11 +371,19 @@ export function SynergySection() {
             if (selectedNodeId === id) {
                 setSelectedNodeId(null);
             } else {
+                // Validar que ambos nodos pertenecen a la misión activa
+                if (activeMissionId !== "final" && mission && !mission.nodes.includes(selectedNodeId)) {
+                    setSelectedNodeId(null);
+                    return;
+                }
+
+                // Verificar si la conexión ya existe (en cualquier dirección)
                 const exists = userEdges.find(e => 
                     (e.from === selectedNodeId && e.to === id) || 
-                    (e.to === selectedNodeId && e.from === id)
+                    (e.from === id && e.to === selectedNodeId)
                 );
                 
+                // Solo agregar si no existe
                 if (!exists) {
                     setUserEdges(prev => [...prev, { from: selectedNodeId, to: id }]);
                 }
@@ -503,7 +535,7 @@ export function SynergySection() {
                             ref={containerRef} 
                             onPointerDown={handleContainerPointerDown}
                             onPointerMove={handleContainerPointerMove}
-                            className="relative w-full h-[500px] sm:h-[550px] md:h-[600px] lg:h-[650px] xl:h-[700px] bg-card-bg/50 border border-brand-cyan/20 rounded-[2rem] overflow-hidden shadow-2xl backdrop-blur-md select-none touch-none"
+                            className="relative w-full min-h-[400px] h-[450px] sm:h-[500px] md:h-[550px] lg:h-[600px] bg-card-bg/50 border border-brand-cyan/20 rounded-3xl overflow-hidden shadow-2xl backdrop-blur-md select-none touch-none"
                         >
                             {/* Grilla Animada Parallax - Ocultar en modo minimalista */}
                             {!isMinimal && (
@@ -529,22 +561,22 @@ export function SynergySection() {
 
                              {/* UI de Ayuda con barra de progreso vertical reducida */}
                              {activeMissionId && !isUltimateVictory && (
-                                 <FadeIn className="absolute top-4 right-4 z-20 w-auto min-w-[180px] md:min-w-[220px] pointer-events-none">
-                                     <div className="bg-background/80 border border-brand-cyan/20 px-4 py-3 rounded-xl backdrop-blur-md shadow-lg flex items-center gap-4">
-                                         <div className="flex flex-col flex-1 gap-1">
+                                 <FadeIn className="absolute top-3 right-3 md:top-4 md:right-4 z-30 w-auto pointer-events-none">
+                                     <div className="bg-background/80 border border-brand-cyan/20 px-3 py-2 md:px-4 md:py-3 rounded-xl backdrop-blur-md shadow-lg flex items-center gap-3 md:gap-4">
+                                         <div className="flex flex-col flex-1 gap-0.5 md:gap-1">
                                              <div className="flex flex-col gap-0">
-                                                 <span className="text-[10px] font-bold uppercase tracking-wider text-brand-cyan">
+                                                 <span className="text-[9px] md:text-[10px] font-bold uppercase tracking-wider text-brand-cyan">
                                                      {t.synergy.progressTitle || "Progreso"}
                                                  </span>
-                                                 <span className="text-xl font-mono font-bold text-foreground leading-tight">{progress}%</span>
+                                                 <span className="text-lg md:text-xl font-mono font-bold text-foreground leading-tight">{progress}%</span>
                                              </div>
-                                             <p className="text-[8px] text-muted uppercase tracking-normal">
+                                             <p className="text-[7px] md:text-[8px] text-muted uppercase tracking-normal hidden sm:block">
                                                  {t.synergy.connectHelp || "Conecta los nodos"}
                                              </p>
                                          </div>
                                          
                                          {/* Barra Vertical más pequeña */}
-                                         <div className="w-1.5 h-12 bg-muted rounded-full overflow-hidden relative">
+                                         <div className="w-1.5 h-10 md:h-12 bg-muted rounded-full overflow-hidden relative">
                                              <motion.div 
                                                  initial={{ height: 0 }}
                                                  animate={{ height: `${progress}%` }}
@@ -582,7 +614,7 @@ export function SynergySection() {
                                                 const p2 = getDynamicNodePosition(n2, idx2);
                                                 
                                                 return (
-                                                    <motion.line 
+                                                    <line 
                                                         key={`guide-${fromId}-${toId}`}
                                                         x1={p1.x}
                                                         y1={p1.y}
@@ -637,14 +669,13 @@ export function SynergySection() {
                                             strokeWidth={2}
                                             strokeOpacity={0.5}
                                             strokeDasharray="6 6"
-                                            className="hidden md:block" 
                                         />
                                     );
                                 })()}
                             </svg>
 
                             {/* Estrellas (Nodos) */}
-                            <div className="absolute inset-0 z-10 overflow-hidden pointer-events-none">
+                            <div className="absolute inset-0 z-20 overflow-hidden pointer-events-none">
                                 {nodes.map((node, index) => {
                                     const isSelected = selectedNodeId === node.id;
                                     const activeMissionData = TARGET_CONSTELLATIONS.find(c => c.id === activeMissionId);
@@ -657,20 +688,26 @@ export function SynergySection() {
                                             key={node.id}
                                             onPointerUp={(e) => handleNodePointerUp(e, node.id)}
                                             onPointerDown={(e) => e.stopPropagation()}
+                                            style={{ 
+                                                position: 'absolute',
+                                                left: 0,
+                                                top: 0,
+                                                width: 0,
+                                                height: 0
+                                            }}
                                             animate={{ 
-                                                left: targetPos.x,
-                                                top: targetPos.y,
+                                                x: targetPos.x,
+                                                y: targetPos.y,
                                                 opacity: isFaded ? 0.3 : 1
                                             }}
                                             transition={{ 
                                                 duration: 0.8,
                                                 ease: [0.25, 0.1, 0.25, 1]
                                             }}
-                                            className={`absolute touch-none -translate-x-1/2 -translate-y-1/2
+                                            className={`touch-none
                                                 ${activeMissionId ? 'pointer-events-auto cursor-pointer' : 'pointer-events-none'}
                                                 ${isSelected ? 'z-50' : 'z-20'}
                                             `}
-                                            style={{ width: 0, height: 0 }}
                                         >
                                             {/* Aura para el nodo seleccionado */}
                                             {isSelected && (
@@ -678,7 +715,7 @@ export function SynergySection() {
                                                     initial={{ scale: 0.5, opacity: 0 }}
                                                     animate={{ scale: 1.5, opacity: [0.3, 0] }}
                                                     transition={{ duration: 1, repeat: Infinity, ease: "easeOut" }}
-                                                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-brand-cyan/20 pointer-events-none"
+                                                    className="absolute -translate-x-1/2 -translate-y-1/2 w-16 h-16 md:w-16 md:h-16 rounded-full bg-brand-cyan/20 pointer-events-none"
                                                 />
                                             )}
 
@@ -693,24 +730,24 @@ export function SynergySection() {
                                                         : '0 0 15px var(--brand-cyan)'
                                                 }}
                                                 transition={{ duration: 0.3, ease: "easeOut" }}
-                                                className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-5 h-5 md:w-6 md:h-6 rounded-full
+                                                className={`absolute -translate-x-1/2 -translate-y-1/2 w-5 h-5 md:w-5 md:h-5 lg:w-6 lg:h-6 rounded-full
                                                     ${isSelected || isUltimateVictory ? 'bg-white' : 'bg-brand-cyan'}
                                                     ${isTargetNode && !isSelected ? 'animate-pulse border border-white' : ''}
                                                 `} 
                                             />
                                             
                                             {/* Zona de click */}
-                                            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-transparent z-10" />
+                                            <div className="absolute -translate-x-1/2 -translate-y-1/2 w-16 h-16 md:w-16 md:h-16 rounded-full bg-transparent z-10" />
 
                                             {/* Texto de la etiqueta */}
                                             <motion.div 
                                                 animate={{ scale: isSelected ? 1.1 : 1 }}
                                                 transition={{ duration: 0.2 }}
-                                                className={`absolute left-1/2 -translate-x-1/2 w-32 text-center pointer-events-none
-                                                    ${node.id === 'ui' && activeMissionId === 'orion' ? 'top-8' : '-top-8'}
+                                                className={`absolute left-0 -translate-x-1/2 w-28 md:w-32 text-center pointer-events-none
+                                                    ${node.id === 'ui' && activeMissionId === 'orion' ? 'top-7 md:top-8' : '-top-7 md:-top-8'}
                                                 `}
                                             >
-                                                <span className={`text-[10px] md:text-xs font-mono tracking-wider font-bold transition-all duration-300
+                                                <span className={`text-[9px] md:text-[10px] lg:text-xs font-mono tracking-wide font-bold transition-all duration-300 whitespace-nowrap
                                                     ${isUltimateVictory || isSelected ? 'text-white drop-shadow-[0_0_8px_var(--brand-cyan)]' : 'text-brand-cyan/80'}
                                                 `}>
                                                     {t.synergyNodes?.[node.id as keyof typeof t.synergyNodes] || node.label}
@@ -728,27 +765,27 @@ export function SynergySection() {
                                         initial={{ opacity: 0 }}
                                         animate={{ opacity: 1 }}
                                         exit={{ opacity: 0 }}
-                                        className="absolute inset-0 z-40 bg-background/60 backdrop-blur-md flex flex-col items-center justify-center p-8 text-center"
+                                        className="absolute inset-0 z-40 bg-background/60 backdrop-blur-md flex flex-col items-center justify-center p-4 md:p-8 text-center"
                                     >
                                         <motion.div
                                             initial={{ scale: 0.9, y: 20 }}
                                             animate={{ scale: 1, y: 0 }}
-                                            className="bg-card-bg/90 border border-brand-cyan/30 p-8 rounded-3xl max-w-md shadow-2xl"
+                                            className="bg-card-bg/90 border border-brand-cyan/30 p-6 md:p-8 rounded-3xl max-w-md w-full shadow-2xl"
                                         >
-                                            <div className="w-16 h-16 bg-brand-cyan/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                                                <Star className="text-brand-cyan" size={32} />
+                                            <div className="w-12 h-12 md:w-16 md:h-16 bg-brand-cyan/20 rounded-full flex items-center justify-center mx-auto mb-4 md:mb-6">
+                                                <Star className="text-brand-cyan" size={24} />
                                             </div>
-                                            <h4 className="text-2xl font-bold font-primary text-brand-cyan mb-2">
+                                            <h4 className="text-xl md:text-2xl font-bold font-primary text-brand-cyan mb-3 leading-tight">
                                                 {t.synergy.rewardTitle} - {t.synergy.constellations.find((c: any) => c.id === rewardMissionId)?.name}
                                             </h4>
-                                            <p className="text-foreground/80 mb-8 leading-relaxed max-h-[150px] overflow-y-auto px-2 custom-scrollbar text-sm md:text-base text-justify">
+                                            <p className="text-foreground/80 mb-6 md:mb-8 leading-relaxed max-h-[120px] md:max-h-[150px] overflow-y-auto px-2 custom-scrollbar text-sm md:text-base text-justify">
                                                 {t.synergy.constellations.find((c: any) => c.id === rewardMissionId)?.description}
                                             </p>
-                                            <div className="flex flex-col gap-3">
-                                                <Button variant="primary" size="md" className="gap-2" onClick={() => window.open('/cv.pdf', '_blank')}>
+                                            <div className="flex flex-col gap-2 md:gap-3">
+                                                <Button variant="primary" size="md" className="gap-2 w-full" onClick={() => window.open('/cv.pdf', '_blank')}>
                                                     <Download size={18} /> {t.synergy.downloadCV}
                                                 </Button>
-                                                <Button variant="ghost" size="sm" onClick={() => setRewardMissionId(null)}>
+                                                <Button variant="ghost" size="sm" className="w-full" onClick={() => setRewardMissionId(null)}>
                                                     {t.synergy.continueBtn}
                                                 </Button>
                                             </div>
