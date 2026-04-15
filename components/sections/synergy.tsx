@@ -427,7 +427,7 @@ export function SynergySection() {
     const isFinalUnlocked = discoveredConstellations.length === TARGET_CONSTELLATIONS.length;
 
     return (
-        <section className="py-20 relative overflow-hidden">
+        <section id="synergy" className="py-20 relative overflow-hidden">
             <div className="max-w-[1400px] mx-auto px-6">
                 
                 <ScrollReveal animation="slide-up" delay={0.1}>
