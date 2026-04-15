@@ -23,6 +23,8 @@ export function Navbar() {
         { name: t.nav.projects, href: "#projects" },
         { name: t.nav.experience, href: "#experience" },
         { name: t.nav.about, href: "#about" },
+        { name: t.nav.synergy, href: "#synergy" },
+        { name: t.nav.testimonials, href: "#testimonials" },
         { name: t.nav.contact, href: "#contact" },
     ];
 

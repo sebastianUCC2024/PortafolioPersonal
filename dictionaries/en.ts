@@ -117,6 +117,8 @@ export const en = {
         projects: "Projects",
         experience: "Experience",
         about: "About",
+        synergy: "Constellations",
+        testimonials: "Testimonials",
         contact: "Contact",
     },
     synergy: {
