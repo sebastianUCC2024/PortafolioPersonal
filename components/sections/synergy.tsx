@@ -17,99 +17,122 @@ interface StarNode {
 }
 
 const INITIAL_STARS: StarNode[] = [
-    { id: "react", label: "React & Next.js", x: 100, y: 150 },
-    { id: "ts", label: "TypeScript", x: 650, y: 100 },
-    { id: "ui", label: "UI / UX", x: 200, y: 400 },
-    { id: "arch", label: "Arquitectura", x: 700, y: 400 },
-    { id: "perf", label: "Performance", x: 400, y: 50 },
-    { id: "backend", label: "APIs", x: 150, y: 250 },
-    { id: "db", label: "Bases de Datos", x: 550, y: 250 },
-    { id: "design", label: "Figma", x: 450, y: 450 },
+    { id: "react", label: "React", x: 250, y: 200 },
+    { id: "nextjs", label: "Next.js", x: 550, y: 180 },
+    { id: "ts", label: "TypeScript", x: 650, y: 350 },
+    { id: "ui", label: "UI/UX", x: 150, y: 450 },
+    { id: "arch", label: "Arquitectura", x: 700, y: 500 },
+    { id: "perf", label: "Performance", x: 400, y: 80 },
+    { id: "backend", label: "APIs", x: 300, y: 300 },
+    { id: "db", label: "Databases", x: 500, y: 400 },
+    { id: "design", label: "Figma", x: 600, y: 550 },
+    { id: "python", label: "Python", x: 100, y: 250 },
+    { id: "cloud", label: "Cloud", x: 450, y: 500 },
+    { id: "docker", label: "Docker", x: 200, y: 350 },
+    { id: "git", label: "Git", x: 550, y: 250 },
+    { id: "testing", label: "Testing", x: 350, y: 550 },
+    { id: "node", label: "Node.js", x: 650, y: 150 },
+    { id: "graphql", label: "GraphQL", x: 500, y: 100 },
+    { id: "mongodb", label: "MongoDB", x: 150, y: 150 },
 ];
 
 const TARGET_CONSTELLATIONS = [
     { 
         id: "orion", 
-        nodes: ["perf", "ts", "backend", "react", "db", "ui", "design"], 
+        nodes: ["perf", "ts", "backend", "react", "db", "ui", "design", "python", "docker", "git", "node"], 
         edges: [
-            // Hombros
-            ["perf", "ts"],
-            // Cinturón (las 3 estrellas centrales)
-            ["backend", "react"], ["react", "db"],
-            // Hombro izquierdo al cinturón
-            ["perf", "backend"],
-            // Hombro derecho al cinturón
-            ["ts", "db"],
-            // Pies
-            ["backend", "ui"], ["db", "design"],
+            ["perf", "ts"], // Hombros
+            ["perf", "python"], ["python", "docker"], ["docker", "backend"], // Brazo izq
+            ["ts", "git"], ["git", "node"], ["node", "db"], // Brazo der
+            ["perf", "backend"], ["ts", "db"], // Hombros a cinturón
+            ["backend", "react"], ["react", "db"], // Cinturón
+            ["backend", "ui"], ["db", "design"], // Pies
+            ["ui", "design"], // Base
         ],
         positions: { 
-            perf: {x: -100, y: -120}, // Betelgeuse (hombro izquierdo)
-            ts: {x: 100, y: -100}, // Bellatrix (hombro derecho)
-            backend: {x: -50, y: 0}, // Alnitak (cinturón izquierda)
-            react: {x: 0, y: 10}, // Alnilam (cinturón centro)
-            db: {x: 50, y: 0}, // Mintaka (cinturón derecha)
-            ui: {x: -80, y: 140}, // Saiph (pie izquierdo)
-            design: {x: 80, y: 150}, // Rigel (pie derecho)
+            perf: {x: -130, y: -200}, 
+            ts: {x: 130, y: -180}, 
+            python: {x: -200, y: -90}, 
+            docker: {x: -180, y: 0}, 
+            backend: {x: -60, y: -40}, 
+            react: {x: 0, y: -35}, 
+            db: {x: 60, y: -40}, 
+            git: {x: 200, y: -90}, 
+            node: {x: 180, y: 0}, 
+            ui: {x: -100, y: 180}, 
+            design: {x: 120, y: 190}, 
         }
     },
     { 
-        id: "lyra", 
-        nodes: ["perf", "ts", "arch", "db", "backend"], 
+        id: "ursa-major", 
+        nodes: ["perf", "ts", "backend", "react", "nextjs", "ui", "arch"], 
         edges: [
-            // Forma de paralelogramo con Vega en la punta
-            ["perf", "ts"], ["ts", "db"], ["db", "backend"], ["backend", "arch"], ["arch", "perf"]
+            ["perf", "ts"], ["ts", "backend"], ["backend", "react"], 
+            ["react", "nextjs"], ["nextjs", "perf"],
+            ["backend", "ui"], ["ui", "arch"],
         ],
         positions: { 
-            perf: {x: 0, y: -140}, // Vega (estrella principal)
-            ts: {x: -60, y: -40}, 
-            arch: {x: -40, y: 40}, 
-            db: {x: 40, y: 60}, 
-            backend: {x: 60, y: -20} 
+            perf: {x: -160, y: -100},
+            ts: {x: -60, y: -100},
+            backend: {x: 50, y: -100},
+            react: {x: 150, y: -80},
+            nextjs: {x: -120, y: 60},
+            ui: {x: 120, y: 40},
+            arch: {x: 180, y: 120},
         }
     },
     { 
         id: "cassiopeia", 
         nodes: ["ts", "perf", "react", "ui", "design"], 
         edges: [
-            // Forma de W característica
             ["ts", "perf"], ["perf", "react"], ["react", "ui"], ["ui", "design"]
         ],
         positions: { 
-            ts: {x: -160, y: -40}, 
-            perf: {x: -80, y: 60}, 
-            react: {x: 0, y: -20}, 
-            ui: {x: 80, y: 60}, 
-            design: {x: 160, y: -40} 
+            ts: {x: -200, y: -50}, 
+            perf: {x: -100, y: 70}, 
+            react: {x: 0, y: -30}, 
+            ui: {x: 100, y: 70}, 
+            design: {x: 200, y: -50} 
         }
     },
     { 
         id: "cygnus", 
-        nodes: ["db", "backend", "react", "ui", "arch"], 
+        nodes: ["perf", "ts", "docker", "backend", "react", "cloud", "ui", "git", "arch", "graphql"], 
         edges: [
-            // Cruz del Norte - cuerpo vertical
-            ["db", "backend"], ["backend", "react"],
-            // Alas horizontales
-            ["ui", "backend"], ["backend", "arch"]
+            ["perf", "ts"], ["ts", "docker"], // Cola
+            ["docker", "backend"], ["backend", "react"], ["react", "cloud"], // Cuerpo
+            ["ui", "git"], ["git", "backend"], // Ala izq
+            ["arch", "graphql"], ["graphql", "backend"], // Ala der
         ],
         positions: { 
-            db: {x: 0, y: -160}, // Cola (Deneb)
-            backend: {x: 0, y: 0}, // Centro (Sadr)
-            react: {x: 0, y: 160}, // Cabeza (Albireo)
-            ui: {x: -140, y: 0}, // Ala izquierda
-            arch: {x: 140, y: 0} // Ala derecha
+            perf: {x: 0, y: -220}, 
+            ts: {x: 0, y: -150}, 
+            docker: {x: 0, y: -80}, 
+            backend: {x: 0, y: 0}, 
+            react: {x: 0, y: 100}, 
+            cloud: {x: 0, y: 200}, 
+            ui: {x: -180, y: -30}, 
+            git: {x: -90, y: -15}, 
+            arch: {x: 180, y: -30}, 
+            graphql: {x: 90, y: -15}, 
         }
     },
     { 
-        id: "pegasus", 
-        nodes: ["perf", "ts", "arch", "backend"], 
+        id: "leo", 
+        nodes: ["perf", "ts", "backend", "react", "db", "arch", "python"], 
         edges: [
-            // Gran Cuadrado de Pegaso
-            ["perf", "ts"], ["ts", "arch"], ["arch", "backend"], ["backend", "perf"]
+            ["perf", "ts"], ["ts", "backend"], ["backend", "react"],
+            ["react", "db"], ["db", "arch"],
+            ["arch", "backend"], ["backend", "python"],
         ],
         positions: { 
-            perf: {x: -120, y: -120}, ts: {x: 120, y: -120}, 
-            arch: {x: 120, y: 120}, backend: {x: -120, y: 120} 
+            perf: {x: -140, y: -140},
+            ts: {x: -80, y: -60}, 
+            backend: {x: 0, y: 0}, 
+            react: {x: 80, y: 60}, 
+            db: {x: 140, y: 140}, 
+            arch: {x: 40, y: 120},
+            python: {x: -50, y: 70}, 
         }
     }
 ];
@@ -536,18 +559,16 @@ export function SynergySection() {
                             <svg className="absolute inset-0 w-full h-full pointer-events-none z-0">
                                 {/* Guía Visual (Líneas trazadoras) - Mantener siempre para intuitividad */}
                                 {activeMissionId && !isUltimateVictory && (
-                                    <g className={isMinimal ? "opacity-20" : "opacity-30 scale-[1.01]"}>
+                                    <g className={isMinimal ? "opacity-20" : "opacity-30"}>
                                         {(() => {
                                             const mission = TARGET_CONSTELLATIONS.find(c => c.id === activeMissionId);
                                             if (!mission || !mission.edges) return null;
                                             
-                                            // Pre-calculate positions to avoid redundant calls in render
-                                            return mission.edges.map(([fromId, toId], i) => {
+                                            return mission.edges.map(([fromId, toId]) => {
                                                 const n1 = nodes.find(n => n.id === fromId);
                                                 const n2 = nodes.find(n => n.id === toId);
                                                 if (!n1 || !n2) return null;
                                                 
-                                                // Check if user already connected these two nodes
                                                 const isConnected = userEdges.some(ue => 
                                                     (ue.from === fromId && ue.to === toId) || 
                                                     (ue.from === toId && ue.to === fromId)
@@ -555,14 +576,18 @@ export function SynergySection() {
                                                 
                                                 if (isConnected) return null;
 
-                                                const p1 = getDynamicNodePosition(n1, nodes.indexOf(n1));
-                                                const p2 = getDynamicNodePosition(n2, nodes.indexOf(n2));
+                                                const idx1 = nodes.indexOf(n1);
+                                                const idx2 = nodes.indexOf(n2);
+                                                const p1 = getDynamicNodePosition(n1, idx1);
+                                                const p2 = getDynamicNodePosition(n2, idx2);
                                                 
                                                 return (
-                                                    <line 
-                                                        key={`guide-${i}`}
-                                                        x1={p1.x} y1={p1.y}
-                                                        x2={p2.x} y2={p2.y}
+                                                    <motion.line 
+                                                        key={`guide-${fromId}-${toId}`}
+                                                        x1={p1.x}
+                                                        y1={p1.y}
+                                                        x2={p2.x}
+                                                        y2={p2.y}
                                                         stroke="var(--brand-cyan)"
                                                         strokeWidth={1}
                                                         strokeDasharray="4 4"
@@ -578,54 +603,53 @@ export function SynergySection() {
                                     const n2 = nodes.find(n => n.id === edge.to);
                                     if (!n1 || !n2) return null;
                                     
-                                    // Utilizar la pos final de las estrelllas tras su animación para el trazado sincrónico no es estrictamente directo en SVG framer,
-                                    // pero como las vinculamos estáticamente, las trazamos directo. Para que se sigan, usaríamos un hook de coordenadas (MotionValue),
-                                    // pero como las organizamos al centro, la UX percibe que unen los puntos en reposo. Para simplificar, usamos las Coords calculadas estáticas
                                     const p1 = getDynamicNodePosition(n1, nodes.indexOf(n1));
                                     const p2 = getDynamicNodePosition(n2, nodes.indexOf(n2));
 
                                     return (
-                                        <line 
+                                        <motion.line 
                                             key={i}
-                                            x1={p1.x}
-                                            y1={p1.y}
-                                            x2={p2.x}
-                                            y2={p2.y}
+                                            initial={{ x1: n1.x, y1: n1.y, x2: n2.x, y2: n2.y }}
+                                            animate={{ x1: p1.x, y1: p1.y, x2: p2.x, y2: p2.y }}
+                                            transition={{ 
+                                                duration: 0.8,
+                                                ease: [0.25, 0.1, 0.25, 1]
+                                            }}
                                             stroke="var(--brand-cyan)"
                                             strokeWidth={isUltimateVictory ? 3 : 2}
                                             strokeOpacity={isUltimateVictory ? 1 : 0.8}
-                                            className="transition-all duration-500 delay-300" 
                                         />
                                     );
                                 })}
                                 
                                 {/* Línea virtual temporal */}
-                                {selectedNodeId && mousePos && (
-                                    <line 
-                                        x1={getDynamicNodePosition(nodes.find(n => n.id === selectedNodeId)!, nodes.findIndex(n => n.id === selectedNodeId)).x || 0}
-                                        y1={getDynamicNodePosition(nodes.find(n => n.id === selectedNodeId)!, nodes.findIndex(n => n.id === selectedNodeId)).y || 0}
-                                        x2={mousePos.x}
-                                        y2={mousePos.y}
-                                        stroke="var(--brand-cyan)"
-                                        strokeWidth={2}
-                                        strokeOpacity={0.5}
-                                        strokeDasharray="6 6"
-                                        className="transition-opacity duration-100 hidden md:block" 
-                                    />
-                                )}
+                                {selectedNodeId && mousePos && (() => {
+                                    const selectedNode = nodes.find(n => n.id === selectedNodeId);
+                                    if (!selectedNode) return null;
+                                    const selectedPos = getDynamicNodePosition(selectedNode, nodes.findIndex(n => n.id === selectedNodeId));
+                                    return (
+                                        <line 
+                                            x1={selectedPos.x}
+                                            y1={selectedPos.y}
+                                            x2={mousePos.x}
+                                            y2={mousePos.y}
+                                            stroke="var(--brand-cyan)"
+                                            strokeWidth={2}
+                                            strokeOpacity={0.5}
+                                            strokeDasharray="6 6"
+                                            className="hidden md:block" 
+                                        />
+                                    );
+                                })()}
                             </svg>
 
                             {/* Estrellas (Nodos) */}
                             <div className="absolute inset-0 z-10 overflow-hidden pointer-events-none">
                                 {nodes.map((node, index) => {
                                     const isSelected = selectedNodeId === node.id;
-                                    
                                     const activeMissionData = TARGET_CONSTELLATIONS.find(c => c.id === activeMissionId);
                                     const isTargetNode = activeMissionId === "final" || (activeMissionData && activeMissionData.nodes.includes(node.id));
-                                    
-                                    // Si hay misión activa y somos target, brillamos algo más
                                     const isFaded = activeMissionId && !isTargetNode && activeMissionId !== "final";
-
                                     const targetPos = getDynamicNodePosition(node, index);
 
                                     return (
@@ -634,43 +658,64 @@ export function SynergySection() {
                                             onPointerUp={(e) => handleNodePointerUp(e, node.id)}
                                             onPointerDown={(e) => e.stopPropagation()}
                                             animate={{ 
-                                                x: targetPos.x,
-                                                y: targetPos.y,
+                                                left: targetPos.x,
+                                                top: targetPos.y,
                                                 opacity: isFaded ? 0.3 : 1
                                             }}
-                                            transition={{ duration: 1.5, type: "spring", bounce: 0.3 }}
-                                            className={`absolute flex items-center justify-center w-0 h-0 touch-none
+                                            transition={{ 
+                                                duration: 0.8,
+                                                ease: [0.25, 0.1, 0.25, 1]
+                                            }}
+                                            className={`absolute touch-none -translate-x-1/2 -translate-y-1/2
                                                 ${activeMissionId ? 'pointer-events-auto cursor-pointer' : 'pointer-events-none'}
                                                 ${isSelected ? 'z-50' : 'z-20'}
                                             `}
+                                            style={{ width: 0, height: 0 }}
                                         >
                                             {/* Aura para el nodo seleccionado */}
-                                            <div className={`absolute w-16 h-16 rounded-full bg-brand-cyan/20 pointer-events-none transition-transform duration-300 
-                                                ${isSelected ? 'animate-ping scale-150 opacity-100' : 'opacity-0 scale-50'}`} 
-                                            />
+                                            {isSelected && (
+                                                <motion.div 
+                                                    initial={{ scale: 0.5, opacity: 0 }}
+                                                    animate={{ scale: 1.5, opacity: [0.3, 0] }}
+                                                    transition={{ duration: 1, repeat: Infinity, ease: "easeOut" }}
+                                                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-brand-cyan/20 pointer-events-none"
+                                                />
+                                            )}
 
                                             {/* Punto Central de la Estrella */}
-                                            <div className={`absolute w-5 h-5 md:w-6 md:h-6 rounded-full transition-all duration-500 ease-out flex items-center justify-center shadow-[0_0_15px_var(--brand-cyan)]
-                                                ${isSelected 
-                                                    ? 'bg-white scale-150 shadow-[0_0_40px_var(--brand-cyan)]' 
-                                                    : isUltimateVictory ? 'bg-white shadow-[0_0_30px_var(--brand-cyan)] scale-150' : 'bg-brand-cyan'}
-                                                ${isTargetNode && !isSelected ? 'animate-pulse bg-brand-cyan/90 border border-white' : ''}
-                                            `} />
+                                            <motion.div 
+                                                animate={{
+                                                    scale: isSelected ? 1.5 : isUltimateVictory ? 1.5 : 1,
+                                                    boxShadow: isSelected 
+                                                        ? '0 0 40px var(--brand-cyan)' 
+                                                        : isUltimateVictory 
+                                                        ? '0 0 30px var(--brand-cyan)' 
+                                                        : '0 0 15px var(--brand-cyan)'
+                                                }}
+                                                transition={{ duration: 0.3, ease: "easeOut" }}
+                                                className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-5 h-5 md:w-6 md:h-6 rounded-full
+                                                    ${isSelected || isUltimateVictory ? 'bg-white' : 'bg-brand-cyan'}
+                                                    ${isTargetNode && !isSelected ? 'animate-pulse border border-white' : ''}
+                                                `} 
+                                            />
                                             
                                             {/* Zona de click */}
-                                            <div className="absolute w-16 h-16 rounded-full bg-transparent z-10" />
+                                            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-transparent z-10" />
 
                                             {/* Texto de la etiqueta */}
-                                            <div className={`absolute w-32 text-center pointer-events-none transition-all duration-500
-                                                ${isSelected ? 'scale-110' : ''}
-                                                ${node.id === 'ui' && activeMissionId === 'orion' ? 'bottom-8' : 'top-8'}
-                                            `}>
-                                                <span className={`text-[10px] md:text-xs font-mono tracking-wider font-bold transition-colors duration-300
-                                                    ${isUltimateVictory || isSelected ? 'text-white drop-shadow-[0_0_5px_var(--brand-cyan)]' : 'text-brand-cyan/80'}
+                                            <motion.div 
+                                                animate={{ scale: isSelected ? 1.1 : 1 }}
+                                                transition={{ duration: 0.2 }}
+                                                className={`absolute left-1/2 -translate-x-1/2 w-32 text-center pointer-events-none
+                                                    ${node.id === 'ui' && activeMissionId === 'orion' ? 'top-8' : '-top-8'}
+                                                `}
+                                            >
+                                                <span className={`text-[10px] md:text-xs font-mono tracking-wider font-bold transition-all duration-300
+                                                    ${isUltimateVictory || isSelected ? 'text-white drop-shadow-[0_0_8px_var(--brand-cyan)]' : 'text-brand-cyan/80'}
                                                 `}>
                                                     {t.synergyNodes?.[node.id as keyof typeof t.synergyNodes] || node.label}
                                                 </span>
-                                            </div>
+                                            </motion.div>
                                         </motion.div>
                                     );
                                 })}

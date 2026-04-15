@@ -141,41 +141,50 @@ export const es = {
         constellations: [
             { 
                 id: "orion", 
-                name: "Orión (Frontend)", 
-                description: "Maestría del espacio visual y precisión técnica. Unifica Figma, React y UI/UX en una experiencia de usuario impecable." 
+                name: "Orión (El Cazador)", 
+                description: "La constelación más icónica del cielo. Representa la maestría Frontend con React, TypeScript y diseño UI/UX impecable." 
             },
             { 
-                id: "lyra", 
-                name: "Lyra (Datos)", 
-                description: "Armonía entre datos y backend. Representa el flujo de información a través de APIs robustas y bases de datos optimizadas." 
+                id: "ursa-major", 
+                name: "Osa Mayor (El Gran Carro)", 
+                description: "Guía estelar de navegación. Simboliza la arquitectura sólida que orienta todo el sistema hacia el éxito." 
             },
             { 
                 id: "cassiopeia", 
-                name: "Casiopea (Rendimiento)", 
-                description: "Solidez del código TypeScript y alto rendimiento. Una aplicación estructurada para perdurar con lógica clara y ejecución impecable." 
+                name: "Casiopea (La Reina)", 
+                description: "Forma de W característica. Representa el rendimiento optimizado y la elegancia del código TypeScript estructurado." 
             },
             { 
                 id: "cygnus", 
-                name: "Cygnus (Fullstack)", 
-                description: "Integración Fullstack en su máxima expresión. Une el Frontend con la solidez del Backend creando un sistema equilibrado." 
+                name: "Cygnus (El Cisne)", 
+                description: "La Cruz del Norte. Integración Fullstack perfecta donde Frontend y Backend se unen en armonía total." 
             },
             { 
-                id: "pegasus", 
-                name: "Pegaso (Núcleo)", 
-                description: "El motor central donde Arquitectura, Rendimiento, TypeScript y APIs convergen para elevar una aplicación a escala global." 
+                id: "leo", 
+                name: "Leo (El León)", 
+                description: "El rey de las constelaciones zodiacales. Poder y liderazgo técnico que impulsa proyectos ambiciosos hacia adelante." 
             }
         ],
         finalMissionObj: "Andrómeda (Red Global)",
     },
     synergyNodes: {
-        react: "React & Next.js",
+        react: "React",
+        nextjs: "Next.js",
         ts: "TypeScript",
-        ui: "UI / UX",
+        ui: "UI/UX",
         arch: "Arquitectura",
-        perf: "Rendimiento",
+        perf: "Performance",
         backend: "APIs",
-        db: "Bases de Datos",
-        design: "Figma"
+        db: "Databases",
+        design: "Figma",
+        python: "Python",
+        cloud: "Cloud",
+        docker: "Docker",
+        git: "Git",
+        testing: "Testing",
+        node: "Node.js",
+        graphql: "GraphQL",
+        mongodb: "MongoDB"
     },
     theme: {
         dark: "Oscuro",

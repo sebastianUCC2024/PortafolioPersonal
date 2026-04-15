@@ -141,41 +141,50 @@ export const en = {
         constellations: [
             { 
                 id: "orion", 
-                name: "Orion (Frontend)", 
-                description: "Visual space mastery and technical precision. Unifies Figma aesthetics, React structure, and UI/UX elegance into a flawless user experience." 
+                name: "Orion (The Hunter)", 
+                description: "The most iconic constellation in the sky. Represents Frontend mastery with React, TypeScript, and impeccable UI/UX design." 
             },
             { 
-                id: "lyra", 
-                name: "Lyra (Data)", 
-                description: "Harmony between data systems and backend architecture. Represents the flow of information through robust APIs and optimized databases." 
+                id: "ursa-major", 
+                name: "Ursa Major (The Big Dipper)", 
+                description: "Stellar navigation guide. Symbolizes the solid architecture that guides the entire system toward success." 
             },
             { 
                 id: "cassiopeia", 
-                name: "Cassiopeia (Performance)", 
-                description: "Unwavering TypeScript code solidity and high performance. An application structured to endure with clear logic and flawless execution." 
+                name: "Cassiopeia (The Queen)", 
+                description: "Characteristic W shape. Represents optimized performance and the elegance of structured TypeScript code." 
             },
             { 
                 id: "cygnus", 
-                name: "Cygnus (Fullstack)", 
-                description: "Fullstack integration at its finest. Unifies Frontend (UI, React) with Backend solidity (API, DB) into a balanced and scalable system." 
+                name: "Cygnus (The Swan)", 
+                description: "The Northern Cross. Perfect Fullstack integration where Frontend and Backend unite in total harmony." 
             },
             { 
-                id: "pegasus", 
-                name: "Pegasus (Core)", 
-                description: "The central engine where Architecture, Performance, TypeScript, and APIs converge to elevate an application to global scalability." 
+                id: "leo", 
+                name: "Leo (The Lion)", 
+                description: "The king of zodiac constellations. Technical power and leadership that drives ambitious projects forward." 
             }
         ],
         finalMissionObj: "Andromeda (Global Network)",
     },
     synergyNodes: {
-        react: "React & Next.js",
+        react: "React",
+        nextjs: "Next.js",
         ts: "TypeScript",
-        ui: "UI / UX",
+        ui: "UI/UX",
         arch: "Architecture",
         perf: "Performance",
         backend: "APIs",
         db: "Databases",
-        design: "Figma"
+        design: "Figma",
+        python: "Python",
+        cloud: "Cloud",
+        docker: "Docker",
+        git: "Git",
+        testing: "Testing",
+        node: "Node.js",
+        graphql: "GraphQL",
+        mongodb: "MongoDB"
     },
     theme: {
         dark: "Dark",
