@@ -181,37 +181,41 @@ export function Navbar() {
 
             {/* Navegación Desplegable Mobile */}
             {isMobileMenuOpen && (
-                <div className="md:hidden border-t border-brand-cyan/10 bg-background absolute w-full left-0 flex flex-col p-6 gap-6 shadow-xl">
-                    {navLinks.map((link) => (
-                        <a 
-                            key={link.name} 
-                            href={link.href} 
-                            onClick={(e) => {
-                                e.preventDefault();
-                                setIsMobileMenuOpen(false);
-                                const target = document.querySelector(link.href);
-                                if (target) {
-                                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                }
-                            }}
-                            className="text-lg font-medium text-foreground hover:text-brand-cyan cursor-pointer"
-                        >
-                            {link.name}
-                        </a>
-                    ))}
+                <div className="md:hidden border-t border-brand-cyan/10 bg-background absolute w-full left-0 shadow-xl max-h-[calc(100vh-5rem)] overflow-y-auto">
+                    <div className="flex flex-col p-6 gap-4">
+                        {/* Enlaces de navegación */}
+                        <nav className="flex flex-col gap-4 pb-4 border-b border-brand-cyan/10">
+                            {navLinks.map((link) => (
+                                <a 
+                                    key={link.name} 
+                                    href={link.href} 
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        setIsMobileMenuOpen(false);
+                                        const target = document.querySelector(link.href);
+                                        if (target) {
+                                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                                        }
+                                    }}
+                                    className="text-base font-medium text-foreground hover:text-brand-cyan cursor-pointer transition-colors py-2"
+                                >
+                                    {link.name}
+                                </a>
+                            ))}
+                        </nav>
                     
-                    <div className="flex flex-col gap-4 mt-2">
+                    <div className="flex flex-col gap-0 pb-4">
                         {/* Descargar CV Mobile */}
-                        <div className="flex justify-between items-center py-4 border-t border-brand-cyan/10">
-                            <span className="text-muted">{language === "es" ? "Hoja de Vida" : "Resume"}</span>
+                        <div className="flex justify-between items-center py-3">
+                            <span className="text-sm text-muted">{language === "es" ? "Hoja de Vida" : "Resume"}</span>
                             <button 
-                                className="flex items-center gap-2 font-medium text-brand-cyan hover:text-brand-cyan/80 transition-colors" 
+                                className="flex items-center gap-2 font-medium text-brand-cyan hover:text-brand-cyan/80 transition-colors text-sm" 
                                 onClick={() => {
                                     window.open('/cv.pdf', '_blank');
                                     setIsMobileMenuOpen(false);
                                 }}
                             >
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                                     <polyline points="14 2 14 8 20 8"/>
                                     <line x1="16" y1="13" x2="8" y2="13"/>
@@ -225,47 +229,47 @@ export function Navbar() {
                         {/* Tema Mobile */}
                         {mounted && (
                             <>
-                                <div className="flex justify-between items-center py-4 border-t border-brand-cyan/10">
-                                    <span className="text-muted">{language === "es" ? "Apariencia" : "Appearance"}</span>
+                                <div className="flex justify-between items-center py-3 border-t border-brand-cyan/10">
+                                    <span className="text-sm text-muted">{language === "es" ? "Apariencia" : "Appearance"}</span>
                                     <button 
-                                        className="flex items-center gap-2 font-medium text-foreground" 
+                                        className="flex items-center gap-2 font-medium text-foreground text-sm" 
                                         onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
                                     >
-                                        {currentTheme === "dark" ? <><Sun size={18} /> {t.theme.light}</> : <><Moon size={18} /> {t.theme.dark}</>}
+                                        {currentTheme === "dark" ? <><Sun size={16} /> {t.theme.light}</> : <><Moon size={16} /> {t.theme.dark}</>}
                                     </button>
                                 </div>
                                 
                                 {/* Modo Minimalista Mobile */}
-                                <div className="flex justify-between items-center py-4 border-t border-brand-cyan/10">
+                                <div className="flex justify-between items-center py-3 border-t border-brand-cyan/10">
                                     <div className="flex flex-col">
-                                        <span className="text-muted">{language === "es" ? "Modo Minimalista" : "Minimal Mode"}</span>
+                                        <span className="text-sm text-muted">{language === "es" ? "Modo Minimalista" : "Minimal Mode"}</span>
                                         <span className="text-xs text-muted/70">{language === "es" ? "Diseño simplificado" : "Simplified design"}</span>
                                     </div>
                                     <button 
-                                        className="flex items-center gap-2 font-medium text-foreground" 
+                                        className="flex items-center gap-2 font-medium text-foreground text-sm" 
                                         onClick={toggleMinimal}
                                     >
-                                        {isMinimal ? <><Maximize2 size={18} /> {language === "es" ? "Completo" : "Full"}</> : <><Minimize2 size={18} /> {language === "es" ? "Minimal" : "Minimal"}</>}
+                                        {isMinimal ? <><Maximize2 size={16} /> {language === "es" ? "Completo" : "Full"}</> : <><Minimize2 size={16} /> {language === "es" ? "Minimal" : "Minimal"}</>}
                                     </button>
                                 </div>
                             </>
                         )}
                         
                         {/* Idioma Mobile */}
-                        <div className="flex justify-between items-center py-4 border-t border-brand-cyan/10">
-                            <span className="text-muted">{language === "es" ? "Idioma" : "Language"}</span>
-                            <div className="flex gap-4">
+                        <div className="flex justify-between items-center py-3 border-t border-brand-cyan/10">
+                            <span className="text-sm text-muted">{language === "es" ? "Idioma" : "Language"}</span>
+                            <div className="flex gap-3">
                                 <button 
                                     onClick={() => { setLanguage("es"); setIsMobileMenuOpen(false); }} 
-                                    className={`font-bold ${language === "es" ? "text-brand-cyan" : "text-muted"}`}
+                                    className={`font-bold text-sm ${language === "es" ? "text-brand-cyan" : "text-muted"}`}
                                 >
-                                    <span className={language === "es" ? "border-b border-brand-cyan" : ""}>Español</span>
+                                    {language === "es" ? "Español" : "Spanish"}
                                 </button>
                                 <button 
                                     onClick={() => { setLanguage("en"); setIsMobileMenuOpen(false); }} 
-                                    className={`font-bold ${language === "en" ? "text-brand-cyan" : "text-muted"}`}
+                                    className={`font-bold text-sm ${language === "en" ? "text-brand-cyan" : "text-muted"}`}
                                 >
-                                    <span className={language === "en" ? "border-b border-brand-cyan" : ""}>English</span>
+                                    English
                                 </button>
                             </div>
                         </div>
