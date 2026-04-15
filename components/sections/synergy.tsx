@@ -30,53 +30,83 @@ const INITIAL_STARS: StarNode[] = [
 const TARGET_CONSTELLATIONS = [
     { 
         id: "orion", 
-        nodes: ["perf", "ts", "backend", "react", "db", "ui", "design", "arch"], 
+        nodes: ["perf", "ts", "backend", "react", "db", "ui", "design"], 
         edges: [
-            ["perf", "ts"], ["ts", "db"], ["db", "arch"], ["arch", "design"], ["design", "ui"], ["ui", "perf"], // Body perimeter
-            ["backend", "react"], ["react", "db"] // Belt (approx)
+            // Hombros
+            ["perf", "ts"],
+            // Cinturón (las 3 estrellas centrales)
+            ["backend", "react"], ["react", "db"],
+            // Hombro izquierdo al cinturón
+            ["perf", "backend"],
+            // Hombro derecho al cinturón
+            ["ts", "db"],
+            // Pies
+            ["backend", "ui"], ["db", "design"],
         ],
         positions: { 
-            perf: {x: -120, y: -140}, ts: {x: 120, y: -130}, 
-            backend: {x: -40, y: -10}, react: {x: 0, y: 0}, db: {x: 40, y: 10},
-            ui: {x: -110, y: 140}, design: {x: 0, y: 160}, arch: {x: 110, y: 140}
+            perf: {x: -100, y: -120}, // Betelgeuse (hombro izquierdo)
+            ts: {x: 100, y: -100}, // Bellatrix (hombro derecho)
+            backend: {x: -50, y: 0}, // Alnitak (cinturón izquierda)
+            react: {x: 0, y: 10}, // Alnilam (cinturón centro)
+            db: {x: 50, y: 0}, // Mintaka (cinturón derecha)
+            ui: {x: -80, y: 140}, // Saiph (pie izquierdo)
+            design: {x: 80, y: 150}, // Rigel (pie derecho)
         }
     },
     { 
         id: "lyra", 
         nodes: ["perf", "ts", "arch", "db", "backend"], 
-        edges: [["perf", "ts"], ["ts", "arch"], ["arch", "db"], ["db", "backend"], ["backend", "ts"]],
+        edges: [
+            // Forma de paralelogramo con Vega en la punta
+            ["perf", "ts"], ["ts", "db"], ["db", "backend"], ["backend", "arch"], ["arch", "perf"]
+        ],
         positions: { 
-            perf: {x: 0, y: -140}, // Vega
-            ts: {x: -40, y: -60}, arch: {x: 40, y: -60}, 
-            db: {x: 60, y: 60}, backend: {x: -20, y: 60} 
+            perf: {x: 0, y: -140}, // Vega (estrella principal)
+            ts: {x: -60, y: -40}, 
+            arch: {x: -40, y: 40}, 
+            db: {x: 40, y: 60}, 
+            backend: {x: 60, y: -20} 
         }
     },
     { 
         id: "cassiopeia", 
         nodes: ["ts", "perf", "react", "ui", "design"], 
-        edges: [["ts", "perf"], ["perf", "react"], ["react", "ui"], ["ui", "design"]],
+        edges: [
+            // Forma de W característica
+            ["ts", "perf"], ["perf", "react"], ["react", "ui"], ["ui", "design"]
+        ],
         positions: { 
-            ts: {x: -160, y: -60}, perf: {x: -80, y: 60}, 
-            react: {x: 0, y: -30}, 
-            ui: {x: 80, y: 60}, design: {x: 160, y: -60} 
+            ts: {x: -160, y: -40}, 
+            perf: {x: -80, y: 60}, 
+            react: {x: 0, y: -20}, 
+            ui: {x: 80, y: 60}, 
+            design: {x: 160, y: -40} 
         }
     },
     { 
         id: "cygnus", 
         nodes: ["db", "backend", "react", "ui", "arch"], 
-        edges: [["db", "backend"], ["backend", "react"], ["backend", "ui"], ["backend", "arch"]],
+        edges: [
+            // Cruz del Norte - cuerpo vertical
+            ["db", "backend"], ["backend", "react"],
+            // Alas horizontales
+            ["ui", "backend"], ["backend", "arch"]
+        ],
         positions: { 
-            db: {x: 0, y: -160}, // Tail
-            backend: {x: 0, y: 20}, // Body
-            react: {x: 0, y: 200}, // Head
-            ui: {x: -140, y: 20}, // Wing
-            arch: {x: 140, y: 20} // Wing
+            db: {x: 0, y: -160}, // Cola (Deneb)
+            backend: {x: 0, y: 0}, // Centro (Sadr)
+            react: {x: 0, y: 160}, // Cabeza (Albireo)
+            ui: {x: -140, y: 0}, // Ala izquierda
+            arch: {x: 140, y: 0} // Ala derecha
         }
     },
     { 
         id: "pegasus", 
         nodes: ["perf", "ts", "arch", "backend"], 
-        edges: [["perf", "ts"], ["ts", "arch"], ["arch", "backend"], ["backend", "perf"]],
+        edges: [
+            // Gran Cuadrado de Pegaso
+            ["perf", "ts"], ["ts", "arch"], ["arch", "backend"], ["backend", "perf"]
+        ],
         positions: { 
             perf: {x: -120, y: -120}, ts: {x: 120, y: -120}, 
             arch: {x: 120, y: 120}, backend: {x: -120, y: 120} 
