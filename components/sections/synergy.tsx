@@ -472,15 +472,6 @@ export function SynergySection() {
                             {activeMissionId && (
                                 <p className="text-[10px] text-muted text-center">{t.synergy.onboarding}</p>
                             )}
-                            
-                            {/* Botón Descargar CV - Móvil */}
-                            <button
-                                onClick={() => window.open('/cv.pdf', '_blank')}
-                                className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-full bg-brand-cyan/10 border border-brand-cyan/30 text-brand-cyan hover:bg-brand-cyan/20 font-medium text-xs transition-all duration-300"
-                            >
-                                <Download size={14} />
-                                <span>{t.synergy.downloadCV || "Descargar CV"}</span>
-                            </button>
                         </div>
 
                         {/* Desktop: panel vertical */}
@@ -519,19 +510,10 @@ export function SynergySection() {
                                 })}
 
                                 {/* Instrucción */}
-                                <div className="mt-auto pt-4 border-t border-brand-cyan/10 space-y-3">
+                                <div className="mt-auto pt-4 border-t border-brand-cyan/10">
                                     <p className="text-xs text-muted leading-relaxed text-center px-2">
                                         {t.synergy.onboarding}
                                     </p>
-                                    
-                                    {/* Botón Descargar CV */}
-                                    <button
-                                        onClick={() => window.open('/cv.pdf', '_blank')}
-                                        className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-brand-cyan/10 border border-brand-cyan/30 text-brand-cyan hover:bg-brand-cyan/20 font-medium text-xs transition-all duration-300"
-                                    >
-                                        <Download size={14} />
-                                        <span>{t.synergy.downloadCV || "Descargar CV"}</span>
-                                    </button>
                                 </div>
                             </div>
                         </div>

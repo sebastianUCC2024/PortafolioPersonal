@@ -99,6 +99,30 @@ export function Navbar() {
                         </div>
                     </div>
 
+                    {/* Botón Descargar CV */}
+                    <div className="relative group">
+                        <button 
+                            className="w-10 h-10 rounded-full flex items-center justify-center text-foreground hover:bg-brand-cyan/10 hover:text-brand-cyan transition-all duration-300 border border-brand-cyan/20 hover:border-brand-cyan/40" 
+                            onClick={() => window.open('/cv.pdf', '_blank')}
+                            aria-label="Download CV"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                <polyline points="7 10 12 15 17 10"/>
+                                <line x1="12" y1="15" x2="12" y2="3"/>
+                            </svg>
+                        </button>
+                        {/* Tooltip */}
+                        <div className="absolute top-full right-0 mt-2 px-3 py-2 bg-card-bg border border-brand-cyan/20 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap z-50">
+                            <p className="text-xs font-medium text-foreground">
+                                {language === "es" ? "Descargar CV" : "Download CV"}
+                            </p>
+                            <p className="text-[10px] text-muted mt-0.5">
+                                {language === "es" ? "Hoja de vida en PDF" : "Resume in PDF"}
+                            </p>
+                        </div>
+                    </div>
+
                     {/* Botón cambiar Tema */}
                     {mounted && (
                         <>
@@ -175,6 +199,25 @@ export function Navbar() {
                     ))}
                     
                     <div className="flex flex-col gap-4 mt-2">
+                        {/* Descargar CV Mobile */}
+                        <div className="flex justify-between items-center py-4 border-t border-brand-cyan/10">
+                            <span className="text-muted">{language === "es" ? "Hoja de Vida" : "Resume"}</span>
+                            <button 
+                                className="flex items-center gap-2 font-medium text-brand-cyan hover:text-brand-cyan/80 transition-colors" 
+                                onClick={() => {
+                                    window.open('/cv.pdf', '_blank');
+                                    setIsMobileMenuOpen(false);
+                                }}
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                    <polyline points="7 10 12 15 17 10"/>
+                                    <line x1="12" y1="15" x2="12" y2="3"/>
+                                </svg>
+                                {language === "es" ? "Descargar" : "Download"}
+                            </button>
+                        </div>
+                        
                         {/* Tema Mobile */}
                         {mounted && (
                             <>
