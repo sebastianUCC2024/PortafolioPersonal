@@ -75,6 +75,48 @@ export const en = {
             "Frontend Development"
         ]
     },
+    techStack: {
+        title: "Tech Stack",
+        subtitle: "Technologies I work with",
+        categories: {
+            ai: {
+                title: "Artificial Intelligence",
+                description: "Main specialization",
+                techs: [
+                    { name: "ChatGPT", icon: "https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg", color: "#10A37F" },
+                    { name: "Claude AI", icon: "https://cdn.simpleicons.org/anthropic/D97757", color: "#D97757" },
+                    { name: "Gemini", icon: "https://www.gstatic.com/lamda/images/gemini_sparkle_v002_d4735304ff6292a690345.svg", color: "#4285F4" }
+                ]
+            },
+            frontend: {
+                title: "Frontend",
+                techs: [
+                    { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" },
+                    { name: "Next.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
+                    { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
+                    { name: "Tailwind CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" }
+                ]
+            },
+            backend: {
+                title: "Backend",
+                techs: [
+                    { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" },
+                    { name: "Django", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/django/django-plain.svg" },
+                    { name: "Java", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg" },
+                    { name: "Spring Boot", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg" }
+                ]
+            },
+            tools: {
+                title: "Tools",
+                techs: [
+                    { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" },
+                    { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg" },
+                    { name: "Figma", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg" },
+                    { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" }
+                ]
+            }
+        }
+    },
     testimonials: {
         title: "Testimonials",
         items: [
@@ -117,6 +159,7 @@ export const en = {
         projects: "Projects",
         experience: "Experience",
         about: "About",
+        techStack: "Tech Stack",
         synergy: "Constellations",
         testimonials: "Testimonials",
         contact: "Contact",
