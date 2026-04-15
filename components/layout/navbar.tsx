@@ -186,7 +186,7 @@ export function Navbar() {
 
             {/* Navegación Desplegable Mobile - Versión Compacta */}
             <div className={`lg:hidden fixed top-16 left-0 right-0 backdrop-blur-lg bg-background/95 border-t border-brand-cyan/10 transition-all duration-300 z-[90] ${isMobileMenuOpen ? 'max-h-[85vh] opacity-100 visible' : 'max-h-0 opacity-0 invisible'}`}>
-                <div className="w-full px-3 sm:px-5 md:px-8 py-3 space-y-0.5 max-h-[calc(85vh-1rem)] overflow-y-auto">
+                <div className="w-full px-4 sm:px-5 md:px-8 py-3 space-y-0.5 max-h-[calc(85vh-1rem)] overflow-y-auto overflow-x-hidden">
                     {/* Enlaces de navegación */}
                     {navLinks.map((link) => (
                         <a 
@@ -212,55 +212,55 @@ export function Navbar() {
                     <div className="border-t border-brand-cyan/10 pt-1.5 mt-1.5 space-y-0.5">
                         {/* Descargar CV */}
                         <button 
-                            className="w-full flex items-center justify-between py-2 hover:bg-brand-cyan/5 rounded-lg transition-colors text-left" 
+                            className="w-full flex items-center justify-between gap-2 py-2 hover:bg-brand-cyan/5 rounded-lg transition-colors text-left" 
                             onClick={(e) => {
                                 e.stopPropagation();
                                 window.open('/cv.pdf', '_blank');
                                 setIsMobileMenuOpen(false);
                             }}
                         >
-                            <span className="text-xs sm:text-sm font-medium text-muted">CV</span>
-                            <span className="text-xs sm:text-sm font-semibold text-brand-cyan flex items-center gap-1 sm:gap-1.5">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="sm:w-4 sm:h-4">
+                            <span className="text-xs sm:text-sm font-medium text-muted flex-shrink-0">CV</span>
+                            <span className="text-xs sm:text-sm font-semibold text-brand-cyan flex items-center gap-1 flex-shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="flex-shrink-0">
                                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
                                     <polyline points="7 10 12 15 17 10"/>
                                     <line x1="12" y1="15" x2="12" y2="3"/>
                                 </svg>
-                                <span className="truncate">{language === "es" ? "Descargar" : "Download"}</span>
+                                <span className="whitespace-nowrap">{language === "es" ? "Descargar" : "Download"}</span>
                             </span>
                         </button>
                         
                         {/* Idioma */}
                         <button 
-                            className="w-full flex items-center justify-between py-2 hover:bg-brand-cyan/5 rounded-lg transition-colors text-left"
+                            className="w-full flex items-center justify-between gap-2 py-2 hover:bg-brand-cyan/5 rounded-lg transition-colors text-left"
                             onClick={(e) => {
                                 e.stopPropagation();
                                 setLanguage(language === "es" ? "en" : "es");
                             }}
                         >
-                            <span className="text-xs sm:text-sm font-medium text-muted">{language === "es" ? "Idioma" : "Language"}</span>
-                            <span className="text-xs sm:text-sm font-semibold text-foreground flex items-center gap-1 sm:gap-1.5">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="sm:w-4 sm:h-4">
+                            <span className="text-xs sm:text-sm font-medium text-muted flex-shrink-0">{language === "es" ? "Idioma" : "Language"}</span>
+                            <span className="text-xs sm:text-sm font-semibold text-foreground flex items-center gap-1 flex-shrink-0">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="flex-shrink-0">
                                     <circle cx="12" cy="12" r="10"/>
                                     <line x1="2" y1="12" x2="22" y2="12"/>
                                     <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
                                 </svg>
-                                <span className="truncate">{language === "es" ? "Español" : "English"}</span>
+                                <span className="whitespace-nowrap">{language === "es" ? "Español" : "English"}</span>
                             </span>
                         </button>
                         
                         {/* Tema */}
                         {mounted && (
                             <button 
-                                className="w-full flex items-center justify-between py-2 hover:bg-brand-cyan/5 rounded-lg transition-colors text-left"
+                                className="w-full flex items-center justify-between gap-2 py-2 hover:bg-brand-cyan/5 rounded-lg transition-colors text-left"
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     setTheme(currentTheme === "dark" ? "light" : "dark");
                                 }}
                             >
-                                <span className="text-xs sm:text-sm font-medium text-muted">{language === "es" ? "Tema" : "Theme"}</span>
-                                <span className="text-xs sm:text-sm font-semibold text-foreground flex items-center gap-1 sm:gap-1.5">
-                                    {currentTheme === "dark" ? <><Sun size={14} className="sm:w-4 sm:h-4" /> <span className="truncate">{t.theme.light}</span></> : <><Moon size={14} className="sm:w-4 sm:h-4" /> <span className="truncate">{t.theme.dark}</span></>}
+                                <span className="text-xs sm:text-sm font-medium text-muted flex-shrink-0">{language === "es" ? "Tema" : "Theme"}</span>
+                                <span className="text-xs sm:text-sm font-semibold text-foreground flex items-center gap-1 flex-shrink-0">
+                                    {currentTheme === "dark" ? <><Sun size={14} className="flex-shrink-0" /> <span className="whitespace-nowrap">{t.theme.light}</span></> : <><Moon size={14} className="flex-shrink-0" /> <span className="whitespace-nowrap">{t.theme.dark}</span></>}
                                 </span>
                             </button>
                         )}
@@ -268,15 +268,15 @@ export function Navbar() {
                         {/* Modo Minimalista */}
                         {mounted && (
                             <button 
-                                className="w-full flex items-center justify-between py-2 hover:bg-brand-cyan/5 rounded-lg transition-colors text-left"
+                                className="w-full flex items-center justify-between gap-2 py-2 hover:bg-brand-cyan/5 rounded-lg transition-colors text-left"
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     toggleMinimal();
                                 }}
                             >
-                                <span className="text-xs sm:text-sm font-medium text-muted">{language === "es" ? "Modo" : "Mode"}</span>
-                                <span className="text-xs sm:text-sm font-semibold text-foreground flex items-center gap-1 sm:gap-1.5">
-                                    {isMinimal ? <><Maximize2 size={14} className="sm:w-4 sm:h-4" /> <span className="truncate">{language === "es" ? "Completo" : "Full"}</span></> : <><Minimize2 size={14} className="sm:w-4 sm:h-4" /> <span className="truncate">Minimal</span></>}
+                                <span className="text-xs sm:text-sm font-medium text-muted flex-shrink-0">{language === "es" ? "Modo" : "Mode"}</span>
+                                <span className="text-xs sm:text-sm font-semibold text-foreground flex items-center gap-1 flex-shrink-0">
+                                    {isMinimal ? <><Maximize2 size={14} className="flex-shrink-0" /> <span className="whitespace-nowrap">{language === "es" ? "Completo" : "Full"}</span></> : <><Minimize2 size={14} className="flex-shrink-0" /> <span className="whitespace-nowrap">Minimal</span></>}
                                 </span>
                             </button>
                         )}
