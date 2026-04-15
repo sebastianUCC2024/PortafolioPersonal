@@ -203,8 +203,8 @@ export function Navbar() {
                                 </a>
                             ))}
                         </nav>
-                    
-                    <div className="flex flex-col gap-0 pb-4">
+                        
+                        <div className="flex flex-col gap-0 pb-4">
                         {/* Descargar CV Mobile */}
                         <div className="flex justify-between items-center py-3">
                             <span className="text-sm text-muted">{language === "es" ? "Hoja de Vida" : "Resume"}</span>
@@ -273,6 +273,7 @@ export function Navbar() {
                                 </button>
                             </div>
                         </div>
+                    </div>
                     </div>
                 </div>
             )}
