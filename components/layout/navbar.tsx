@@ -1,288 +1,348 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { useLanguage } from "@/hooks/use-language";
-import { useMinimalMode } from "@/hooks/use-minimal-mode";
 import { useTheme } from "next-themes";
-import { Button } from "@/components/ui/button";
-
-import { Sun, Moon, Menu, X, Minimize2, Maximize2 } from "lucide-react";
+import { Sun, Moon, Menu, X } from "lucide-react";
+import { motion, AnimatePresence, Variants, useScroll, useMotionValueEvent } from "framer-motion";
+import Image from "next/image";
 
 export function Navbar() {
     const { t, language, setLanguage } = useLanguage();
     const { theme, setTheme, systemTheme } = useTheme();
-    const { isMinimal, toggleMinimal } = useMinimalMode();
 
-    // Solución contra el warning de "Hydration" visual al cargar SVGs condicionales
     const [mounted, setMounted] = useState(false);
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
+    const [hidden, setHidden] = useState(false);
+    const [currentTime, setCurrentTime] = useState("");
+
+    const { scrollY } = useScroll();
+
+    useMotionValueEvent(scrollY, "change", (latest) => {
+        const previous = scrollY.getPrevious() ?? 0;
+        
+        if (latest > 50) {
+            setScrolled(true);
+        } else {
+            setScrolled(false);
+        }
+
+        if (latest > previous && latest > 150) {
+            setHidden(true);
+        } else {
+            setHidden(false);
+        }
+    });
 
     useEffect(() => setMounted(true), []);
 
+    useEffect(() => {
+        const updateClock = () => {
+            const now = new Date();
+            const formatter = new Intl.DateTimeFormat("en-US", {
+                timeZone: "America/Bogota",
+                hour: "numeric",
+                minute: "2-digit",
+                hour12: true,
+            });
+            setCurrentTime(formatter.format(now));
+        };
+        updateClock();
+        const interval = setInterval(updateClock, 1000);
+        return () => clearInterval(interval);
+    }, []);
+
+    useEffect(() => {
+        if (isMenuOpen) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "";
+        }
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, [isMenuOpen]);
+
+    useEffect(() => {
+        const handleEscape = (e: KeyboardEvent) => {
+            if (e.key === "Escape") setIsMenuOpen(false);
+        };
+        window.addEventListener("keydown", handleEscape);
+        return () => window.removeEventListener("keydown", handleEscape);
+    }, []);
+
     const navLinks = [
-        { name: t.nav.projects, href: "#projects" },
-        { name: t.nav.experience, href: "#experience" },
         { name: t.nav.about, href: "#about" },
-        { name: t.nav.techStack, href: "#tech-stack" },
-        { name: t.nav.synergy, href: "#synergy" },
-        { name: t.nav.testimonials, href: "#testimonials" },
+        { name: t.nav.projects, href: "#projects" },
         { name: t.nav.contact, href: "#contact" },
+        { name: t.nav.experience, href: "#experience" },
+        { name: t.nav.techStack, href: "#tech-stack" },
+        { name: t.nav.testimonials, href: "#testimonials" },
     ];
 
     const currentTheme = theme === "system" ? systemTheme : theme;
 
+    const handleNavClick = useCallback((href: string) => {
+        setIsMenuOpen(false);
+        setTimeout(() => {
+            const target = document.querySelector(href);
+            if (target) {
+                target.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+        }, 400);
+    }, []);
+
+    /* ─── animation variants ─── */
+    const overlayVariants: Variants = {
+        hidden: { opacity: 0 },
+        visible: { opacity: 1 },
+        exit: { opacity: 0 },
+    };
+
+    const panelVariants: Variants = {
+        hidden: { x: "100%" },
+        visible: {
+            x: "0%",
+            transition: { type: "tween", duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] },
+        },
+        exit: {
+            x: "100%",
+            transition: { type: "tween", duration: 0.4, ease: [0.55, 0.06, 0.68, 0.19] },
+        },
+    };
+
+    const stagger: Variants = {
+        hidden: {},
+        visible: { transition: { staggerChildren: 0.07, delayChildren: 0.15 } },
+    };
+
+    const linkItem: Variants = {
+        hidden: { opacity: 0, x: 40 },
+        visible: { opacity: 1, x: 0, transition: { duration: 0.45, ease: "easeOut" } },
+    };
+
+    const fadeUp: Variants = {
+        hidden: { opacity: 0, y: 14 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.45 } },
+    };
+
+    /* ─── portal menu ─── */
+    const menuPanel = mounted
+        ? createPortal(
+              <AnimatePresence>
+                  {isMenuOpen && (
+                      <div className="fixed inset-0" style={{ zIndex: 9999 }}>
+                          {/* backdrop */}
+                          <motion.div
+                              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+                              variants={overlayVariants}
+                              initial="hidden"
+                              animate="visible"
+                              exit="exit"
+                              transition={{ duration: 0.3 }}
+                              onClick={() => setIsMenuOpen(false)}
+                          />
+
+                          {/* panel */}
+                          <motion.aside
+                              className="absolute right-0 top-0 h-full w-full max-w-[480px] overflow-y-auto border-l border-white/[0.06]"
+                              style={{ backgroundColor: "#0a0a0b", boxShadow: "-24px 0 80px rgba(0,0,0,0.6)" }}
+                              variants={panelVariants}
+                              initial="hidden"
+                              animate="visible"
+                              exit="exit"
+                          >
+                              <div className="flex h-full flex-col px-8 py-7 sm:px-12 sm:py-9">
+                                  {/* ── top bar: Menu label + Close ── */}
+                                  <div className="flex items-center justify-between">
+                                      <span className="text-[11px] font-medium uppercase tracking-[0.45em] text-zinc-500">
+                                          Menu
+                                      </span>
+                                      <div className="flex items-center gap-3">
+                                          <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-zinc-500 hidden sm:inline">
+                                              Close
+                                          </span>
+                                          <button
+                                              type="button"
+                                              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition-all duration-300 hover:bg-white/15 hover:border-white/20 hover:rotate-90"
+                                              onClick={() => setIsMenuOpen(false)}
+                                              aria-label="Cerrar menú"
+                                          >
+                                              <X size={15} />
+                                          </button>
+                                      </div>
+                                  </div>
+
+                                  {/* thin separator */}
+                                  <div className="mt-5 h-px w-full bg-white/[0.06]" />
+
+                                  {/* ── nav links ── */}
+                                  <motion.nav
+                                      className="mt-10 flex flex-col flex-1"
+                                      variants={stagger}
+                                      initial="hidden"
+                                      animate="visible"
+                                  >
+                                      {navLinks.map((link) => (
+                                          <motion.div key={link.name} variants={linkItem}>
+                                              <button
+                                                  onClick={() => handleNavClick(link.href)}
+                                                  className="group relative flex items-center w-full text-left py-[14px] border-b border-white/[0.04] transition-all duration-300"
+                                              >
+                                                  {/* number / bullet */}
+                                                  <span className="w-5 text-[11px] text-zinc-600 font-mono opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
+                                                      →
+                                                  </span>
+                                                  <span className="text-[1.6rem] sm:text-[1.85rem] font-semibold text-white tracking-tight transition-all duration-300 group-hover:text-zinc-400 group-hover:translate-x-1 inline-block leading-tight">
+                                                      {link.name}
+                                                  </span>
+                                              </button>
+                                          </motion.div>
+                                      ))}
+                                  </motion.nav>
+
+                                  {/* ── bottom section ── */}
+                                  <motion.div variants={fadeUp} initial="hidden" animate="visible">
+                                      {/* separator */}
+                                      <div className="h-px w-full bg-white/[0.06] mb-5" />
+
+                                      {/* contact + social — two columns */}
+                                      <div className="grid grid-cols-2 gap-x-6 gap-y-0">
+                                          {/* contact col */}
+                                          <div>
+                                              <span className="text-[10px] font-medium uppercase tracking-[0.45em] text-zinc-600 block mb-2.5">
+                                                  Contact
+                                              </span>
+                                              <a href="mailto:juan17patino@gmail.com" className="block text-[13px] text-zinc-300 hover:text-white transition-colors duration-300 leading-relaxed">
+                                                  juan17patino@gmail.com
+                                              </a>
+                                              <a href="tel:+573233561695" className="block text-[13px] text-zinc-300 hover:text-white transition-colors duration-300 leading-relaxed mt-1">
+                                                  +57 323 356 1695
+                                              </a>
+                                          </div>
+
+                                          {/* social col */}
+                                          <div className="text-right">
+                                              <span className="text-[10px] font-medium uppercase tracking-[0.45em] text-zinc-600 block mb-2.5">
+                                                  Social
+                                              </span>
+                                              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="block text-[13px] text-zinc-300 hover:text-white transition-colors duration-300 leading-relaxed">GitHub</a>
+                                              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="block text-[13px] text-zinc-300 hover:text-white transition-colors duration-300 leading-relaxed mt-1">LinkedIn</a>
+                                          </div>
+                                      </div>
+
+                                      {/* toggles row */}
+                                      <div className="mt-6 flex items-center gap-2.5 flex-wrap">
+                                          <button
+                                              type="button"
+                                              className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-2 text-[11px] font-semibold uppercase tracking-[0.25em] text-zinc-400 transition-all duration-300 hover:border-white/20 hover:text-white hover:bg-white/10"
+                                              onClick={() => setLanguage(language === "es" ? "en" : "es")}
+                                          >
+                                              {language === "es" ? "EN" : "ES"}
+                                          </button>
+
+                                          {mounted && (
+                                              <button
+                                                  type="button"
+                                                  className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-2 text-[11px] font-semibold uppercase tracking-[0.25em] text-zinc-400 transition-all duration-300 hover:border-white/20 hover:text-white hover:bg-white/10"
+                                                  onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
+                                              >
+                                                  {currentTheme === "dark" ? <Sun size={13} /> : <Moon size={13} />}
+                                                  {currentTheme === "dark" ? t.theme.light : t.theme.dark}
+                                              </button>
+                                          )}
+                                      </div>
+                                  </motion.div>
+                              </div>
+                          </motion.aside>
+                      </div>
+                  )}
+              </AnimatePresence>,
+              document.body
+          )
+        : null;
+
     return (
-        <header className="fixed top-0 left-0 right-0 w-full z-[100] border-b border-brand-cyan/10 dark:border-brand-cyan/20 backdrop-blur-lg bg-background transition-colors duration-300 shadow-sm dark:shadow-brand-cyan/5">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-
-                {/* Logo con icono personalizado (Versión Final Corregida) */}
-                <a href="#" className="flex items-center gap-2 group z-[110]">
-                    <div className="w-10 h-10 relative transition-transform duration-500 group-hover:scale-110 flex items-center justify-center">
-                        <img 
-                            src="/logo.png" 
-                            alt="Logo" 
-                            className="w-full h-full object-contain brightness-0 dark:invert dark:brightness-100 opacity-90 group-hover:opacity-100 transition-all" 
-                        />
-                    </div>
-                    <span className="text-base font-bold font-primary text-foreground tracking-tight group-hover:text-brand-cyan transition-colors duration-300">
-                        Sebastián
-                    </span>
-                </a>
-                
-
-                {/* Navegación de Escritorio */}
-                <nav className="hidden lg:flex gap-6 items-center font-secondary">
-                    {navLinks.map((link) => (
-                        <a 
-                            key={link.name} 
-                            href={link.href} 
-                            onClick={(e) => {
-                                e.preventDefault();
-                                const target = document.querySelector(link.href);
-                                if (target) {
-                                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                }
-                            }}
-                            className="text-sm font-medium text-muted hover:text-brand-cyan transition-colors cursor-pointer whitespace-nowrap"
-                        >
-                            {link.name}
-                        </a>
-                    ))}
-                </nav>
-
-                {/* Accesorios y Botones de Escritorio */}
-                <div className="hidden lg:flex items-center gap-3">
-                    {/* Botón cambiar Idioma */}
-                    <div className="relative group">
-                        <div className="flex items-center gap-1.5 text-xs font-bold uppercase border border-brand-cyan/20 rounded-full px-2.5 py-1">
-                            <button
-                                onClick={() => setLanguage("es")}
-                                className={`transition-colors ${language === "es" ? "text-brand-cyan" : "text-muted hover:text-foreground"}`}
-                            >
-                                ES
-                            </button>
-                            <span className="text-muted/30">|</span>
-                            <button
-                                onClick={() => setLanguage("en")}
-                                className={`transition-colors ${language === "en" ? "text-brand-cyan" : "text-muted hover:text-foreground"}`}
-                            >
-                                EN
-                            </button>
-                        </div>
-                        {/* Tooltip */}
-                        <div className="absolute top-full right-0 mt-2 px-3 py-2 bg-card-bg border border-brand-cyan/20 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap z-50">
-                            <p className="text-xs font-medium text-foreground">
-                                {language === "es" ? "Cambiar Idioma" : "Change Language"}
-                            </p>
-                            <p className="text-[10px] text-muted mt-0.5">
-                                {language === "es" ? "Español / English" : "Spanish / English"}
-                            </p>
-                        </div>
-                    </div>
-
-                    {/* Botón Descargar CV */}
-                    <div className="relative group">
-                        <button 
-                            className="w-9 h-9 rounded-full flex items-center justify-center text-foreground hover:bg-brand-cyan/10 hover:text-brand-cyan transition-all duration-300 border border-brand-cyan/20 hover:border-brand-cyan/40" 
-                            onClick={() => window.open('/cv.pdf', '_blank')}
-                            aria-label="Download CV"
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                                <polyline points="14 2 14 8 20 8"/>
-                                <line x1="16" y1="13" x2="8" y2="13"/>
-                                <line x1="16" y1="17" x2="8" y2="17"/>
-                                <polyline points="10 9 9 9 8 9"/>
-                            </svg>
-                        </button>
-                        {/* Tooltip */}
-                        <div className="absolute top-full right-0 mt-2 px-3 py-2 bg-card-bg border border-brand-cyan/20 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap z-50">
-                            <p className="text-xs font-medium text-foreground">
-                                {language === "es" ? "Descargar CV" : "Download CV"}
-                            </p>
-                            <p className="text-[10px] text-muted mt-0.5">
-                                {language === "es" ? "Hoja de vida en PDF" : "Resume in PDF"}
-                            </p>
-                        </div>
-                    </div>
-
-                    {/* Botón cambiar Tema */}
-                    {mounted && (
-                        <>
-                            <div className="relative group">
-                                <button 
-                                    className="w-9 h-9 rounded-full flex items-center justify-center text-foreground hover:bg-brand-cyan/10 hover:text-brand-cyan transition-all duration-300 border border-brand-cyan/20 hover:border-brand-cyan/40" 
-                                    onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
-                                    aria-label="Toggle Theme"
-                                >
-                                    {currentTheme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
-                                </button>
-                                {/* Tooltip */}
-                                <div className="absolute top-full right-0 mt-2 px-3 py-2 bg-card-bg border border-brand-cyan/20 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap z-50">
-                                    <p className="text-xs font-medium text-foreground">
-                                        {currentTheme === "dark" ? (language === "es" ? "Modo Claro" : "Light Mode") : (language === "es" ? "Modo Oscuro" : "Dark Mode")}
-                                    </p>
-                                    <p className="text-[10px] text-muted mt-0.5">
-                                        {currentTheme === "dark" ? (language === "es" ? "Activar tema claro" : "Enable light theme") : (language === "es" ? "Activar tema oscuro" : "Enable dark theme")}
-                                    </p>
-                                </div>
-                            </div>
-                            
-                            {/* Botón Modo Minimalista */}
-                            <div className="relative group">
-                                <button 
-                                    className="w-9 h-9 rounded-full flex items-center justify-center text-foreground hover:bg-brand-cyan/10 hover:text-brand-cyan transition-all duration-300 border border-brand-cyan/20 hover:border-brand-cyan/40" 
-                                    onClick={toggleMinimal}
-                                    aria-label="Toggle Minimal Mode"
-                                >
-                                    {isMinimal ? <Maximize2 size={18} /> : <Minimize2 size={18} />}
-                                </button>
-                                {/* Tooltip */}
-                                <div className="absolute top-full right-0 mt-2 px-3 py-2 bg-card-bg border border-brand-cyan/20 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none whitespace-nowrap z-50">
-                                    <p className="text-xs font-medium text-foreground">
-                                        {isMinimal ? (language === "es" ? "Modo Completo" : "Full Mode") : (language === "es" ? "Modo Minimalista" : "Minimal Mode")}
-                                    </p>
-                                    <p className="text-[10px] text-muted mt-0.5">
-                                        {isMinimal ? (language === "es" ? "Activar animaciones" : "Enable animations") : (language === "es" ? "Diseño simplificado" : "Simplified design")}
-                                    </p>
-                                </div>
-                            </div>
-                        </>
-                    )}
-                </div>
-
-                {/* Menú de Hamburguesa para Mobile */}
-                <button
-                    className="lg:hidden text-brand-cyan z-[110] p-2"
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        setIsMobileMenuOpen(prev => !prev);
-                    }}
-                    aria-label="Toggle menu"
+        <>
+            <motion.header
+                variants={{
+                    visible: { y: 0 },
+                    hidden: { y: "-100%" },
+                }}
+                animate={hidden ? "hidden" : "visible"}
+                transition={{ duration: 0.35, ease: "easeInOut" }}
+                className={`fixed inset-x-0 top-0 z-[100] w-full transition-colors duration-500 ${
+                    scrolled
+                        ? "pointer-events-auto bg-background/80 backdrop-blur-2xl border-b border-foreground/[0.03] shadow-[0_4px_30px_rgba(0,0,0,0.03)]"
+                        : "pointer-events-none bg-transparent"
+                }`}
+            >
+                <div
+                    className={`mx-auto max-w-7xl flex items-center justify-between transition-all duration-500 ${
+                        scrolled ? "px-6 sm:px-8 py-4" : "px-6 sm:px-8 py-6 md:py-10"
+                    }`}
                 >
-                    {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-                </button>
-            </div>
+                    {/* Logo + Name */}
+                    <a
+                        href="#"
+                        className="pointer-events-auto group flex items-center gap-3.5"
+                    >
+                        <div className="w-9 h-9 relative flex items-center justify-center transition-all duration-700 ease-out group-hover:scale-110 group-hover:-rotate-12">
+                            {/* Glowing aura */}
+                            <div className="absolute inset-0 bg-brand-cyan/20 rounded-full blur-md scale-0 group-hover:scale-[1.8] transition-transform duration-700 ease-out"></div>
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                                src="/logo.png"
+                                alt="Logo"
+                                className="relative z-10 w-full h-full object-contain brightness-0 dark:invert dark:brightness-100 opacity-90 transition-opacity group-hover:opacity-100"
+                            />
+                        </div>
+                        <div className="flex items-center gap-1.5 mt-[2px]">
+                            <span className="text-[17px] font-extrabold font-primary tracking-tighter text-foreground uppercase transition-colors group-hover:text-brand-cyan">
+                                Sebastián
+                            </span>
+                            {/* Pulsing Dot (Available status) */}
+                            <span className="relative flex h-1.5 w-1.5">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-cyan opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-brand-cyan"></span>
+                            </span>
+                        </div>
+                    </a>
 
-            {/* Navegación Desplegable Mobile - Versión Compacta */}
-            <div className={`lg:hidden fixed top-16 left-0 right-0 backdrop-blur-lg bg-background/95 border-t border-brand-cyan/10 transition-all duration-300 z-[90] ${isMobileMenuOpen ? 'max-h-[85vh] opacity-100 visible' : 'max-h-0 opacity-0 invisible'}`}>
-                <div className="w-full px-4 sm:px-5 md:px-8 py-3 space-y-0.5 max-h-[calc(85vh-1rem)] overflow-y-auto overflow-x-hidden">
-                    {/* Enlaces de navegación */}
-                    {navLinks.map((link) => (
-                        <a 
-                            key={link.name} 
-                            href={link.href} 
-                            onClick={(e) => {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                setIsMobileMenuOpen(false);
-                                setTimeout(() => {
-                                    const target = document.querySelector(link.href);
-                                    if (target) {
-                                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                    }
-                                }, 100);
-                            }}
-                            className="block text-sm sm:text-base font-semibold text-foreground hover:text-brand-cyan py-2 hover:bg-brand-cyan/5 rounded-lg transition-colors"
-                        >
-                            {link.name}
-                        </a>
-                    ))}
-                    
-                    <div className="border-t border-brand-cyan/10 pt-1.5 mt-1.5 space-y-0.5">
-                        {/* Descargar CV */}
-                        <button 
-                            className="w-full flex items-center justify-between gap-2 py-2 hover:bg-brand-cyan/5 rounded-lg transition-colors text-left" 
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                window.open('/cv.pdf', '_blank');
-                                setIsMobileMenuOpen(false);
-                            }}
-                        >
-                            <span className="text-xs sm:text-sm font-medium text-muted flex-shrink-0">CV</span>
-                            <span className="text-xs sm:text-sm font-semibold text-brand-cyan flex items-center gap-1 flex-shrink-0">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="flex-shrink-0">
-                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                                    <polyline points="7 10 12 15 17 10"/>
-                                    <line x1="12" y1="15" x2="12" y2="3"/>
-                                </svg>
-                                <span className="whitespace-nowrap">{language === "es" ? "Descargar" : "Download"}</span>
-                            </span>
-                        </button>
-                        
-                        {/* Idioma */}
-                        <button 
-                            className="w-full flex items-center justify-between gap-2 py-2 hover:bg-brand-cyan/5 rounded-lg transition-colors text-left"
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                setLanguage(language === "es" ? "en" : "es");
-                            }}
-                        >
-                            <span className="text-xs sm:text-sm font-medium text-muted flex-shrink-0">{language === "es" ? "Idioma" : "Language"}</span>
-                            <span className="text-xs sm:text-sm font-semibold text-foreground flex items-center gap-1 flex-shrink-0">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="flex-shrink-0">
-                                    <circle cx="12" cy="12" r="10"/>
-                                    <line x1="2" y1="12" x2="22" y2="12"/>
-                                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                                </svg>
-                                <span className="whitespace-nowrap">{language === "es" ? "Español" : "English"}</span>
-                            </span>
-                        </button>
-                        
-                        {/* Tema */}
-                        {mounted && (
-                            <button 
-                                className="w-full flex items-center justify-between gap-2 py-2 hover:bg-brand-cyan/5 rounded-lg transition-colors text-left"
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    setTheme(currentTheme === "dark" ? "light" : "dark");
-                                }}
-                            >
-                                <span className="text-xs sm:text-sm font-medium text-muted flex-shrink-0">{language === "es" ? "Tema" : "Theme"}</span>
-                                <span className="text-xs sm:text-sm font-semibold text-foreground flex items-center gap-1 flex-shrink-0">
-                                    {currentTheme === "dark" ? <><Sun size={14} className="flex-shrink-0" /> <span className="whitespace-nowrap">{t.theme.light}</span></> : <><Moon size={14} className="flex-shrink-0" /> <span className="whitespace-nowrap">{t.theme.dark}</span></>}
-                                </span>
-                            </button>
-                        )}
-                        
-                        {/* Modo Minimalista */}
-                        {mounted && (
-                            <button 
-                                className="w-full flex items-center justify-between gap-2 py-2 hover:bg-brand-cyan/5 rounded-lg transition-colors text-left"
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    toggleMinimal();
-                                }}
-                            >
-                                <span className="text-xs sm:text-sm font-medium text-muted flex-shrink-0">{language === "es" ? "Modo" : "Mode"}</span>
-                                <span className="text-xs sm:text-sm font-semibold text-foreground flex items-center gap-1 flex-shrink-0">
-                                    {isMinimal ? <><Maximize2 size={14} className="flex-shrink-0" /> <span className="whitespace-nowrap">{language === "es" ? "Completo" : "Full"}</span></> : <><Minimize2 size={14} className="flex-shrink-0" /> <span className="whitespace-nowrap">Minimal</span></>}
-                                </span>
-                            </button>
-                        )}
+                    {/* Center Widget (Time) - Desktop Only */}
+                    <div className="hidden lg:flex items-center gap-3 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-auto opacity-80 hover:opacity-100 transition-opacity">
+                        <span className="text-[11px] font-medium uppercase tracking-[0.2em] text-foreground/70">
+                            Bogotá, CO
+                        </span>
+                        <span className="h-3 w-[1px] bg-foreground/20"></span>
+                        <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-foreground min-w-[70px] text-center">
+                            {mounted ? currentTime : "--:--"}
+                        </span>
                     </div>
+
+                    {/* Menu Button */}
+                    <button
+                        type="button"
+                        className="pointer-events-auto group flex items-center gap-4 text-foreground"
+                        onClick={() => setIsMenuOpen(true)}
+                        aria-label="Open menu"
+                        aria-expanded={isMenuOpen}
+                    >
+                        <span className="hidden sm:block text-[12px] font-bold uppercase tracking-[0.4em] opacity-80 transition-opacity group-hover:opacity-100 mt-[2px]">
+                            Menu
+                        </span>
+                        <div className="relative flex h-12 w-12 items-center justify-center rounded-full border border-foreground/20 transition-all duration-500 ease-out group-hover:border-foreground group-hover:scale-105 overflow-hidden group-hover:text-background">
+                            {/* Swipe fill effect */}
+                            <div className="absolute inset-0 bg-foreground translate-y-[101%] group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)]" />
+                            <Menu size={18} className="relative z-10 transition-all duration-500 group-hover:rotate-180" />
+                        </div>
+                    </button>
                 </div>
-            </div>
-        </header>
+            </motion.header>
+
+            {menuPanel}
+        </>
     );
 }
