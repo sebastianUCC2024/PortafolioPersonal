@@ -9,6 +9,9 @@
   --brand-cyan: #0a4d3c; /* verde oscuro profundo */
   --brand-cyan-hover: #083d30; /* verde aún más oscuro */
   
+  /* Menu Background in light mode */
+  --menu-bg: #0a4d3c;
+  
   /* Cards y Componentes modo claro */
   --card-bg: #ffffff; /* blanco puro para cards */
   --muted: #78716c; /* stone-500 */
@@ -23,6 +26,9 @@
   --brand-cyan: #e4e4e7; /* zinc-200 */
   --brand-cyan-hover: #ffffff;
   
+  /* Menu Background in dark mode */
+  --menu-bg: #09090b; /* zinc-950 (same as background) */
+  
   /* Cards y Bordes en modo oscuro */
   --card-bg: #18181b; /* zinc-900 */
   --muted: #a1a1aa; /* zinc-400 */
@@ -36,6 +42,7 @@
   --font-secondary: var(--font-plus-jakarta);
   --color-brand-cyan: var(--brand-cyan);
   --color-brand-cyan-hover: var(--brand-cyan-hover);
+  --color-menu-bg: var(--menu-bg);
   --color-card-bg: var(--card-bg);
   --color-muted: var(--muted);
 }

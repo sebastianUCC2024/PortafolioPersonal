@@ -147,8 +147,7 @@ export function Navbar() {
 
                           {/* panel */}
                           <motion.aside
-                              className="absolute right-0 top-0 h-full w-full max-w-[480px] overflow-y-auto border-l border-white/[0.06]"
-                              style={{ backgroundColor: "#0a0a0b", boxShadow: "-24px 0 80px rgba(0,0,0,0.6)" }}
+                              className="absolute right-0 top-0 h-full w-full max-w-[480px] overflow-y-auto border-l border-white/10 bg-menu-bg shadow-[-24px_0_80px_rgba(0,0,0,0.1)] dark:shadow-[-24px_0_80px_rgba(0,0,0,0.6)]"
                               variants={panelVariants}
                               initial="hidden"
                               animate="visible"
@@ -157,16 +156,16 @@ export function Navbar() {
                               <div className="flex h-full flex-col px-8 py-7 sm:px-12 sm:py-9">
                                   {/* ── top bar: Menu label + Close ── */}
                                   <div className="flex items-center justify-between">
-                                      <span className="text-[11px] font-medium uppercase tracking-[0.45em] text-zinc-500">
+                                      <span className="text-[11px] font-medium uppercase tracking-[0.45em] text-white/50">
                                           Menu
                                       </span>
                                       <div className="flex items-center gap-3">
-                                          <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-zinc-500 hidden sm:inline">
+                                          <span className="text-[11px] font-medium uppercase tracking-[0.35em] text-white/50 hidden sm:inline">
                                               Close
                                           </span>
                                           <button
                                               type="button"
-                                              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition-all duration-300 hover:bg-white/15 hover:border-white/20 hover:rotate-90"
+                                              className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white transition-all duration-300 hover:bg-white/10 hover:border-white/30 hover:rotate-90"
                                               onClick={() => setIsMenuOpen(false)}
                                               aria-label="Cerrar menú"
                                           >
@@ -176,7 +175,7 @@ export function Navbar() {
                                   </div>
 
                                   {/* thin separator */}
-                                  <div className="mt-5 h-px w-full bg-white/[0.06]" />
+                                  <div className="mt-5 h-px w-full bg-white/10" />
 
                                   {/* ── nav links ── */}
                                   <motion.nav
@@ -189,13 +188,13 @@ export function Navbar() {
                                           <motion.div key={link.name} variants={linkItem}>
                                               <button
                                                   onClick={() => handleNavClick(link.href)}
-                                                  className="group relative flex items-center w-full text-left py-[14px] border-b border-white/[0.04] transition-all duration-300"
+                                                  className="group relative flex items-center w-full text-left py-[14px] border-b border-white/10 transition-all duration-300"
                                               >
                                                   {/* number / bullet */}
-                                                  <span className="w-5 text-[11px] text-zinc-600 font-mono opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
+                                                  <span className="w-5 text-[11px] text-white/40 font-mono opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 group-hover:text-white">
                                                       →
                                                   </span>
-                                                  <span className="text-[1.6rem] sm:text-[1.85rem] font-semibold text-white tracking-tight transition-all duration-300 group-hover:text-zinc-400 group-hover:translate-x-1 inline-block leading-tight">
+                                                  <span className="text-[1.6rem] sm:text-[1.85rem] font-semibold text-white tracking-tight transition-all duration-300 group-hover:text-white/60 group-hover:translate-x-1 inline-block leading-tight">
                                                       {link.name}
                                                   </span>
                                               </button>
@@ -206,53 +205,64 @@ export function Navbar() {
                                   {/* ── bottom section ── */}
                                   <motion.div variants={fadeUp} initial="hidden" animate="visible">
                                       {/* separator */}
-                                      <div className="h-px w-full bg-white/[0.06] mb-5" />
+                                      <div className="h-px w-full bg-white/10 mb-5" />
 
                                       {/* contact + social — two columns */}
                                       <div className="grid grid-cols-2 gap-x-6 gap-y-0">
                                           {/* contact col */}
                                           <div>
-                                              <span className="text-[10px] font-medium uppercase tracking-[0.45em] text-zinc-600 block mb-2.5">
+                                              <span className="text-[10px] font-medium uppercase tracking-[0.45em] text-white/50 block mb-2.5">
                                                   Contact
                                               </span>
-                                              <a href="mailto:juan17patino@gmail.com" className="block text-[13px] text-zinc-300 hover:text-white transition-colors duration-300 leading-relaxed">
+                                              <a href="mailto:juan17patino@gmail.com" className="block text-[13px] text-white/70 hover:text-white transition-colors duration-300 leading-relaxed">
                                                   juan17patino@gmail.com
                                               </a>
-                                              <a href="tel:+573233561695" className="block text-[13px] text-zinc-300 hover:text-white transition-colors duration-300 leading-relaxed mt-1">
+                                              <a href="tel:+573233561695" className="block text-[13px] text-white/70 hover:text-white transition-colors duration-300 leading-relaxed mt-1">
                                                   +57 323 356 1695
                                               </a>
                                           </div>
 
                                           {/* social col */}
                                           <div className="text-right">
-                                              <span className="text-[10px] font-medium uppercase tracking-[0.45em] text-zinc-600 block mb-2.5">
+                                              <span className="text-[10px] font-medium uppercase tracking-[0.45em] text-white/50 block mb-2.5">
                                                   Social
                                               </span>
-                                              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="block text-[13px] text-zinc-300 hover:text-white transition-colors duration-300 leading-relaxed">GitHub</a>
-                                              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="block text-[13px] text-zinc-300 hover:text-white transition-colors duration-300 leading-relaxed mt-1">LinkedIn</a>
+                                              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="block text-[13px] text-white/70 hover:text-white transition-colors duration-300 leading-relaxed">GitHub</a>
+                                              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="block text-[13px] text-white/70 hover:text-white transition-colors duration-300 leading-relaxed mt-1">LinkedIn</a>
                                           </div>
                                       </div>
 
-                                      {/* toggles row */}
-                                      <div className="mt-6 flex items-center gap-2.5 flex-wrap">
-                                          <button
-                                              type="button"
-                                              className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-2 text-[11px] font-semibold uppercase tracking-[0.25em] text-zinc-400 transition-all duration-300 hover:border-white/20 hover:text-white hover:bg-white/10"
-                                              onClick={() => setLanguage(language === "es" ? "en" : "es")}
+                                      {/* toggles row + CV */}
+                                      <div className="mt-8 flex flex-col sm:flex-row items-center gap-3">
+                                          {/* Descargar CV */}
+                                          <a
+                                              href="/cv.pdf"
+                                              download
+                                              className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 rounded-full bg-white px-4 py-2.5 text-[11px] font-bold uppercase tracking-[0.2em] text-[#0a0a0b] transition-all duration-300 hover:scale-[1.02] hover:bg-white/90"
                                           >
-                                              {language === "es" ? "EN" : "ES"}
-                                          </button>
+                                              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                              Descargar CV
+                                          </a>
 
-                                          {mounted && (
+                                          <div className="flex w-full sm:w-auto gap-2">
                                               <button
                                                   type="button"
-                                                  className="inline-flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-2 text-[11px] font-semibold uppercase tracking-[0.25em] text-zinc-400 transition-all duration-300 hover:border-white/20 hover:text-white hover:bg-white/10"
-                                                  onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
+                                                  className="flex-1 sm:flex-none inline-flex h-9 w-12 items-center justify-center rounded-full border border-white/20 bg-white/5 text-[10px] font-bold uppercase text-white/80 transition-all duration-300 hover:border-white/40 hover:text-white hover:bg-white/10"
+                                                  onClick={() => setLanguage(language === "es" ? "en" : "es")}
                                               >
-                                                  {currentTheme === "dark" ? <Sun size={13} /> : <Moon size={13} />}
-                                                  {currentTheme === "dark" ? t.theme.light : t.theme.dark}
+                                                  {language === "es" ? "EN" : "ES"}
                                               </button>
-                                          )}
+
+                                              {mounted && (
+                                                  <button
+                                                      type="button"
+                                                      className="flex-1 sm:flex-none inline-flex h-9 w-12 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white/80 transition-all duration-300 hover:border-white/40 hover:text-white hover:bg-white/10"
+                                                      onClick={() => setTheme(currentTheme === "dark" ? "light" : "dark")}
+                                                  >
+                                                      {currentTheme === "dark" ? <Sun size={14} /> : <Moon size={14} />}
+                                                  </button>
+                                              )}
+                                          </div>
                                       </div>
                                   </motion.div>
                               </div>
